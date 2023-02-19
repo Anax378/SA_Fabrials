@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "sa_fabrials:zircon"
+    }
+  },
+  "result": {
+    "item": "sa_fabrials:perfect_zircon"
+  }
+}

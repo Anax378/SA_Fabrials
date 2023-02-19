@@ -1,0 +1,22 @@
+{
+  "item.sa_fabrials.topaz": "Topaz",
+  "item.sa_fabrials.sapphire": "Sapphire",
+  "item.sa_fabrials.smokestone": "Topaz",
+  "item.sa_fabrials.ruby": "Ruby",
+  "item.sa_fabrials.garnet": "Garnet",
+  "item.sa_fabrials.zircon": "Zircon",
+  "item.sa_fabrials.heliodor": "Heliodor",
+  "itemGroup.sa_fabrials_tab": "SA: Fabrials",
+  "tooltip.sa_fabrials.stored_stormlight": "Stored Stormlight: ",
+
+  "item.sa_fabrials.perfect_topaz": "Perfect Topaz",
+  "item.sa_fabrials.perfect_sapphire": "Perfect Sapphire",
+  "item.sa_fabrials.perfect_smokestone": "Perfect Smokestone",
+  "item.sa_fabrials.perfect_ruby": "Perfect Ruby",
+  "item.sa_fabrials.perfect_garnet": "Perfect Garnet",
+  "item.sa_fabrials.perfect_zircon": "Perfect Zircon",
+  "item.sa_fabrials.perfect_heliodor": "Perfect Heliodor",
+  "item.sa_fabrials.perfect_diamond": "Perfect Diamond",
+  "item.sa_fabrials.perfect_emerald": "Perfect Emerald",
+  "item.sa_fabrials.perfect_amethyst": "Perfect Amethyst"
+}
