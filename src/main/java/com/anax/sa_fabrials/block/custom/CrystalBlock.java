@@ -20,23 +20,20 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 
-public class CrystalBlock extends BaseEntityBlock {
+public abstract class CrystalBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
-    public RegistryObject<BlockEntityType<CrystalBlockEntity>> blockEntity;
-    public CrystalBlock(Properties properties, RegistryObject<BlockEntityType<CrystalBlockEntity>> blockEntity) {
+    public CrystalBlock(Properties properties) {
         super(properties);
-        this.blockEntity = blockEntity;
     }
-
+    abstract BlockEntity getNewBlockENtity(BlockPos blockPos, BlockState blockState);
     @Nullable
     @Override
+
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+        return getNewBlockENtity(blockPos, blockState);
     }
 
     private static final VoxelShape SHAPE = Block.box(3, 0, 3, 13, 13, 13);
@@ -82,14 +79,17 @@ public class CrystalBlock extends BaseEntityBlock {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
+
+    abstract boolean isMyType(BlockEntity entity);
+    abstract void openGui(ServerPlayer player,BlockEntity entity ,BlockPos pPos);
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
                                  Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             System.out.println("use");
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof CrystalBlockEntity) {
-                NetworkHooks.openGui(((ServerPlayer)pPlayer), (CrystalBlockEntity)entity, pPos);
+            if(isMyType(entity)) {
+                openGui(((ServerPlayer)pPlayer), entity, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -98,10 +98,11 @@ public class CrystalBlock extends BaseEntityBlock {
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
+    abstract <T extends BlockEntity> BlockEntityTicker<T> buildCreateTickHelper (BlockEntityType<T> pBlockEntityType);
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, blockEntity.get(),
-                CrystalBlockEntity::tick);
+        return buildCreateTickHelper(pBlockEntityType);
     }
 }

@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.block.screen;
 
 import com.anax.sa_fabrials.block.entity.custom.CrystalBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -8,6 +9,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -18,7 +20,7 @@ public class CrystalMenu extends AbstractContainerMenu {
     private final Block userBlock;
 
     public CrystalMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), inv.player.level.getBlockState(extraData.readBlockPos()).getBlock());
+        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), Blocks.CRAFTING_TABLE);
     }
 
     public CrystalMenu(int pContainerId, Inventory inv, BlockEntity entity, Block userBlock) {
@@ -32,8 +34,8 @@ public class CrystalMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 35, 10));
-            this.addSlot(new SlotItemHandler(handler, 1, 17, 41));
+            this.addSlot(new SlotItemHandler(handler, 0, 43, 15));
+            this.addSlot(new SlotItemHandler(handler, 1, 43, 55));
         });
     }
 
@@ -54,7 +56,7 @@ public class CrystalMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 2;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

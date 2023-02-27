@@ -27,12 +27,10 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
 
-public class CrystalBlockEntity extends BlockEntity implements MenuProvider {
-    Block userBlock;
+public abstract class CrystalBlockEntity extends BlockEntity implements MenuProvider {
     BlockEntityType<?> blockEntityType;
     public CrystalBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
         super(blockEntityType, blockPos, blockState);
-        userBlock = blockState.getBlock();
         this.blockEntityType = blockEntityType;
     }
 
@@ -56,11 +54,12 @@ public class CrystalBlockEntity extends BlockEntity implements MenuProvider {
         return new TextComponent("Crystal");
     }
 
+    abstract Block getUserBlock();
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         System.out.println("createMenu");
-        return new CrystalMenu(pContainerId, pInventory, this, userBlock);
+        return new CrystalMenu(pContainerId, pInventory, this, getUserBlock());
     }
 
     @Nonnull

@@ -2,6 +2,7 @@ package com.anax.sa_fabrials.block.entity;
 import com.anax.sa_fabrials.SAFabrials;
 import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.custom.CrystalBlockEntity;
+import com.anax.sa_fabrials.block.entity.custom.TopazCrystalBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -13,9 +14,9 @@ public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, SAFabrials.MOD_ID);
 
-    public static final RegistryObject<BlockEntityType<CrystalBlockEntity>> TOPAZ_CRYSTAL_BLOCK_ENTITY =
+    public static final RegistryObject<BlockEntityType<TopazCrystalBlockEntity>> TOPAZ_CRYSTAL_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("topaz_crystal_block_entity", () ->
-                    BlockEntityType.Builder.of((a, b) -> new CrystalBlockEntity(ModBlockEntities.TOPAZ_CRYSTAL_BLOCK_ENTITY.get(), a, b),
+                    BlockEntityType.Builder.of(TopazCrystalBlockEntity::new,
                             ModBlocks.TOPAZ_CRYSTAL_BLOCK.get()).build(null));
 
 

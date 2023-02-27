@@ -19,5 +19,6 @@
   "item.sa_fabrials.perfect_diamond": "Perfect Diamond",
   "item.sa_fabrials.perfect_emerald": "Perfect Emerald",
   "item.sa_fabrials.perfect_amethyst": "Perfect Amethyst",
-  "item.sa_fabrials.topaz_crystal_block": "Topaz Crystal Block"
+  
+  "block.sa_fabrials.topaz_crystal_block": "Topaz Crystal Block"
 }
