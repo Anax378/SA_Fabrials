@@ -1,12 +1,18 @@
 package com.anax.sa_fabrials.block;
 
 import com.anax.sa_fabrials.SAFabrials;
+import com.anax.sa_fabrials.block.custom.CrystalBlock;
+import com.anax.sa_fabrials.block.custom.TopazCrystalBlock;
+import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.item.ModCreativeModeTab;
 import com.anax.sa_fabrials.item.ModItems;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +27,8 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, SAFabrials.MOD_ID);
 
 
+    public static final RegistryObject<Block> TOPAZ_CRYSTAL_BLOCK = registerBlock("topaz_crystal_block",
+            () -> new TopazCrystalBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.TEST_MOD_TAB);
 
 
     private static <T extends Block> RegistryObject<T> registerBlock

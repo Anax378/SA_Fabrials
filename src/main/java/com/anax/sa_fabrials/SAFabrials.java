@@ -1,8 +1,12 @@
 package com.anax.sa_fabrials;
 
 import com.anax.sa_fabrials.block.ModBlocks;
+import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.screen.CrystalScreen;
+import com.anax.sa_fabrials.block.screen.ModMenuTypes;
 import com.anax.sa_fabrials.item.ModItems;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.level.block.Block;
@@ -19,6 +23,7 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import java.util.stream.Collectors;
@@ -38,6 +43,9 @@ public class SAFabrials
 
         ModItems.register(eventBus);
         ModBlocks.register(eventBus);
+        ModBlockEntities.register(eventBus);
+        ModMenuTypes.register(eventBus);
+        System.out.println(ForgeRegistries.BLOCK_ENTITIES.getValues());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -45,6 +53,6 @@ public class SAFabrials
 
     }
     private void clientSetup(final FMLClientSetupEvent event){
-
+        MenuScreens.register(ModMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
     }
 }
