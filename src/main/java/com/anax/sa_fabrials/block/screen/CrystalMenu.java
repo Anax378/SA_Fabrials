@@ -1,7 +1,6 @@
 package com.anax.sa_fabrials.block.screen;
 
 import com.anax.sa_fabrials.block.entity.custom.CrystalBlockEntity;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -18,17 +17,19 @@ public class CrystalMenu extends AbstractContainerMenu {
     private final CrystalBlockEntity blockEntity;
     private final Level level;
     private final Block userBlock;
+    final ContainerData data;
 
     public CrystalMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
-        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), Blocks.CRAFTING_TABLE);
+        this(pContainerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()), Blocks.CRAFTING_TABLE, new SimpleContainerData(2));
     }
 
-    public CrystalMenu(int pContainerId, Inventory inv, BlockEntity entity, Block userBlock) {
+    public CrystalMenu(int pContainerId, Inventory inv, BlockEntity entity, Block userBlock, ContainerData data) {
         super(ModMenuTypes.CRYSTAL_MENU.get(), pContainerId);
         this.userBlock = userBlock;
         checkContainerSize(inv, 2);
         blockEntity = ((CrystalBlockEntity) entity);
         this.level = inv.player.level;
+        this.data = data;
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -37,6 +38,12 @@ public class CrystalMenu extends AbstractContainerMenu {
             this.addSlot(new SlotItemHandler(handler, 0, 43, 15));
             this.addSlot(new SlotItemHandler(handler, 1, 43, 55));
         });
+
+        addDataSlots(data);
+    }
+
+    public int getScaleEnergy(){
+        return -1*Math.round(70f * ( ( ( (float) data.get(0)) / ((float) data.get(1) ))));
     }
 
 

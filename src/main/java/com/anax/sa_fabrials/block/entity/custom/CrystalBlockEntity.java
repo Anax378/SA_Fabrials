@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.block.screen.CrystalMenu;
+import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -12,6 +13,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,6 +24,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,9 +32,46 @@ import javax.annotation.Nonnull;
 
 public abstract class CrystalBlockEntity extends BlockEntity implements MenuProvider {
     BlockEntityType<?> blockEntityType;
-    public CrystalBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState) {
+
+    protected final ContainerData data;
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2){
+        @Override
+        protected void onContentsChanged(int slot){
+            setChanged();
+        }
+    };
+    final StormlightStorage stormlightStorage;
+
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<StormlightStorage> lazyStormlightStorage = LazyOptional.empty();
+
+    public CrystalBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, int maxReceive, int maxExtract, int capacity) {
         super(blockEntityType, blockPos, blockState);
         this.blockEntityType = blockEntityType;
+        this.stormlightStorage = new StormlightStorage(capacity, maxReceive, maxExtract, 500000) {
+            @Override
+            public void onChanged() {
+                setChanged();
+            }
+        };
+        this.data = new ContainerData() {
+            @Override
+            public int get(int index) {
+                switch(index){
+                    case 0: return CrystalBlockEntity.this.stormlightStorage.getStormlightStored();
+                    case 1: return CrystalBlockEntity.this.stormlightStorage.getMaxStormlightStored();
+                }
+                return 0;
+            }
+
+            @Override
+            public void set(int index, int value) {}
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
     }
 
     @Override
@@ -40,14 +80,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         return blockEntityType;
     }
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2){
-        @Override
-        protected void onContentsChanged(int slot){
-            setChanged();
-        }
-    };
 
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     @Override
     public Component getDisplayName() {
@@ -59,7 +92,8 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         System.out.println("createMenu");
-        return new CrystalMenu(pContainerId, pInventory, this, getUserBlock());
+        System.out.println(stormlightStorage.getStormlightStored());
+        return new CrystalMenu(pContainerId, pInventory, this, getUserBlock(), data);
     }
 
     @Nonnull
@@ -68,6 +102,9 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return lazyItemHandler.cast();
         }
+        if(cap == StormlightStorage.STORMLIGHT_STORAGE){
+            return lazyStormlightStorage.cast();
+        }
         return super.getCapability(cap, side);
     }
 
@@ -75,17 +112,20 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     public void onLoad() {
         super.onLoad();
         lazyItemHandler = LazyOptional.of(() -> itemHandler);
+        lazyStormlightStorage = LazyOptional.of(() -> stormlightStorage);
     }
 
     @Override
     public void invalidateCaps()  {
         super.invalidateCaps();
         lazyItemHandler.invalidate();
+        lazyStormlightStorage.invalidate();
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
+        tag.merge(stormlightStorage.saveOnNBT());
         super.saveAdditional(tag);
     }
 
@@ -93,6 +133,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     public void load(CompoundTag nbt) {
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
+        stormlightStorage.loadFromNBT(nbt);
     }
 
     public void drops() {
@@ -106,6 +147,4 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, CrystalBlockEntity pBlockEntity) {
 
     }
-
-
 }

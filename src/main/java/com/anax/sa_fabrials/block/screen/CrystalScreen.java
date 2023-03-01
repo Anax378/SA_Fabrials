@@ -26,6 +26,10 @@ public class CrystalScreen extends AbstractContainerScreen<CrystalMenu> {
         int y = (height - imageHeight) / 2;
 
         this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
+
+
+        blit(pPoseStack,x + 146, y + 8, 176, 0, 22, Math.round(70*(1-(((float)menu.data.get(0))/((float)menu.data.get(1))))));
+
     }
 
     @Override
