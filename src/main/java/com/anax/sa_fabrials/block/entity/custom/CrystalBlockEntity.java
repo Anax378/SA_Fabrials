@@ -145,6 +145,21 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, CrystalBlockEntity pBlockEntity) {
+        final int[] received = {0};
+        pBlockEntity.itemHandler.getStackInSlot(1).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
+                handler -> {
+                    if(handler.canReceive()){
+                    received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(500, true), false);}
+                }
+        );
+        pBlockEntity.stormlightStorage.extractStormlight(received[0], false);
 
+        final int[] extracted = {0};
+        pBlockEntity.itemHandler.getStackInSlot(0).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
+                handler -> {
+                    if (handler.canExtract()){
+                    extracted[0] = handler.extractStormlight(pBlockEntity.stormlightStorage.receiveStormlight(500, true), false);}}
+        );
+        pBlockEntity.stormlightStorage.receiveStormlight(extracted[0], false);
     }
 }

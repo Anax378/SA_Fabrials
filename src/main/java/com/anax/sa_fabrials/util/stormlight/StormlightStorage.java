@@ -5,13 +5,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 
-public abstract class StormlightStorage {
+public abstract class StormlightStorage implements IStormlightStorage{
     int capacity;
     int maxExtract;
     int maxReceive;
     int stormlight;
 
-    public static Capability<StormlightStorage> STORMLIGHT_STORAGE = CapabilityManager.get(new CapabilityToken<StormlightStorage>() {});
+    public static Capability<IStormlightStorage> STORMLIGHT_STORAGE = CapabilityManager.get(new CapabilityToken<IStormlightStorage>(){});
 
     public StormlightStorage(int capacity, int maxReceive, int maxExtract, int stormlight){
         this.capacity = capacity;
