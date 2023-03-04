@@ -34,6 +34,8 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     BlockEntityType<?> blockEntityType;
 
     protected final ContainerData data;
+    int maxExtract;
+    int maxReceive;
     private final ItemStackHandler itemHandler = new ItemStackHandler(2){
         @Override
         protected void onContentsChanged(int slot){
@@ -48,7 +50,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     public CrystalBlockEntity(BlockEntityType<?> blockEntityType, BlockPos blockPos, BlockState blockState, int maxReceive, int maxExtract, int capacity) {
         super(blockEntityType, blockPos, blockState);
         this.blockEntityType = blockEntityType;
-        this.stormlightStorage = new StormlightStorage(capacity, maxReceive, maxExtract, 500000) {
+        this.stormlightStorage = new StormlightStorage(capacity, maxReceive, maxExtract, 0) {
             @Override
             public void onChanged() {
                 setChanged();
@@ -72,6 +74,8 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
                 return 2;
             }
         };
+        this.maxReceive = maxReceive;
+        this.maxExtract = maxExtract;
     }
 
     @Override
@@ -149,7 +153,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         pBlockEntity.itemHandler.getStackInSlot(1).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
                 handler -> {
                     if(handler.canReceive()){
-                    received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(500, true), false);}
+                    received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(pBlockEntity.maxExtract, true), false);}
                 }
         );
         pBlockEntity.stormlightStorage.extractStormlight(received[0], false);
@@ -158,7 +162,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         pBlockEntity.itemHandler.getStackInSlot(0).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
                 handler -> {
                     if (handler.canExtract()){
-                    extracted[0] = handler.extractStormlight(pBlockEntity.stormlightStorage.receiveStormlight(500, true), false);}}
+                    extracted[0] = handler.extractStormlight(pBlockEntity.stormlightStorage.receiveStormlight(pBlockEntity.maxReceive, true), false);}}
         );
         pBlockEntity.stormlightStorage.receiveStormlight(extracted[0], false);
     }

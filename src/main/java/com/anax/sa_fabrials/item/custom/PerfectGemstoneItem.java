@@ -27,12 +27,12 @@ public class PerfectGemstoneItem extends Item {
     int maxReceive;
     int maxExtract;
     int initialStormlight;
-    public PerfectGemstoneItem(Properties properties, int capacity){
+    public PerfectGemstoneItem(Properties properties, int capacity, int maxReceive, int maxExtract){
         super(properties);
         this.capacity = capacity;
-        maxExtract = 500;
-        maxReceive = 500;
-        initialStormlight = 500;
+        this.maxExtract = maxExtract;
+        this.maxReceive = maxReceive;
+        this.initialStormlight = 0;
     }
 
     @Override

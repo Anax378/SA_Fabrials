@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "sa_fabrials:ruby"
+      "item": "minecraft:emerald"
     }
   },
   "result": {
-    "item": "sa_fabrials:perfect_ruby"
+    "item": "sa_fabrials:emerald_gem"
   }
 }

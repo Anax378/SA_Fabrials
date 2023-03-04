@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "minecraft:emerald"
+      "item": "sa_fabrials:sapphire"
     }
   },
   "result": {
-    "item": "sa_fabrials:perfect_emerald"
+    "item": "sa_fabrials:sapphire_gem"
   }
 }

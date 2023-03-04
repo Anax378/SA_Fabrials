@@ -6,10 +6,10 @@
   ],
   "key": {
     "#": {
-      "item": "sa_fabrials:garnet"
+      "item": "sa_fabrials:zircon"
     }
   },
   "result": {
-    "item": "sa_fabrials:perfect_garnet"
+    "item": "sa_fabrials:zircon_gem"
   }
 }

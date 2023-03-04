@@ -1,15 +1,15 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "##",
-    "##"
+    "###",
+    "#"
   ],
   "key": {
     "#": {
-      "item": "sa_fabrials:smokestone"
+      "item": "minecraft:amethyst_shard"
     }
   },
   "result": {
-    "item": "sa_fabrials:perfect_smokestone"
+    "item": "sa_fabrials:amethyst_gem"
   }
 }

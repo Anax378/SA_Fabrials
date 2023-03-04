@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "sa_fabrials:item/perfect_ruby"
+    "layer0": "sa_fabrials:item/ruby_gem"
   }
 }

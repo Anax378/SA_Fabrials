@@ -47,7 +47,7 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
     @Override
     public int receiveStormlight(int maxReceive, boolean simulate) {
         updateStormlight();
-        int energyReceived = Math.min(maxReceive, this.getMaxStormlightStored() - this.stormlight);
+        int energyReceived = Math.min(Math.min(maxReceive, this.maxReceive), this.getMaxStormlightStored() - this.stormlight);
         if (!simulate) {
             this.stormlight += energyReceived;
         }
@@ -58,7 +58,7 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
     @Override
     public int extractStormlight(int maxExtract, boolean simulate) {
         updateStormlight();
-        int energyExtracted = Math.min(maxExtract, this.stormlight);
+        int energyExtracted = Math.min(Math.min(maxExtract, this.maxExtract), this.stormlight);
         if (!simulate) {
             this.stormlight -= energyExtracted;
         }
