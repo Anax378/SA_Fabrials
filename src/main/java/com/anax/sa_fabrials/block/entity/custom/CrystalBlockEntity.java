@@ -1,7 +1,9 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
+import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.block.screen.CrystalMenu;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
+import net.minecraft.client.renderer.FaceInfo;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -16,10 +18,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -29,6 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.annotation.Nonnull;
+import java.util.Properties;
 
 public abstract class CrystalBlockEntity extends BlockEntity implements MenuProvider {
     BlockEntityType<?> blockEntityType;
@@ -107,7 +114,10 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
             return lazyItemHandler.cast();
         }
         if(cap == StormlightStorage.STORMLIGHT_STORAGE){
-            return lazyStormlightStorage.cast();
+            if(side == null){return lazyStormlightStorage.cast();}
+            if(side.equals(this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) || side.equals(this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite())){
+                return lazyItemHandler.cast();
+            }
         }
         return super.getCapability(cap, side);
     }
@@ -165,5 +175,19 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
                     extracted[0] = handler.extractStormlight(pBlockEntity.stormlightStorage.receiveStormlight(pBlockEntity.maxReceive, true), false);}}
         );
         pBlockEntity.stormlightStorage.receiveStormlight(extracted[0], false);
+
+        Direction facing = pBlockEntity.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING);
+        received[0] = 0;
+        BlockEntity entity = pLevel.getBlockEntity(pPos.relative(facing));
+        if(entity != null){
+        entity.getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
+                handler -> {
+                    if(handler.canReceive()){
+                        received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(pBlockEntity.maxExtract, true), false);
+                    }
+                }
+        );
+        pBlockEntity.stormlightStorage.extractStormlight(received[0], false);
+        }
     }
 }
