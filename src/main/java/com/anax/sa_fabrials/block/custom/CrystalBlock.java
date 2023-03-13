@@ -86,7 +86,6 @@ public abstract class CrystalBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
                                  Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
-            System.out.println("use");
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(isMyType(entity)) {
                 openGui(((ServerPlayer)pPlayer), entity, pPos);

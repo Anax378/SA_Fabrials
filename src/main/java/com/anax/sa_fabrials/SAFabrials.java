@@ -45,7 +45,6 @@ public class SAFabrials
         ModBlocks.register(eventBus);
         ModBlockEntities.register(eventBus);
         ModMenuTypes.register(eventBus);
-        System.out.println(ForgeRegistries.BLOCK_ENTITIES.getValues());
     }
 
     private void setup(final FMLCommonSetupEvent event)

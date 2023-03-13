@@ -49,6 +49,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
             setChanged();
         }
     };
+
     final StormlightStorage stormlightStorage;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -102,8 +103,6 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        System.out.println("createMenu");
-        System.out.println(stormlightStorage.getStormlightStored());
         return new CrystalMenu(pContainerId, pInventory, this, getUserBlock(), data);
     }
 
@@ -116,7 +115,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         if(cap == StormlightStorage.STORMLIGHT_STORAGE){
             if(side == null){return lazyStormlightStorage.cast();}
             if(side.equals(this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)) || side.equals(this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite())){
-                return lazyItemHandler.cast();
+                return lazyStormlightStorage.cast();
             }
         }
         return super.getCapability(cap, side);
@@ -180,7 +179,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         received[0] = 0;
         BlockEntity entity = pLevel.getBlockEntity(pPos.relative(facing));
         if(entity != null){
-        entity.getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
+        entity.getCapability(StormlightStorage.STORMLIGHT_STORAGE, facing.getOpposite()).ifPresent(
                 handler -> {
                     if(handler.canReceive()){
                         received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(pBlockEntity.maxExtract, true), false);

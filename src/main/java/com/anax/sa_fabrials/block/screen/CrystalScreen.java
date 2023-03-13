@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
@@ -25,13 +26,15 @@ public class CrystalScreen extends AbstractContainerScreen<CrystalMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
+
         this.blit(pPoseStack, x, y, 0, 0, imageWidth, imageHeight);
-
-
         blit(pPoseStack,x + 146, y + 8, 176, 0, 22, Math.round(71*(1-(((float)menu.data.get(0))/((float)menu.data.get(1))))));
 
-    }
+        if(this.isHovering(146, 8, 21, 70, pMouseX, pMouseY)){
+            this.renderTooltip(pPoseStack, new TextComponent(menu.data.get(0) + "/" + menu.data.get(1) + " Stormlight"), pMouseX, pMouseY);
+        }
 
+    }
     @Override
     public void render(PoseStack pPoseStack, int mouseX, int mouseY, float delta){
         renderBackground(pPoseStack);

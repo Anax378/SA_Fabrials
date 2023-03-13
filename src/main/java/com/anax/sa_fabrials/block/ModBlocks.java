@@ -1,9 +1,8 @@
 package com.anax.sa_fabrials.block;
 
 import com.anax.sa_fabrials.SAFabrials;
-import com.anax.sa_fabrials.block.custom.CrystalBlock;
+import com.anax.sa_fabrials.block.custom.StormlightPipeBlock;
 import com.anax.sa_fabrials.block.custom.TopazCrystalBlock;
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.item.ModCreativeModeTab;
 import com.anax.sa_fabrials.item.ModItems;
 import net.minecraft.network.chat.Component;
@@ -29,6 +28,10 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> TOPAZ_CRYSTAL_BLOCK = registerBlock("topaz_crystal_block",
             () -> new TopazCrystalBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.TEST_MOD_TAB);
+
+    public static final RegistryObject<Block> STORMLIGHT_PIPE_BLOCK = registerBlock("stormlight_pipe",
+            () -> new StormlightPipeBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.TEST_MOD_TAB);
+
 
 
     private static <T extends Block> RegistryObject<T> registerBlock

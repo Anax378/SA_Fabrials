@@ -26,7 +26,6 @@ public class TopazCrystalBlock extends CrystalBlock{
 
     @Override
     boolean isMyType(BlockEntity entity) {
-        System.out.println("isMyType: " + (entity instanceof TopazCrystalBlockEntity));
         return entity instanceof TopazCrystalBlockEntity;
     }
 
