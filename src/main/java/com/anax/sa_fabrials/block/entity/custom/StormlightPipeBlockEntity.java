@@ -13,10 +13,23 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.Map;
+
 public class StormlightPipeBlockEntity extends BlockEntity {
+
+    static Map<Direction, Integer> directionToIndex = Map.of(
+            Direction.DOWN, 0,
+            Direction.UP, 1,
+            Direction.NORTH, 2,
+            Direction.SOUTH, 3,
+            Direction.WEST, 4,
+            Direction.EAST, 5
+    );
 
     public StormlightStorage stormlightStorage;
     private LazyOptional<StormlightStorage> lazyStormlightStorage = LazyOptional.empty();
+
     public StormlightPipeBlockEntity(BlockPos blockPos, BlockState blockState) {
         super(ModBlockEntities.STORMLIGHT_PIPE_BLOCK_ENTITY.get(), blockPos, blockState);
         stormlightStorage = new StormlightStorage(1050, 10000, 10000, 0) {
