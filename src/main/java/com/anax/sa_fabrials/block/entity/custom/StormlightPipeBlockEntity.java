@@ -1,5 +1,6 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
+import com.anax.sa_fabrials.block.custom.StormlightPipeBlock;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
@@ -13,19 +14,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Map;
 
 public class StormlightPipeBlockEntity extends BlockEntity {
-
-    static Map<Direction, Integer> directionToIndex = Map.of(
-            Direction.DOWN, 0,
-            Direction.UP, 1,
-            Direction.NORTH, 2,
-            Direction.SOUTH, 3,
-            Direction.WEST, 4,
-            Direction.EAST, 5
-    );
 
     public StormlightStorage stormlightStorage;
     private LazyOptional<StormlightStorage> lazyStormlightStorage = LazyOptional.empty();
@@ -89,11 +80,11 @@ public class StormlightPipeBlockEntity extends BlockEntity {
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, StormlightPipeBlockEntity pBlockEntity){
-        pBlockEntity.handleStormlight(pLevel, pPos.below(), Direction.UP);
-        pBlockEntity.handleStormlight(pLevel, pPos.above(), Direction.DOWN);
-        pBlockEntity.handleStormlight(pLevel, pPos.north(), Direction.SOUTH);
-        pBlockEntity.handleStormlight(pLevel, pPos.south(), Direction.NORTH);
-        pBlockEntity.handleStormlight(pLevel, pPos.east(), Direction.WEST);
-        pBlockEntity.handleStormlight(pLevel, pPos.west(), Direction.EAST);
+        if(!pState.getValue(StormlightPipeBlock.IS_INPUT_UP)){pBlockEntity.handleStormlight(pLevel, pPos.below(), Direction.UP);}
+        if(!pState.getValue(StormlightPipeBlock.IS_INPUT_DOWN)){pBlockEntity.handleStormlight(pLevel, pPos.above(), Direction.DOWN);}
+        if(!pState.getValue(StormlightPipeBlock.IS_INPUT_SOUTH)){pBlockEntity.handleStormlight(pLevel, pPos.north(), Direction.SOUTH);}
+        if(!pState.getValue(StormlightPipeBlock.IS_INPUT_NORTH)){pBlockEntity.handleStormlight(pLevel, pPos.south(), Direction.NORTH);}
+        if(!pState.getValue(StormlightPipeBlock.IS_INPUT_WEST)){pBlockEntity.handleStormlight(pLevel, pPos.east(), Direction.WEST);}
+        if(!pState.getValue(StormlightPipeBlock.IS_INPUT_EAST)){pBlockEntity.handleStormlight(pLevel, pPos.west(), Direction.EAST);}
     }
 }
