@@ -65,14 +65,26 @@ public class StormlightPipeBlock extends BaseEntityBlock {
     static final VoxelShape DOWN = Block.box(5, 0, 5, 11, 5, 11);
 
     public static boolean isLookingAtShape(Player player, VoxelShape shape, BlockPos blockPos){
+        System.out.println("----------------");
+        System.out.println(blockPos);
+
         Vec3 direction = player.getLookAngle().normalize().scale(player.getReachDistance());
         Vec3 start = player.getEyePosition();
         Vec3 end = start.add(direction);
 
+        System.out.println("start: "+start);
+        System.out.println("end: "+end);
+
+        System.out.println("is shape empty: " + shape.isEmpty());
+        Vec3 vec3 = end.subtract(start);
+        System.out.println("Weird check: " + (vec3.lengthSqr() < 1.0E-7D));
+
+
         BlockHitResult result = shape.clip(start, end, blockPos);
 
-        if(result == null){return false;}
-        if(result.getType() == HitResult.Type.MISS){return false;}
+        if(result == null){System.out.println("null");return false;}
+        if(result.getType() == HitResult.Type.MISS){System.out.println("miss"); return false;}
+        System.out.println("returning true!");
         return true;
 
     }
@@ -167,15 +179,50 @@ public class StormlightPipeBlock extends BaseEntityBlock {
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
         return new StormlightPipeBlockEntity(blockPos, blockState);
     }
+    @Nullable
+    public static Direction getClickedDirection (Vec3 loc, VoxelShape shape, BlockPos pos){
+        AABB bounds = shape.bounds();
+        Vec3 rLoc = new Vec3(loc.x-pos.getX(), loc.y-pos.getY(), loc.z-pos.getZ());
+
+        if(rLoc.z > bounds.maxZ){return Direction.SOUTH;}
+        if(rLoc.z < bounds.minZ){return Direction.NORTH;}
+        if(rLoc.x > bounds.maxX){return Direction.EAST;}
+        if(rLoc.x < bounds.minX){return Direction.WEST;}
+        if(rLoc.y > bounds.maxY){return Direction.UP;}
+        if(rLoc.y < bounds.minY){return Direction.DOWN;}
+
+        System.out.println("its null");
+        return null;
+
+    }
 
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
-        if(StormlightPipeBlock.isLookingAtShape(player, UP , blockPos)){blockState = blockState.setValue(IS_INPUT_UP, !blockState.getValue(IS_INPUT_UP));}
-        if(StormlightPipeBlock.isLookingAtShape(player, DOWN , blockPos)){blockState = blockState.setValue(IS_INPUT_DOWN, !blockState.getValue(IS_INPUT_DOWN));}
-        if(StormlightPipeBlock.isLookingAtShape(player, NORTH , blockPos)){blockState = blockState.setValue(IS_INPUT_NORTH, !blockState.getValue(IS_INPUT_NORTH));}
-        if(StormlightPipeBlock.isLookingAtShape(player, SOUTH , blockPos)){blockState = blockState.setValue(IS_INPUT_SOUTH, !blockState.getValue(IS_INPUT_SOUTH));}
-        if(StormlightPipeBlock.isLookingAtShape(player, WEST , blockPos)){blockState = blockState.setValue(IS_INPUT_WEST, !blockState.getValue(IS_INPUT_WEST));}
-        if(StormlightPipeBlock.isLookingAtShape(player, EAST , blockPos)){blockState = blockState.setValue(IS_INPUT_EAST, !blockState.getValue(IS_INPUT_EAST));}
+        if(!level.isClientSide() && interactionHand == InteractionHand.MAIN_HAND) {
+            Direction direction = getClickedDirection(blockHitResult.getLocation(), CORE, blockPos);
+            System.out.println(direction);
+            if (direction == null) {
+                return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+            }
+            if (direction == Direction.SOUTH) {
+                level.setBlock(blockPos, blockState.setValue(IS_INPUT_SOUTH, !blockState.getValue(IS_INPUT_SOUTH)), 3);
+            }
+            if (direction == Direction.NORTH) {
+                level.setBlock(blockPos, blockState.setValue(IS_INPUT_NORTH, !blockState.getValue(IS_INPUT_NORTH)), 3);
+            }
+            if (direction == Direction.EAST) {
+                level.setBlock(blockPos, blockState.setValue(IS_INPUT_EAST, !blockState.getValue(IS_INPUT_EAST)), 3);
+            }
+            if (direction == Direction.WEST) {
+                level.setBlock(blockPos, blockState.setValue(IS_INPUT_WEST, !blockState.getValue(IS_INPUT_WEST)), 3);
+            }
+            if (direction == Direction.UP) {
+                level.setBlock(blockPos, blockState.setValue(IS_INPUT_UP, !blockState.getValue(IS_INPUT_UP)), 3);
+            }
+            if (direction == Direction.DOWN) {
+                level.setBlock(blockPos, blockState.setValue(IS_INPUT_DOWN, !blockState.getValue(IS_INPUT_DOWN)), 3);
+            }
+        }
 
         return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
     }
