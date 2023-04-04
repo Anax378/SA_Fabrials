@@ -4,6 +4,7 @@ import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.block.entity.custom.StormlightPipeBlockEntity;
 import com.anax.sa_fabrials.block.entity.custom.TopazCrystalBlockEntity;
+import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -90,7 +91,9 @@ public class StormlightPipeBlock extends BaseEntityBlock {
     }
 
     public boolean connects(Direction direction, BlockPos pos, LevelAccessor level){
-        return level.getBlockState(pos.relative(direction)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get());
+        if(level.getBlockState(pos.relative(direction)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get())){return true;}
+        if(level.getBlockEntity(pos.relative(direction)) != null && level.getBlockEntity(pos.relative(direction)).getCapability(StormlightStorage.STORMLIGHT_STORAGE).isPresent()){return true;}
+        return false;
     }
 
 
@@ -141,12 +144,12 @@ public class StormlightPipeBlock extends BaseEntityBlock {
         if(connects(Direction.NORTH, blockPlaceContext.getClickedPos(), blockPlaceContext.getLevel())){state = state.setValue(CONNECTED_NORTH, Boolean.TRUE);}else{state = state.setValue(CONNECTED_NORTH, Boolean.FALSE);}
         if(connects(Direction.SOUTH, blockPlaceContext.getClickedPos(), blockPlaceContext.getLevel())){state = state.setValue(CONNECTED_SOUTH, Boolean.TRUE);}else{state = state.setValue(CONNECTED_SOUTH, Boolean.FALSE);}
 
-        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.DOWN)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.DOWN)).getValue(IS_INPUT_UP)){state = state.setValue(IS_INPUT_DOWN, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_DOWN, Boolean.FALSE);}
-        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.UP)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.UP)).getValue(IS_INPUT_DOWN)){state = state.setValue(IS_INPUT_UP, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_UP, Boolean.FALSE);}
-        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.WEST)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.WEST)).getValue(IS_INPUT_EAST)){state = state.setValue(IS_INPUT_WEST, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_WEST, Boolean.FALSE);}
-        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.EAST)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.EAST)).getValue(IS_INPUT_WEST)){state = state.setValue(IS_INPUT_EAST, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_EAST, Boolean.FALSE);}
-        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.NORTH)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.NORTH)).getValue(IS_INPUT_SOUTH)){state = state.setValue(IS_INPUT_NORTH, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_NORTH, Boolean.FALSE);}
-        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.SOUTH)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.SOUTH)).getValue(IS_INPUT_NORTH)){state = state.setValue(IS_INPUT_SOUTH, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_SOUTH, Boolean.FALSE);}
+        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.DOWN)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && !blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.DOWN)).getValue(IS_INPUT_UP)){state = state.setValue(IS_INPUT_DOWN, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_DOWN, Boolean.FALSE);}
+        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.UP)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && !blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.UP)).getValue(IS_INPUT_DOWN)){state = state.setValue(IS_INPUT_UP, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_UP, Boolean.FALSE);}
+        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.WEST)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && !blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.WEST)).getValue(IS_INPUT_EAST)){state = state.setValue(IS_INPUT_WEST, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_WEST, Boolean.FALSE);}
+        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.EAST)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && !blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.EAST)).getValue(IS_INPUT_WEST)){state = state.setValue(IS_INPUT_EAST, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_EAST, Boolean.FALSE);}
+        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.NORTH)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && !blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.NORTH)).getValue(IS_INPUT_SOUTH)){state = state.setValue(IS_INPUT_NORTH, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_NORTH, Boolean.FALSE);}
+        if(blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.SOUTH)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get()) && !blockPlaceContext.getLevel().getBlockState(pos.relative(Direction.SOUTH)).getValue(IS_INPUT_NORTH)){state = state.setValue(IS_INPUT_SOUTH, Boolean.TRUE);}else{state = state.setValue(IS_INPUT_SOUTH, Boolean.FALSE);}
 
         return state;
     }

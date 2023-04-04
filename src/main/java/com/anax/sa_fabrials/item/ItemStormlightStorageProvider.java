@@ -77,12 +77,12 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
     }
 
     @Override
-    public boolean canExtract() {
+    public boolean canExtract(Direction side) {
         return maxExtract > 0 && stormlight > 0;
     }
 
     @Override
-    public boolean canReceive() {
+    public boolean canReceive(Direction side) {
         return maxReceive>0&&stormlight<capacity;
     }
 

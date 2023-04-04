@@ -63,6 +63,20 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
             public void onChanged() {
                 setChanged();
             }
+
+            @Override
+            public boolean canExtract(@Nullable Direction direction) {
+                if(direction != null)
+                {if(direction != getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)){return false;}}
+                return super.canExtract(direction);
+            }
+
+            @Override
+            public boolean canReceive(@Nullable Direction direction) {
+                if(direction != null)
+                {if(direction != getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite()){return false;}}
+                return super.canReceive(direction);
+            }
         };
         this.data = new ContainerData() {
             @Override
@@ -161,7 +175,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         final int[] received = {0};
         pBlockEntity.itemHandler.getStackInSlot(1).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
                 handler -> {
-                    if(handler.canReceive()){
+                    if(handler.canReceive(null)){
                     received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(pBlockEntity.maxExtract, true), false);}
                 }
         );
@@ -170,7 +184,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         final int[] extracted = {0};
         pBlockEntity.itemHandler.getStackInSlot(0).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(
                 handler -> {
-                    if (handler.canExtract()){
+                    if (handler.canExtract(null)){
                     extracted[0] = handler.extractStormlight(pBlockEntity.stormlightStorage.receiveStormlight(pBlockEntity.maxReceive, true), false);}}
         );
         pBlockEntity.stormlightStorage.receiveStormlight(extracted[0], false);
@@ -181,7 +195,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         if(entity != null){
         entity.getCapability(StormlightStorage.STORMLIGHT_STORAGE, facing.getOpposite()).ifPresent(
                 handler -> {
-                    if(handler.canReceive()){
+                    if(handler.canReceive(facing.getOpposite())){
                         received[0] = handler.receiveStormlight(pBlockEntity.stormlightStorage.extractStormlight(pBlockEntity.maxExtract, true), false);
                     }
                 }

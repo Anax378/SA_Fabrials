@@ -21,5 +21,7 @@
   "item.sa_fabrials.amethyst_gem": "Amethyst Gem",
   "item.as_fabrials.creative_gem": "Creative Gem",
   
-  "block.sa_fabrials.topaz_crystal_block": "Topaz Crystal Block"
+  "block.sa_fabrials.topaz_crystal_block": "Topaz Crystal Block",
+  "block.sa_fabrials.stormlight_pipe": "Stormlight Pipe",
+  "item.sa_fabrials.creative_gem": "Creative Gem"
 }

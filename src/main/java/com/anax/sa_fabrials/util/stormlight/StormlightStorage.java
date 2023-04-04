@@ -1,9 +1,11 @@
 package com.anax.sa_fabrials.util.stormlight;
 
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class StormlightStorage implements IStormlightStorage{
     int capacity;
@@ -43,10 +45,10 @@ public abstract class StormlightStorage implements IStormlightStorage{
     public int getMaxStormlightStored() {
         return capacity;
     }
-    public boolean canExtract() {
+    public boolean canExtract(@Nullable Direction direction) {
         return maxExtract > 0;
     }
-    public boolean canReceive() {
+    public boolean canReceive(@Nullable Direction direction) {
         return maxReceive > 0;
     }
 

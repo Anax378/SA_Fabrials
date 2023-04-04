@@ -27,10 +27,10 @@ public class ModBlocks {
 
 
     public static final RegistryObject<Block> TOPAZ_CRYSTAL_BLOCK = registerBlock("topaz_crystal_block",
-            () -> new TopazCrystalBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.TEST_MOD_TAB);
+            () -> new TopazCrystalBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
     public static final RegistryObject<Block> STORMLIGHT_PIPE_BLOCK = registerBlock("stormlight_pipe",
-            () -> new StormlightPipeBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.TEST_MOD_TAB);
+            () -> new StormlightPipeBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
 
 
