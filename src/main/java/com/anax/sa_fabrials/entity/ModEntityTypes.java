@@ -15,21 +15,19 @@ import java.util.function.Supplier;
 
 public class ModEntityTypes {
 
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, SAFabrials.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, SAFabrials.MOD_ID);
 
-    public static final RegistryObject<EntityType<ThrownFabrial>> THROWN_FABRIAL = ENTITY_TYPES.register("thrown_fabrial",  () -> EntityType.Builder.<ThrownFabrial>of((a, b) -> {return new ThrownFabrial(a, b);}, MobCategory.MISC)
-                            .sized(0.25f, 0.25f)
-                            .setShouldReceiveVelocityUpdates(true)
-                            .setUpdateInterval(1)
-                            .clientTrackingRange(4)
-                            .build("thrown_fabrial"));
+
+    public static final RegistryObject<EntityType<ThrownFabrial>> THROWN_FABRIAL =
+            ENTITIES.register("thrown_fabrial",
+            () -> EntityType.Builder.<ThrownFabrial>of(ThrownFabrial::new,
+                    MobCategory.MISC)
+                    .sized(0.25f, 0.25f)
+                    .clientTrackingRange(10)
+                    .build("thrown_fabrial"));
 
 
     public static void register(IEventBus eventBus){
-        System.out.println("-----------------------------------------");
-        System.out.println("isNull?: " + (THROWN_FABRIAL == null));
-        System.out.println("ENTITY_TYPES : " + ENTITY_TYPES);
-        System.out.println("ModId: " + SAFabrials.MOD_ID);
-        eventBus.register(ENTITY_TYPES);
+        eventBus.register(ENTITIES);
     }
 }
