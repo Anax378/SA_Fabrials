@@ -23,5 +23,7 @@
   
   "block.sa_fabrials.topaz_crystal_block": "Topaz Crystal Block",
   "block.sa_fabrials.stormlight_pipe": "Stormlight Pipe",
-  "item.sa_fabrials.creative_gem": "Creative Gem"
+  "item.sa_fabrials.creative_gem": "Creative Gem",
+  "block.sa_fabrials.spren_catching_station_block": "Spren catching station block",
+  "tooltip.sa_fabrials.spren": "Spren: "
 }

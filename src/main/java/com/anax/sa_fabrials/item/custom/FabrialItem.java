@@ -30,9 +30,11 @@ public class FabrialItem extends Item {
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> componentList, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, componentList, tooltipFlag);
+        if(!itemStack.getOrCreateTag().contains("spren")){itemStack.getOrCreateTag().putString("spren", "none");}
         int[] storedAndMaxStormlight = {0, 0};
         itemStack.getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(handler -> {storedAndMaxStormlight[0] = handler.getStormlightStored();storedAndMaxStormlight[1] = handler.getMaxStormlightStored();});
         componentList.add(new TranslatableComponent("tooltip.sa_fabrials.stored_stormlight").append(" " + Integer.toString(storedAndMaxStormlight[0]) + "/" + Integer.toString(storedAndMaxStormlight[1])));
+        componentList.add(new TranslatableComponent("tooltip.sa_fabrials.spren").append(" " + itemStack.getOrCreateTag().getString("spren")));
     }
     @Nullable
     @Override

@@ -1,8 +1,10 @@
 package com.anax.sa_fabrials.block;
 
 import com.anax.sa_fabrials.SAFabrials;
+import com.anax.sa_fabrials.block.custom.SprenCatchingStationBlock;
 import com.anax.sa_fabrials.block.custom.StormlightPipeBlock;
 import com.anax.sa_fabrials.block.custom.TopazCrystalBlock;
+import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
 import com.anax.sa_fabrials.item.ModCreativeModeTab;
 import com.anax.sa_fabrials.item.ModItems;
 import net.minecraft.network.chat.Component;
@@ -31,6 +33,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> STORMLIGHT_PIPE_BLOCK = registerBlock("stormlight_pipe",
             () -> new StormlightPipeBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
+
+    public static final RegistryObject<Block> SPREN_CATCHING_STATION = registerBlock("spren_catching_station_block",
+            () -> new SprenCatchingStationBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
 
 

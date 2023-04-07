@@ -1,12 +1,12 @@
 package com.anax.sa_fabrials.item.custom;
 
-import com.anax.sa_fabrials.entity.ModEntityTypes;
 import com.anax.sa_fabrials.entity.custom.ThrownFabrial;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class ThrowableFabrialItem extends FabrialItem {
@@ -19,12 +19,23 @@ public class ThrowableFabrialItem extends FabrialItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         ItemStack itemStack = player.getItemInHand(interactionHand);
         if(!level.isClientSide()){
-            ThrownFabrial thrownFabrial = new ThrownFabrial(ModEntityTypes.THROWN_FABRIAL.get(), level);
-            thrownFabrial.init(itemStack);
+            ThrownFabrial thrownFabrial = new ThrownFabrial(level, player);
+            thrownFabrial.init(itemStack.copy());
             thrownFabrial.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(thrownFabrial);
         }
-        itemStack.shrink(1);
+        player.setItemInHand(interactionHand, ItemStack.EMPTY);
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+    }
+
+    @Override
+    public boolean canBeHurtBy(DamageSource damageSource) {
+        if(damageSource.isExplosion() || damageSource.isFire() || DamageSource.LIGHTNING_BOLT.getMsgId().equals(damageSource.getMsgId())){return false;}
+        return super.canBeHurtBy(damageSource);
+    }
+
+    @Override
+    public void onDestroyed(ItemEntity itemEntity) {
+        super.onDestroyed(itemEntity);
     }
 }

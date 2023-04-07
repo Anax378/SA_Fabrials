@@ -1,7 +1,7 @@
 package com.anax.sa_fabrials.item;
 
 import com.anax.sa_fabrials.SAFabrials;
-import com.anax.sa_fabrials.item.custom.PerfectGemstoneItem;
+import com.anax.sa_fabrials.item.custom.GemstoneItem;
 import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -44,34 +44,34 @@ public class ModItems {
     public static final RegistryObject<Item> HELIODOR = ITEMS.register("heliodor",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB)));
 
-    public static final RegistryObject<PerfectGemstoneItem> TOPAZ_GEM = ITEMS.register("topaz_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 64000, 500, 500));
-    public static final RegistryObject<PerfectGemstoneItem> SMOKESTONE_GEM = ITEMS.register("smokestone_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 1000, 500,500));
-    public static final RegistryObject<PerfectGemstoneItem> GARNET_GEM = ITEMS.register("garnet_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 8000, 500,500));
-    public static final RegistryObject<PerfectGemstoneItem> ZIRCON_GEM = ITEMS.register("zircon_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 12000, 500,500));
-    public static final RegistryObject<PerfectGemstoneItem> RUBY_GEM = ITEMS.register("ruby_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 20000, 500,500));
-    public static final RegistryObject<PerfectGemstoneItem> SAPPHIRE_GEM = ITEMS.register("sapphire_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 28000, 500,500));
+    public static final RegistryObject<GemstoneItem> TOPAZ_GEM = ITEMS.register("topaz_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 64000, 500, 500));
+    public static final RegistryObject<GemstoneItem> SMOKESTONE_GEM = ITEMS.register("smokestone_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 1000, 500,500));
+    public static final RegistryObject<GemstoneItem> GARNET_GEM = ITEMS.register("garnet_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 8000, 500,500));
+    public static final RegistryObject<GemstoneItem> ZIRCON_GEM = ITEMS.register("zircon_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 12000, 500,500));
+    public static final RegistryObject<GemstoneItem> RUBY_GEM = ITEMS.register("ruby_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 20000, 500,500));
+    public static final RegistryObject<GemstoneItem> SAPPHIRE_GEM = ITEMS.register("sapphire_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 28000, 500,500));
 
-    public static final RegistryObject<PerfectGemstoneItem> HELIODOR_GEM = ITEMS.register("heliodor_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 16000, 500,500));
+    public static final RegistryObject<GemstoneItem> HELIODOR_GEM = ITEMS.register("heliodor_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 16000, 500,500));
 
-    public static final RegistryObject<PerfectGemstoneItem> DIAMOND_GEM = ITEMS.register("diamond_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 32000, 500,500));
-    public static final RegistryObject<PerfectGemstoneItem> EMERALD_GEM = ITEMS.register("emerald_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 4000, 500,500));
-    public static final RegistryObject<PerfectGemstoneItem> AMETHYST_GEM = ITEMS.register("amethyst_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500));
+    public static final RegistryObject<GemstoneItem> DIAMOND_GEM = ITEMS.register("diamond_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 32000, 500,500));
+    public static final RegistryObject<GemstoneItem> EMERALD_GEM = ITEMS.register("emerald_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 4000, 500,500));
+    public static final RegistryObject<GemstoneItem> AMETHYST_GEM = ITEMS.register("amethyst_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500));
 
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_FABRIAL = ITEMS.register("throwable_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 1000, 1000, 1000, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), 1000, 1000, 1000, 0));
 
-    public static final RegistryObject<PerfectGemstoneItem> CREATIVE_GEM = ITEMS.register("creative_gem",
-            () -> new PerfectGemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500){
+    public static final RegistryObject<GemstoneItem> CREATIVE_GEM = ITEMS.register("creative_gem",
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500){
                 @Override
                 public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
                     return new ItemStormlightStorageProvider(100000000, 100000000, 100000000, 100000000, stack){

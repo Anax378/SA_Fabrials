@@ -65,31 +65,6 @@ public class StormlightPipeBlock extends BaseEntityBlock {
     static final VoxelShape UP = Block.box(5, 11, 5, 11, 16, 11);
     static final VoxelShape DOWN = Block.box(5, 0, 5, 11, 5, 11);
 
-    public static boolean isLookingAtShape(Player player, VoxelShape shape, BlockPos blockPos){
-        System.out.println("----------------");
-        System.out.println(blockPos);
-
-        Vec3 direction = player.getLookAngle().normalize().scale(player.getReachDistance());
-        Vec3 start = player.getEyePosition();
-        Vec3 end = start.add(direction);
-
-        System.out.println("start: "+start);
-        System.out.println("end: "+end);
-
-        System.out.println("is shape empty: " + shape.isEmpty());
-        Vec3 vec3 = end.subtract(start);
-        System.out.println("Weird check: " + (vec3.lengthSqr() < 1.0E-7D));
-
-
-        BlockHitResult result = shape.clip(start, end, blockPos);
-
-        if(result == null){System.out.println("null");return false;}
-        if(result.getType() == HitResult.Type.MISS){System.out.println("miss"); return false;}
-        System.out.println("returning true!");
-        return true;
-
-    }
-
     public boolean connects(Direction direction, BlockPos pos, LevelAccessor level){
         if(level.getBlockState(pos.relative(direction)).is(ModBlocks.STORMLIGHT_PIPE_BLOCK.get())){return true;}
         if(level.getBlockEntity(pos.relative(direction)) != null && level.getBlockEntity(pos.relative(direction)).getCapability(StormlightStorage.STORMLIGHT_STORAGE).isPresent()){return true;}

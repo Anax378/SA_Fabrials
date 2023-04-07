@@ -4,6 +4,7 @@ import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.block.screen.CrystalScreen;
 import com.anax.sa_fabrials.block.screen.ModMenuTypes;
+import com.anax.sa_fabrials.block.screen.SprenCatchingStationScreen;
 import com.anax.sa_fabrials.entity.ModEntityTypes;
 import com.anax.sa_fabrials.item.ModItems;
 import com.mojang.logging.LogUtils;
@@ -52,5 +53,6 @@ public class SAFabrials
     }
     private void clientSetup(final FMLClientSetupEvent event){
         MenuScreens.register(ModMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
+        MenuScreens.register(ModMenuTypes.SPREN_CATCHING_STATION_MENU.get(), SprenCatchingStationScreen::new);
     }
 }

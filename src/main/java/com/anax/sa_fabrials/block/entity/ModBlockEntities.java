@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.block.entity;
 import com.anax.sa_fabrials.SAFabrials;
 import com.anax.sa_fabrials.block.ModBlocks;
+import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
 import com.anax.sa_fabrials.block.entity.custom.StormlightPipeBlockEntity;
 import com.anax.sa_fabrials.block.entity.custom.TopazCrystalBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,6 +24,11 @@ public class ModBlockEntities {
             BLOCK_ENTITIES.register("stormlight_block_entity", () ->
                     BlockEntityType.Builder.of(StormlightPipeBlockEntity::new,
                             ModBlocks.STORMLIGHT_PIPE_BLOCK.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<SprenCatchingStationBlockEntity>> SPREN_CATCHING_STATION_ENTITY =
+            BLOCK_ENTITIES.register("spren_catching_station_block_entity", () ->
+                    BlockEntityType.Builder.of(SprenCatchingStationBlockEntity::new,
+                            ModBlocks.SPREN_CATCHING_STATION.get()).build(null));
 
 
     public static void register(IEventBus eventBus){
