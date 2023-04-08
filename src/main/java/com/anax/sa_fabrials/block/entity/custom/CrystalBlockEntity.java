@@ -16,6 +16,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,7 +44,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         }
     };
 
-    final StormlightStorage stormlightStorage;
+    public final StormlightStorage stormlightStorage;
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<StormlightStorage> lazyStormlightStorage = LazyOptional.empty();
@@ -55,6 +56,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
             @Override
             public void onChanged() {
                 setChanged();
+                level.getLightEngine().checkBlock(blockPos);
             }
 
             @Override

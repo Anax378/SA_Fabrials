@@ -6,18 +6,24 @@ import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Cow;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
@@ -26,14 +32,18 @@ import net.minecraftforge.network.NetworkHooks;
 import static net.minecraft.world.Containers.dropItemStack;
 
 public class ThrownFabrial extends ThrowableItemProjectile {
-    ItemStack itemStack;
+    private ItemStack itemStack;
     public ThrownFabrial(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
         super(entityType, level);
-        init(ModItems.THROWABLE_FABRIAL.get().getDefaultInstance());
     }
 
     public ThrownFabrial(Level level, LivingEntity entity){
         super(ModEntityTypes.THROWN_FABRIAL.get(), entity, level);
+    }
+
+    public ThrownFabrial(Level level, LivingEntity entity, ItemStack itemStack){
+        super(ModEntityTypes.THROWN_FABRIAL.get(), entity, level);
+        init(itemStack);
     }
 
     @Override
@@ -53,8 +63,20 @@ public class ThrownFabrial extends ThrowableItemProjectile {
 
     }
 
+    @Override
+    public void addAdditionalSaveData(CompoundTag tag) {
+        tag.put("fabrial_item", getItem().save(new CompoundTag()));
+        super.addAdditionalSaveData(tag);
+    }
+
+    @Override
+    public void readAdditionalSaveData(CompoundTag tag) {
+        setItem(ItemStack.of((CompoundTag) tag.get("fabrial_item")));
+        super.readAdditionalSaveData(tag);
+    }
+
     public void init(ItemStack stack){
-        this.itemStack = stack;
+        super.setItem(stack);
     }
 
     public void drop(Level level, double x, double y, double z){
@@ -63,7 +85,8 @@ public class ThrownFabrial extends ThrowableItemProjectile {
 
     @Override
     protected Item getDefaultItem() {
-        return ModItems.THROWABLE_FABRIAL.get();
+        if(itemStack == null){return ModItems.THROWABLE_SMOKESTONE_FABRIAL.get();}
+        return itemStack.getItem();
     }
 
     @Override

@@ -19,8 +19,7 @@ public class ThrowableFabrialItem extends FabrialItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         ItemStack itemStack = player.getItemInHand(interactionHand);
         if(!level.isClientSide()){
-            ThrownFabrial thrownFabrial = new ThrownFabrial(level, player);
-            thrownFabrial.init(itemStack.copy());
+            ThrownFabrial thrownFabrial = new ThrownFabrial(level, player, itemStack.copy());
             thrownFabrial.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(thrownFabrial);
         }

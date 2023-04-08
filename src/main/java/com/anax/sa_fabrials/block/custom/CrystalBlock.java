@@ -82,6 +82,14 @@ public abstract class CrystalBlock extends BaseEntityBlock {
 
     abstract boolean isMyType(BlockEntity entity);
     abstract void openGui(ServerPlayer player,BlockEntity entity ,BlockPos pPos);
+
+    @Override
+    public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
+        CrystalBlockEntity entity = (CrystalBlockEntity) level.getBlockEntity(pos);
+        if(entity != null){return Math.round(((float) entity.stormlightStorage.getStormlightStored() / (float) entity.stormlightStorage.getMaxStormlightStored())*15f);}
+        return 0;
+    }
+
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
                                  Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
