@@ -27,12 +27,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.network.NetworkHooks;
 
 import static net.minecraft.world.Containers.dropItemStack;
 
 public class ThrownFabrial extends ThrowableItemProjectile {
-    private ItemStack itemStack;
+    private ItemStack itemStack = Items.AIR.getDefaultInstance();
     public ThrownFabrial(EntityType<? extends ThrowableItemProjectile> entityType, Level level) {
         super(entityType, level);
     }
@@ -76,6 +77,7 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     }
 
     public void init(ItemStack stack){
+        itemStack = stack;
         super.setItem(stack);
     }
 
@@ -91,11 +93,25 @@ public class ThrownFabrial extends ThrowableItemProjectile {
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
-        if(itemStack.getOrCreateTag().getString("spren").equals("fire")){FabrialEffects.setFire(level, this, this.getOnPos(), 1);}
-        if(itemStack.getOrCreateTag().getString("spren").equals("lightning")){FabrialEffects.lightning(level, this, this.position(), 1);}
-        if(itemStack.getOrCreateTag().getString("spren").equals("explosion")){FabrialEffects.explode(level, this, 4);}
-        drop(level, this.getX(), this.getY(), this.getZ());
+        if(itemStack != null){
+            if(itemStack.getOrCreateTag().getString("spren").equals("fire")){FabrialEffects.setFire(level, blockHitResult.getBlockPos(),blockHitResult.getDirection(), 1);}
+            if(itemStack.getOrCreateTag().getString("spren").equals("lightning")){FabrialEffects.lightning(level, this.position(), 1);}
+            if(itemStack.getOrCreateTag().getString("spren").equals("explosion")){FabrialEffects.explode(level, this.position(), 4);}
+            drop(level, this.getX(), this.getY(), this.getZ());
+        }
         this.discard();
         super.onHitBlock(blockHitResult);
+    }
+
+    @Override
+    protected void onHitEntity(EntityHitResult entityHitResult) {
+        if(itemStack != null){
+            if(itemStack.getOrCreateTag().getString("spren").equals("fire")){
+                FabrialEffects.setEntityFire(entityHitResult.getEntity(), 1);
+                drop(level, this.getX(), this.getY(), this.getZ());
+            }
+        }
+        this.discard();
+        super.onHitEntity(entityHitResult);
     }
 }

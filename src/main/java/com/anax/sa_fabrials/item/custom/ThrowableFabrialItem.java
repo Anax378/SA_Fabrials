@@ -7,9 +7,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
 
-public class ThrowableFabrialItem extends FabrialItem {
+public class ThrowableFabrialItem extends AbstractFabrialItem {
     public ThrowableFabrialItem(Properties properties, int capacity, int maxExtract,int maxReceive, int initialStormlight) {
         super(properties, capacity, maxExtract, maxReceive, initialStormlight);
 
@@ -27,14 +28,5 @@ public class ThrowableFabrialItem extends FabrialItem {
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
     }
 
-    @Override
-    public boolean canBeHurtBy(DamageSource damageSource) {
-        if(damageSource.isExplosion() || damageSource.isFire() || DamageSource.LIGHTNING_BOLT.getMsgId().equals(damageSource.getMsgId())){return false;}
-        return super.canBeHurtBy(damageSource);
-    }
 
-    @Override
-    public void onDestroyed(ItemEntity itemEntity) {
-        super.onDestroyed(itemEntity);
-    }
 }

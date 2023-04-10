@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.item;
 
 import com.anax.sa_fabrials.SAFabrials;
+import com.anax.sa_fabrials.item.custom.FabrialItem;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
 import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
 import com.anax.sa_fabrials.util.fabrial.GemCapacities;
@@ -88,8 +89,8 @@ public class ModItems {
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_AMETHYST_FABRIAL = ITEMS.register("throwable_amethyst_fabrial",
             ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0));
 
-    public static final RegistryObject<ThrowableFabrialItem> THROWN_FABRIAL = ITEMS.register("thrown_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), 0, 0, 0, 0));
+    public static final RegistryObject<FabrialItem> TOPAZ_FABRIAL = ITEMS.register("topaz_fabrial",
+            ()-> new FabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
 
     public static final RegistryObject<GemstoneItem> CREATIVE_GEM = ITEMS.register("creative_gem",
             () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500){

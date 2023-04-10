@@ -142,7 +142,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
 
             if(isFinishedCrafting[0] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.CAN_HOLD_SPREN)){
                 if(getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()) != null) {
-                    pLevel.playLocalSound(pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, true);
+                    pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1);
                     pBlockEntity.itemStackHandler.getStackInSlot(1).getOrCreateTag().putString("spren", getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()));
                 }
                 pBlockEntity.isCrafting = false;
@@ -166,7 +166,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
                 );
                 if (data[0] && data[1] && (capacities[0] <= capacities[1] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.CAN_HOLD_SPREN))) {
                     pBlockEntity.isCrafting = true;
-                    pLevel.playLocalSound(pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS, 1, 1, true);
+                    pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS, 1, 1);
                 }
 
             }
