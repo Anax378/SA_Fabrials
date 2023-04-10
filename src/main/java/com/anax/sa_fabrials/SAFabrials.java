@@ -2,6 +2,7 @@ package com.anax.sa_fabrials;
 
 import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.screen.ArtifabriansStationScreen;
 import com.anax.sa_fabrials.block.screen.CrystalScreen;
 import com.anax.sa_fabrials.block.screen.ModMenuTypes;
 import com.anax.sa_fabrials.block.screen.SprenCatchingStationScreen;
@@ -54,5 +55,6 @@ public class SAFabrials
     private void clientSetup(final FMLClientSetupEvent event){
         MenuScreens.register(ModMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
         MenuScreens.register(ModMenuTypes.SPREN_CATCHING_STATION_MENU.get(), SprenCatchingStationScreen::new);
+        MenuScreens.register(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), ArtifabriansStationScreen::new);
     }
 }

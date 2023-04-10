@@ -1,9 +1,11 @@
 package com.anax.sa_fabrials.block;
 
 import com.anax.sa_fabrials.SAFabrials;
+import com.anax.sa_fabrials.block.custom.ArtifabriansStationBlock;
 import com.anax.sa_fabrials.block.custom.SprenCatchingStationBlock;
 import com.anax.sa_fabrials.block.custom.StormlightPipeBlock;
 import com.anax.sa_fabrials.block.custom.TopazCrystalBlock;
+import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
 import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
 import com.anax.sa_fabrials.item.ModCreativeModeTab;
 import com.anax.sa_fabrials.item.ModItems;
@@ -36,6 +38,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> SPREN_CATCHING_STATION = registerBlock("spren_catching_station_block",
             () -> new SprenCatchingStationBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
+
+    public static final RegistryObject<Block> ARTIFABRIANS_STATION_BLOCK = registerBlock("artifabrians_station_block",
+            () -> new ArtifabriansStationBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
 
 

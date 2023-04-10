@@ -1,5 +1,7 @@
 package com.anax.sa_fabrials.block.custom;
 
+import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -18,14 +20,14 @@ import org.jetbrains.annotations.Nullable;
 public class ArtifabriansStationBlock extends BaseEntityBlock {
 
     public static VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-    protected ArtifabriansStationBlock(Properties properties) {
+    public ArtifabriansStationBlock(Properties properties) {
         super(properties);
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return TODO;
+        return new ArtifabriansStationBlockEntity(blockPos, blockState);
     }
 
     @Override
@@ -52,6 +54,6 @@ public class ArtifabriansStationBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> tBlockEntityType) {
-        return createTickerHelper(tBlockEntityType, TODO, TODO::tick);
+        return createTickerHelper(tBlockEntityType, ModBlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get(), ArtifabriansStationBlockEntity::tick);
     }
 }
