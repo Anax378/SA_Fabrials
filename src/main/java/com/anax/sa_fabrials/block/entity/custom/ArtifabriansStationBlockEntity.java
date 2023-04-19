@@ -153,13 +153,11 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         }
 
         if(has_valid_recipe()){
-            System.out.println("has valid recipe");
             ItemStack resultItemStack = null;
             if(itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())){
                 resultItemStack = FabrialClassification.throwable_fabrial_from_gem((GemstoneItem) itemStackHandler.getStackInSlot(0).getItem()).getDefaultInstance();
             }
             if(resultItemStack != null) {
-                System.out.println("here id63455334864");
                 resultItemStack.getOrCreateTag().putString("spren", itemStackHandler.getStackInSlot(0).getOrCreateTag().getString("spren"));
                 resultItemStack.getOrCreateTag().putInt("stormlight_capacity", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_capacity"));
                 resultItemStack.getOrCreateTag().putInt("stormlight_maxReceive", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_maxReceive"));
@@ -167,7 +165,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 resultItemStack.getOrCreateTag().putInt("stormlight", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight"));
 
                 resultItemStack.getOrCreateTag().putBoolean("is_attractor", isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS));
-                resultItemStack.getOrCreateTag().putInt("power", Math.max(itemStackHandler.getStackInSlot(4).getCount(), 5));
+                resultItemStack.getOrCreateTag().putInt("power", Math.min(itemStackHandler.getStackInSlot(4).getCount(), 5));
                 itemStackHandler.setStackInSlot(2, resultItemStack);
                 isHasCraftedItem = true;
             }else{
@@ -187,10 +185,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     }
 
     boolean has_valid_recipe(){
-        System.out.println("1: " + (itemStackHandler.getStackInSlot(0).getItem() instanceof GemstoneItem));
-        System.out.println("2: " + (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS)));
-        System.out.println("3: " + (itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())));
-        System.out.println("4: " + (isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), ModTags.Items.ZINC_NUGGETS)));
         return (itemStackHandler.getStackInSlot(0).getItem() instanceof GemstoneItem
                 && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS))
                 && itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())

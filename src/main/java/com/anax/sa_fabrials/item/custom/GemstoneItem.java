@@ -42,7 +42,6 @@ public class GemstoneItem extends Item {
 
     @Override
     public InteractionResult useOn(UseOnContext pContext){
-        pContext.getItemInHand().getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(handler -> {handler.receiveStormlight(1, false);});
         return super.useOn(pContext);
     }
 
