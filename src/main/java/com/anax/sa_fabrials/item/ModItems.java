@@ -92,6 +92,17 @@ public class ModItems {
     public static final RegistryObject<FabrialItem> TOPAZ_FABRIAL = ITEMS.register("topaz_fabrial",
             ()-> new FabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
 
+    public static final RegistryObject<Item> THROWABLE_FABRIAL_CASING = ITEMS.register("throwable_fabrial_casing",
+            ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64).fireResistant()));
+
+    public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
+
+    public static final RegistryObject<Item> ZINC_NUGGET = ITEMS.register("zinc_nugget",
+            () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
+
+
+
     public static final RegistryObject<GemstoneItem> CREATIVE_GEM = ITEMS.register("creative_gem",
             () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500){
                 @Override

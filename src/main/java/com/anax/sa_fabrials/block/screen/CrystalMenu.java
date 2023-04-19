@@ -42,10 +42,6 @@ public class CrystalMenu extends AbstractContainerMenu {
         addDataSlots(data);
     }
 
-    public int getScaleEnergy(){
-        return -1*Math.round(70f * ( ( ( (float) data.get(0)) / ((float) data.get(1) ))));
-    }
-
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.

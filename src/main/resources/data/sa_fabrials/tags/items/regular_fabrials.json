@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values":
+  [
+    "sa_fabrials:topaz_fabrial",
+    "sa_fabrials:smokestone_fabrial",
+    "sa_fabrials:garnet_fabrial",
+    "sa_fabrials:zircon_fabrial",
+    "sa_fabrials:ruby_fabrial",
+    "sa_fabrials:sapphire_fabrial",
+    "sa_fabrials:heliodor_fabrial",
+    "sa_fabrials:diamond_fabrial",
+    "sa_fabrials:emerald_fabrial",
+    "sa_fabrials:amethyst_fabrial"
+  ]
+}

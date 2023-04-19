@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values":
+  [
+    "sa_fabrials:throwable_topaz_fabrial",
+    "sa_fabrials:throwable_smokestone_fabrial",
+    "sa_fabrials:throwable_garnet_fabrial",
+    "sa_fabrials:throwable_zircon_fabrial",
+    "sa_fabrials:throwable_ruby_fabrial",
+    "sa_fabrials:throwable_sapphire_fabrial",
+    "sa_fabrials:throwable_heliodor_fabrial",
+    "sa_fabrials:throwable_diamond_fabrial",
+    "sa_fabrials:throwable_emerald_fabrial",
+    "sa_fabrials:throwable_amethyst_fabrial"
+  ]
+}

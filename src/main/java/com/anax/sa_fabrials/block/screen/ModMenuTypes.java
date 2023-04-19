@@ -21,7 +21,7 @@ public class ModMenuTypes {
             registerMenuType(SprenCatchingStationMenu::new, "spren_catching_station_menu");
 
     public static final RegistryObject<MenuType<ArtifabriansStationMenu>> ARTIFABRIANS_STATION_MENU =
-            registerMenuType(ArtifabriansStationMenu::new, "spren_catching_station_menu");
+            registerMenuType(ArtifabriansStationMenu::new, "artifabrians_station_menu");
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>>
     registerMenuType(IContainerFactory<T> factory, String name){

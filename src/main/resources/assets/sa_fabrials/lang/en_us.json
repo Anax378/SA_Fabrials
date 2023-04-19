@@ -25,5 +25,8 @@
   "block.sa_fabrials.stormlight_pipe": "Stormlight Pipe",
   "item.sa_fabrials.creative_gem": "Creative Gem",
   "block.sa_fabrials.spren_catching_station_block": "Spren catching station block",
-  "tooltip.sa_fabrials.spren": "Spren: "
+  "tooltip.sa_fabrials.spren": "Spren:",
+  "tooltip.sa_fabrials.shift_for_info": "§6Shift for more information",
+  "tooltip.sa_fabrials.is_attractor": "Charge: ",
+  "tooltip.sa_fabrials.power": "Power:"
 }

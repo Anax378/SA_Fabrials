@@ -1,15 +1,19 @@
 package com.anax.sa_fabrials.block.screen;
 
+import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 public class ArtifabriansStationMenu extends AbstractContainerMenu {
@@ -19,17 +23,27 @@ public class ArtifabriansStationMenu extends AbstractContainerMenu {
         this(containerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
 
-    public ArtifabriansStationMenu (int conatainerId, Inventory inv, BlockEntity entity){
-        super(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), conatainerId);
+    public ArtifabriansStationMenu (int containerId, Inventory inv, BlockEntity entity){
+        super(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), containerId);
+        checkContainerSize(inv, 5);
         level = inv.player.level;
         blockEntity = (ArtifabriansStationBlockEntity)entity;
-        addPlayerHotbar(inv);
         addPlayerInventory(inv);
+        addPlayerHotbar(inv);
+
+
+        this.blockEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(handler -> {
+            this.addSlot(new SlotItemHandler(handler, 0, 80, 7));
+            this.addSlot(new SlotItemHandler(handler, 1, 52, 35));
+            this.addSlot(new SlotItemHandler(handler, 2, 80, 35));
+            this.addSlot(new SlotItemHandler(handler, 3, 108, 35));
+            this.addSlot(new SlotItemHandler(handler, 4, 80, 64));
+        });
     }
 
     @Override
     public boolean stillValid(Player player) {
-        return false;
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.ARTIFABRIANS_STATION_BLOCK.get());
     }
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
@@ -61,7 +75,7 @@ public class ArtifabriansStationMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 5;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {

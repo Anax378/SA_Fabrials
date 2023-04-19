@@ -34,7 +34,7 @@ public class ModBlockEntities {
     public static final RegistryObject<BlockEntityType<ArtifabriansStationBlockEntity>> ARTIFABRIANS_STATION_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("artifabrians_station_block_entity", () ->
                     BlockEntityType.Builder.of(ArtifabriansStationBlockEntity::new,
-                            ModBlocks.SPREN_CATCHING_STATION.get()).build(null));
+                            ModBlocks.ARTIFABRIANS_STATION_BLOCK.get()).build(null));
 
 
     public static void register(IEventBus eventBus){

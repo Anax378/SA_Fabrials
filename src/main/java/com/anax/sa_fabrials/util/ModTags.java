@@ -26,6 +26,14 @@ public class ModTags {
 
         public static final TagKey<Item> CAN_HOLD_SPREN = tag("can_hold_spren");
 
+        public static final TagKey<Item> THROWABLE_FABRIALS = tag("throwable_fabrials");
+        public static final TagKey<Item> REGULAR_FABRIALS = tag("regular_fabrials");
+
+        public static final TagKey<Item> STEEL_INGOTS = forgeTag("ingot/steel");
+        public static final TagKey<Item> IRON_INGOTS = forgeTag("ingot/iron");
+        public static final TagKey<Item> ZINC_NUGGETS = forgeTag("nuggets/zinc");
+
+
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(new ResourceLocation(SAFabrials.MOD_ID, name));
         }
