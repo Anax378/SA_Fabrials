@@ -10,6 +10,8 @@ import com.anax.sa_fabrials.entity.ModEntityTypes;
 import com.anax.sa_fabrials.item.ModItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.common.MinecraftForge;
@@ -53,6 +55,8 @@ public class SAFabrials
 
     }
     private void clientSetup(final FMLClientSetupEvent event){
+        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ARTIFABRIANS_STATION_BLOCK.get(), RenderType.translucent());
+
         MenuScreens.register(ModMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
         MenuScreens.register(ModMenuTypes.SPREN_CATCHING_STATION_MENU.get(), SprenCatchingStationScreen::new);
         MenuScreens.register(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), ArtifabriansStationScreen::new);

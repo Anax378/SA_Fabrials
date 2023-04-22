@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 
 import static net.minecraft.world.Containers.dropItemStack;
@@ -94,9 +95,9 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         if(itemStack != null){
-            if(itemStack.getOrCreateTag().getString("spren").equals("fire")){FabrialEffects.setFire(level, blockHitResult.getBlockPos(),blockHitResult.getDirection(), 1);}
-            if(itemStack.getOrCreateTag().getString("spren").equals("lightning")){FabrialEffects.lightning(level, this.position(), 1);}
-            if(itemStack.getOrCreateTag().getString("spren").equals("explosion")){FabrialEffects.explode(level, this.position(), 4);}
+            if(itemStack.getOrCreateTag().getString("spren").equals("fire")){FabrialEffects.setFire(level, blockHitResult.getBlockPos(),blockHitResult.getDirection(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
+            if(itemStack.getOrCreateTag().getString("spren").equals("lightning")){FabrialEffects.lightning(level, this.position(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
+            if(itemStack.getOrCreateTag().getString("spren").equals("explosion")){FabrialEffects.explode(level, this.position(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
             drop(level, this.getX(), this.getY(), this.getZ());
         }
         this.discard();
@@ -107,11 +108,23 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     protected void onHitEntity(EntityHitResult entityHitResult) {
         if(itemStack != null){
             if(itemStack.getOrCreateTag().getString("spren").equals("fire")){
-                FabrialEffects.setEntityFire(entityHitResult.getEntity(), 1);
+                FabrialEffects.setEntityFire(entityHitResult.getEntity(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));
+                drop(level, this.getX(), this.getY(), this.getZ());
+                this.discard();
             }
-            drop(level, this.getX(), this.getY(), this.getZ());
+            if(itemStack.getOrCreateTag().getString("spren").equals("wind")){
+                FabrialEffects.launchEntity(entityHitResult.getEntity(), new Vec3(0, 1, 0), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));
+                drop(level, this.getX(), this.getY(), this.getZ());
+                this.discard();
+            }
+            if(itemStack.getOrCreateTag().getString("spren").equals("health")){
+                FabrialEffects.health((LivingEntity) entityHitResult.getEntity(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));
+                drop(level, this.getX(), this.getY(), this.getZ());
+                this.discard();
+            }
+
         }
-        this.discard();
         super.onHitEntity(entityHitResult);
     }
+
 }

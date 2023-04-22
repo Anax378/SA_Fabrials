@@ -23,6 +23,8 @@ public class ModTags {
         public static final TagKey<Item> EXPLOSION_SPREN_ATTRACTORS = tag("explosion_spren_attractors");
         public static final TagKey<Item> FIRE_SPREN_ATTRACTORS = tag("fire_spren_attractors");
         public static final TagKey<Item> LIGHTNING_SPREN_ATTRACTORS = tag("lightning_spren_attractors");
+        public static final TagKey<Item> WIND_SPREN_ATTRACTORS = tag("wind_spren_attractors");
+        public static final TagKey<Item> HEALTH_SPREN_ATTRACTORS = tag("health_spren_attractors");
 
         public static final TagKey<Item> CAN_HOLD_SPREN = tag("can_hold_spren");
 

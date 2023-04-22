@@ -12,6 +12,7 @@
     "sa_fabrials:garnet_gem",
     "sa_fabrials:zircon_gem",
     "sa_fabrials:smokestone_gem",
+
     "sa_fabrials:throwable_topaz_fabrial",
     "sa_fabrials:throwable_heliodor_fabrial",
     "sa_fabrials:throwable_ruby_fabrial",
@@ -22,7 +23,17 @@
     "sa_fabrials:throwable_garnet_fabrial",
     "sa_fabrials:throwable_zircon_fabrial",
     "sa_fabrials:throwable_smokestone_fabrial",
-    "sa_fabrials:topaz_fabrial"
+
+    "sa_fabrials:topaz_fabrial",
+    "sa_fabrials:heliodor_fabrial",
+    "sa_fabrials:ruby_fabrial",
+    "sa_fabrials:sapphire_fabrial",
+    "sa_fabrials:diamond_fabrial",
+    "sa_fabrials:emerald_fabrial",
+    "sa_fabrials:amethyst_fabrial",
+    "sa_fabrials:garnet_fabrial",
+    "sa_fabrials:zircon_fabrial",
+    "sa_fabrials:smokestone_fabrial"
   ]
 
 }

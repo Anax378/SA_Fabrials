@@ -7,6 +7,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PotionItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -24,13 +27,13 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.Vec3;
 
 public class FabrialEffects {
-    public static void explode(Level level,Vec3 position, float power){
+    public static void explode(Level level,Vec3 position, float power, boolean charge){
         if(!level.isClientSide()) {
             level.explode(null, position.x, position.y, position.z, power, Explosion.BlockInteraction.BREAK);
         }
     }
 
-    public static void lightning(Level level, Vec3 position, float power){
+    public static void lightning(Level level, Vec3 position, float power, boolean charge){
         if(!level.isClientSide()) {
             LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
             lightningBolt.setPos(position);
@@ -38,7 +41,7 @@ public class FabrialEffects {
         }
     }
 
-    public static void setFire(Level level, BlockPos position, Direction direction, float power){
+    public static void setFire(Level level, BlockPos position, Direction direction, float power, boolean charge){
         if(level.getBlockState(position).is(Blocks.TNT)){
             TntBlock.explode(level, position);
             level.setBlock(position, Blocks.AIR.defaultBlockState(), 3);
@@ -57,9 +60,28 @@ public class FabrialEffects {
 
     }
 
-    public static void setEntityFire(Entity entity, float power){
-        if (entity instanceof Creeper){((Creeper)entity).ignite();return;}
-        entity.setRemainingFireTicks(Math.round(power*20));
+    public static void setEntityFire(Entity entity, float power, boolean charge){
+        if(charge){
+            if (entity instanceof Creeper){((Creeper)entity).ignite();return;}
+            entity.setRemainingFireTicks(Math.round(power*20));
+        }else{
+            entity.clearFire();
+        }
+    }
+
+    public static void launchEntity(Entity entity, Vec3 direction, float power, boolean charge){
+        direction = direction.normalize().scale(power);
+        if(!charge){direction = direction.reverse();}
+        entity.lerpMotion(direction.x, direction.y, direction.z);
+    }
+
+    public static void health(LivingEntity entity, float power, boolean charge){
+        if(!charge){
+            entity.hurt(DamageSource.MAGIC, power*2);
+        }
+        if(charge){
+            entity.heal(power*2);
+        }
     }
 
 

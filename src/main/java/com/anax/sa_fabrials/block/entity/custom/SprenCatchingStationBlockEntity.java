@@ -116,6 +116,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
         if(isHasItemTag(item, ModTags.Items.EXPLOSION_SPREN_ATTRACTORS)){return "explosion";}
         if(isHasItemTag(item, ModTags.Items.FIRE_SPREN_ATTRACTORS)){return "fire";}
         if(isHasItemTag(item, ModTags.Items.LIGHTNING_SPREN_ATTRACTORS)){return "lightning";}
+        if(isHasItemTag(item, ModTags.Items.WIND_SPREN_ATTRACTORS)){return "wind";}
         return null;
     }
 

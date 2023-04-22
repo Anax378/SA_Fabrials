@@ -24,10 +24,40 @@
   "block.sa_fabrials.topaz_crystal_block": "Topaz Crystal Block",
   "block.sa_fabrials.stormlight_pipe": "Stormlight Pipe",
   "item.sa_fabrials.creative_gem": "Creative Gem",
-  "block.sa_fabrials.spren_catching_station_block": "Spren catching station block",
+  "block.sa_fabrials.spren_catching_station_block": "Spren catching station",
   "tooltip.sa_fabrials.spren": "Spren:",
   "tooltip.sa_fabrials.shift_for_info": "§6Shift for more information",
   "tooltip.sa_fabrials.is_attractor": "Charge: ",
   "tooltip.sa_fabrials.power": "Power:",
-  "menu.sa_fabrials.artifabrians_station": "Artifabrian's \n Station"
+  "menu.sa_fabrials.artifabrians_station": "",
+
+  "item.sa_fabrials.throwable_topaz_fabrials": "Throwable Topaz Fabrial",
+  "item.sa_fabrials.throwable_sapphire_fabrials": "Throwable Sapphire Fabrial",
+  "item.sa_fabrials.throwable_smokestone_fabrials": "Throwable Smokestone Fabrial",
+  "item.sa_fabrials.throwable_ruby_fabrials": "Throwable Ruby Fabrial",
+  "item.sa_fabrials.throwable_garnet_fabrials": "Throwable Garnet Fabrial",
+  "item.sa_fabrials.throwable_zircon_fabrials": "Throwable Zircon Fabrial",
+  "item.sa_fabrials.throwable_heliodor_fabrials": "Throwable Heliodor Fabrial",
+  "item.sa_fabrials.throwable_diamond_fabrials": "Throwable Diamond Fabrial",
+  "item.sa_fabrials.throwable_emerald_fabrials": "Throwable Emerald Fabrial",
+  "item.sa_fabrials.throwable_amethyst_fabrials": "Throwable Amethyst Fabrial",
+
+  "item.sa_fabrials.topaz_fabrial": "Topaz Fabrial",
+  "item.sa_fabrials.sapphire_fabrial": "Sapphire Fabrial",
+  "item.sa_fabrials.smokestone_fabrial": "Smokestone Fabrial",
+  "item.sa_fabrials.ruby_fabrial": "Ruby Fabrial",
+  "item.sa_fabrials.garnet_fabrial": "Garnet Fabrial",
+  "item.sa_fabrials.zircon_fabrial": "Zircon Fabrial",
+  "item.sa_fabrials.heliodor_fabrial": "Heliodor Fabrial",
+  "item.sa_fabrials.diamond_fabrial": "Diamond Fabrial",
+  "item.sa_fabrials.emerald_fabrial": "Emerald Fabrial",
+  "item.sa_fabrials.amethyst_fabrial": "Amethyst Fabrial",
+
+  "block.sa_fabrials.artifabrians_station_block": "Artifabrians Station",
+
+  "item.sa_fabrials.throwable_fabrial_casing": "Throwable Fabrials Casing",
+  "item.sa_fabrials.fabrial_casing": "Fabrials Casing",
+  "item.sa_fabrials.zinc_nugget": "Zinc Nugget",
+  "item.sa_fabrials.steel_ingot": "Steel Ingot"
+
 }

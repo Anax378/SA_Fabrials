@@ -4,6 +4,7 @@ import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.block.screen.ArtifabriansStationMenu;
 import com.anax.sa_fabrials.item.ModItems;
 import com.anax.sa_fabrials.item.custom.AbstractFabrialItem;
+import com.anax.sa_fabrials.item.custom.FabrialItem;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
 import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
 import com.anax.sa_fabrials.util.ModTags;
@@ -30,7 +31,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.data.ForgeItemTagsProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -38,15 +38,13 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
 public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuProvider {
     private boolean isHasCraftedItem = false;
     public ItemStackHandler itemStackHandler = new ItemStackHandler(5){
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             if(slot == 2){
-                if(itemStackHandler.getStackInSlot(0).isEmpty() && itemStackHandler.getStackInSlot(1).isEmpty() && itemStackHandler.getStackInSlot(3).isEmpty() && itemStackHandler.getStackInSlot(4).isEmpty() && stack.getItem() instanceof AbstractFabrialItem && stack.getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial((ThrowableFabrialItem) stack.getItem()) != null) {
+                if(itemStackHandler.getStackInSlot(0).isEmpty() && itemStackHandler.getStackInSlot(1).isEmpty() && itemStackHandler.getStackInSlot(3).isEmpty() && itemStackHandler.getStackInSlot(4).isEmpty()  &&  ((FabrialClassification.gem_from_fabrial(stack.getItem()) != null) || (FabrialClassification.gem_from_throwable_fabrial(stack.getItem()) != null))) {
                     return true;
                 }else return false;
             }
@@ -134,10 +132,18 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         if(itemStackHandler.getStackInSlot(0).isEmpty() && itemStackHandler.getStackInSlot(1).isEmpty() && itemStackHandler.getStackInSlot(3).isEmpty() && itemStackHandler.getStackInSlot(4).isEmpty()) {
             if (itemStackHandler.getStackInSlot(2).getItem() instanceof AbstractFabrialItem) {
                 ItemStack gemItemStack = null;
-                if (itemStackHandler.getStackInSlot(2).getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial((ThrowableFabrialItem) itemStackHandler.getStackInSlot(2).getItem()) != null) {
+
+                if (itemStackHandler.getStackInSlot(2).getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial(itemStackHandler.getStackInSlot(2).getItem()) != null) {
                     itemStackHandler.setStackInSlot(3, ModItems.THROWABLE_FABRIAL_CASING.get().getDefaultInstance());
-                    gemItemStack = FabrialClassification.gem_from_throwable_fabrial((ThrowableFabrialItem) itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
+                    gemItemStack = FabrialClassification.gem_from_throwable_fabrial(itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
                 }
+
+                if (itemStackHandler.getStackInSlot(2).getItem() instanceof FabrialItem && FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()) != null) {
+                    itemStackHandler.setStackInSlot(3, ModItems.FABRIAL_CASING.get().getDefaultInstance());
+                    gemItemStack = FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
+                }
+
+
                 if(gemItemStack != null) {
                     itemStackHandler.setStackInSlot(1, itemStackHandler.getStackInSlot(2).getOrCreateTag().getBoolean("is_attractor")
                             ? Items.IRON_INGOT.getDefaultInstance() : ModItems.STEEL_INGOT.get().getDefaultInstance());
@@ -157,9 +163,15 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
         if(has_valid_recipe()){
             ItemStack resultItemStack = null;
+
             if(itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())){
-                resultItemStack = FabrialClassification.throwable_fabrial_from_gem((GemstoneItem) itemStackHandler.getStackInSlot(0).getItem()).getDefaultInstance();
+                resultItemStack = FabrialClassification.throwable_fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()).getDefaultInstance();
             }
+
+            if(itemStackHandler.getStackInSlot(3).is(ModItems.FABRIAL_CASING.get())){
+                resultItemStack = FabrialClassification.fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()).getDefaultInstance();
+            }
+
             if(resultItemStack != null) {
                 resultItemStack.getOrCreateTag().putString("spren", itemStackHandler.getStackInSlot(0).getOrCreateTag().getString("spren"));
                 resultItemStack.getOrCreateTag().putInt("stormlight_capacity", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_capacity"));
@@ -190,9 +202,9 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     boolean has_valid_recipe(){
         return (itemStackHandler.getStackInSlot(0).getItem() instanceof GemstoneItem
                 && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS))
-                && itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())
+                && (itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get()) || itemStackHandler.getStackInSlot(3).is(ModItems.FABRIAL_CASING.get()))
                 && isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), ModTags.Items.ZINC_NUGGETS)
-                && FabrialClassification.throwable_fabrial_from_gem((GemstoneItem) itemStackHandler.getStackInSlot(0).getItem()) != null
+                && (FabrialClassification.throwable_fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null || FabrialClassification.fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null)
         );
     }
 
