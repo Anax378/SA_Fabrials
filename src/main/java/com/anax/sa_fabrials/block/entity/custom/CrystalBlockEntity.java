@@ -14,6 +14,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RedstoneLampBlock;
@@ -157,12 +159,16 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         stormlightStorage.loadFromNBT(nbt);
     }
+    abstract Item getItem();
 
     public void drops() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+1);
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
+        ItemStack stack = getItem().getDefaultInstance();
+        stack.getOrCreateTag().putInt("stormlight", this.stormlightStorage.getStormlightStored());
+        inventory.setItem(itemHandler.getSlots(), stack);
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 

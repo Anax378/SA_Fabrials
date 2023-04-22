@@ -200,9 +200,9 @@ public class StormlightPipeBlock extends BaseEntityBlock {
             if (direction == Direction.DOWN) {
                 level.setBlock(blockPos, blockState.setValue(IS_INPUT_DOWN, !blockState.getValue(IS_INPUT_DOWN)), 3);
             }
+            return InteractionResult.CONSUME;
         }
-
-        return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+        return InteractionResult.SUCCESS;
     }
 
     @Nullable

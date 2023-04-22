@@ -1,7 +1,9 @@
 package com.anax.sa_fabrials.block.entity.custom;
 import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -14,4 +16,10 @@ public class TopazCrystalBlockEntity extends CrystalBlockEntity{
     Block getUserBlock() {
         return ModBlocks.TOPAZ_CRYSTAL_BLOCK.get();
     }
+
+    @Override
+    Item getItem() {
+        return ModBlocks.TOPAZ_CRYSTAL_BLOCK_ITEM.get();
+    }
+
 }

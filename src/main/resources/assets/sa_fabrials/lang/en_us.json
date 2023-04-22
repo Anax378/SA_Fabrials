@@ -28,5 +28,6 @@
   "tooltip.sa_fabrials.spren": "Spren:",
   "tooltip.sa_fabrials.shift_for_info": "§6Shift for more information",
   "tooltip.sa_fabrials.is_attractor": "Charge: ",
-  "tooltip.sa_fabrials.power": "Power:"
+  "tooltip.sa_fabrials.power": "Power:",
+  "menu.sa_fabrials.artifabrians_station": "Artifabrian's \n Station"
 }

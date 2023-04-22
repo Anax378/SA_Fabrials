@@ -11,4 +11,8 @@ public class GemCapacities {
     public static final int DIAMOND_GEM_CAPACITY = 32000;
     public static final int EMERALD_GEM_CAPACITY = 4000;
     public static final int AMETHYST_GEM_CAPACITY = 2000;
+
+    public static int GEM_MAX_TRANSFER = 500;
+    public static int CRYSTAL_BLOCK_MAX_TRANSFER = 10000;
+    public static int CRYSTAL_BLOCK_CAPACITY_MULTIPLIER = 10;
 }

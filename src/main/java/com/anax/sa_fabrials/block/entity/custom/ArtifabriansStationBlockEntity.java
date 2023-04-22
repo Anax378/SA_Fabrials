@@ -13,6 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -24,6 +25,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -69,7 +71,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Artifabrian's Station");
+        return new TranslatableComponent("menu.sa_fabrials.artifabrians_station");
     }
 
     @Nullable
@@ -111,6 +113,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         super.load(tag);
     }
     public void drops(){
+        if(isHasCraftedItem){consume_ingredients();isHasCraftedItem = false;}
         SimpleContainer inventory = new SimpleContainer(itemStackHandler.getSlots());
         for (int i = 0; i < itemStackHandler.getSlots(); i++) {
             inventory.setItem(i, itemStackHandler.getStackInSlot(i));
@@ -178,9 +181,9 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         }
     }
     void consume_ingredients(){
-        itemStackHandler.setStackInSlot(0, ItemStack.EMPTY);
-        itemStackHandler.setStackInSlot(1, ItemStack.EMPTY);
-        itemStackHandler.setStackInSlot(3, ItemStack.EMPTY);
+        itemStackHandler.getStackInSlot(0).shrink(1);
+        itemStackHandler.getStackInSlot(1).shrink(1);
+        itemStackHandler.getStackInSlot(3).shrink(1);
         itemStackHandler.getStackInSlot(4).shrink(5);
     }
 
@@ -189,6 +192,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS))
                 && itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())
                 && isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), ModTags.Items.ZINC_NUGGETS)
+                && FabrialClassification.throwable_fabrial_from_gem((GemstoneItem) itemStackHandler.getStackInSlot(0).getItem()) != null
         );
     }
 

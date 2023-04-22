@@ -108,8 +108,8 @@ public class ThrownFabrial extends ThrowableItemProjectile {
         if(itemStack != null){
             if(itemStack.getOrCreateTag().getString("spren").equals("fire")){
                 FabrialEffects.setEntityFire(entityHitResult.getEntity(), 1);
-                drop(level, this.getX(), this.getY(), this.getZ());
             }
+            drop(level, this.getX(), this.getY(), this.getZ());
         }
         this.discard();
         super.onHitEntity(entityHitResult);

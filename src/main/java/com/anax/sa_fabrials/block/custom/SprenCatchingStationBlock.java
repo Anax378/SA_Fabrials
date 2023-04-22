@@ -73,7 +73,7 @@ public class SprenCatchingStationBlock extends BaseEntityBlock {
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
-            return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
+            return InteractionResult.CONSUME;
         }
 
     return InteractionResult.sidedSuccess(level.isClientSide());

@@ -42,7 +42,7 @@ public abstract class AbstractFabrialItem extends Item {
         if(Screen.hasShiftDown()){
             componentList.add(new TranslatableComponent("tooltip.sa_fabrials.spren").append(" " + (itemStack.getOrCreateTag().getString("spren").isEmpty() ? "none" : itemStack.getOrCreateTag().getString("spren"))));
             componentList.add(new TranslatableComponent("tooltip.sa_fabrials.power").append(" " + (itemStack.getOrCreateTag().getInt("power"))));
-            componentList.add(new TranslatableComponent("tooltip.sa_fabrials.is_attractor").append(" " + (itemStack.getOrCreateTag().getBoolean("is_attractor") ? "§c+" : "§9-")));
+            componentList.add(new TranslatableComponent("tooltip.sa_fabrials.is_attractor").append(" " + (itemStack.getOrCreateTag().getBoolean("is_attractor") ? "§c+" : "§b-")));
         }else {
             componentList.add(new TranslatableComponent("tooltip.sa_fabrials.shift_for_info"));
         }

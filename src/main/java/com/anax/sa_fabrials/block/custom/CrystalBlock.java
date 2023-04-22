@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -100,8 +101,8 @@ public abstract class CrystalBlock extends BaseEntityBlock {
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
+            return InteractionResult.CONSUME;
         }
-
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 

@@ -9,6 +9,7 @@ import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
 import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
 import com.anax.sa_fabrials.item.ModCreativeModeTab;
 import com.anax.sa_fabrials.item.ModItems;
+import com.anax.sa_fabrials.item.custom.CrystalBlockItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.*;
@@ -30,8 +31,10 @@ public class ModBlocks {
             DeferredRegister.create(ForgeRegistries.BLOCKS, SAFabrials.MOD_ID);
 
 
-    public static final RegistryObject<Block> TOPAZ_CRYSTAL_BLOCK = registerBlock("topaz_crystal_block",
+    public static final RegistryObject<Block> TOPAZ_CRYSTAL_BLOCK = registerBlockWithoutItem("topaz_crystal_block",
             () -> new TopazCrystalBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
+
+    public static final RegistryObject<Item> TOPAZ_CRYSTAL_BLOCK_ITEM = registerCrystalBLockItem("topaz_crystal_block", TOPAZ_CRYSTAL_BLOCK, ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
     public static final RegistryObject<Block> STORMLIGHT_PIPE_BLOCK = registerBlock("stormlight_pipe",
             () -> new StormlightPipeBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
@@ -62,6 +65,13 @@ public class ModBlocks {
         return ModItems.ITEMS.register(
                 name,
                 () -> new BlockItem(block.get(),new Item.Properties().tab(tab)));
+    }
+
+    private static <T extends Block>RegistryObject<Item> registerCrystalBLockItem
+            (String name, RegistryObject<T> block, CreativeModeTab tab){
+        return ModItems.ITEMS.register(
+                name,
+                () -> new CrystalBlockItem(block.get(),new Item.Properties().tab(tab)));
     }
 
 
