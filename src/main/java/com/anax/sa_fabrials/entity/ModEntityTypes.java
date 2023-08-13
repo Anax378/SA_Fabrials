@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 public class ModEntityTypes {
 
     public static final DeferredRegister<EntityType<?>>
-            ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, SAFabrials.MOD_ID);
+            ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SAFabrials.MOD_ID);
 
 
     public static final RegistryObject<EntityType<ThrownFabrial>> THROWN_FABRIAL =

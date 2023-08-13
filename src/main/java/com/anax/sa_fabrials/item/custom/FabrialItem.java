@@ -2,7 +2,6 @@ package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;

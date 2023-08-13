@@ -31,7 +31,7 @@ public class TopazCrystalBlock extends CrystalBlock{
 
     @Override
     void openGui(ServerPlayer pPlayer, BlockEntity entity ,BlockPos pPos) {
-        NetworkHooks.openGui(pPlayer,(TopazCrystalBlockEntity) entity, pPos);
+        NetworkHooks.openScreen(pPlayer,(TopazCrystalBlockEntity) entity, pPos);
     }
 
     @Override

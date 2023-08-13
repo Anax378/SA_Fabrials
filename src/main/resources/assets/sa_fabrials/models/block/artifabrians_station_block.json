@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"render_type": "translucent",
 	"textures": {
 		"0": "sa_fabrials:block/artifabrians_station_body",
 		"1": "sa_fabrials:block/artifabrians_station_central_crystal",

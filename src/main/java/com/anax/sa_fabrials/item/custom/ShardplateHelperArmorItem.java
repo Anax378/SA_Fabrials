@@ -2,7 +2,6 @@ package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.item.SAItems;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;

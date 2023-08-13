@@ -6,7 +6,6 @@ import com.anax.sa_fabrials.item.ModCreativeModeTab;
 import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.CrystalBlockItem;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -85,7 +84,7 @@ public class ModBlocks {
                 () -> new BlockItem(block.get(),new Item.Properties().tab(tab)){
                     @Override
                     public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
-                        pTooltip.add(new TranslatableComponent(tooltipKey));
+                        pTooltip.add(Component.translatable(tooltipKey));
                     }
                 });
     }

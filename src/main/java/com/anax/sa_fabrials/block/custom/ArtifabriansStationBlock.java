@@ -72,7 +72,7 @@ public class ArtifabriansStationBlock extends BaseEntityBlock {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(blockPos);
             if(entity instanceof ArtifabriansStationBlockEntity) {
-                NetworkHooks.openGui((ServerPlayer) player,(ArtifabriansStationBlockEntity) entity, blockPos);
+                NetworkHooks.openScreen((ServerPlayer) player,(ArtifabriansStationBlockEntity) entity, blockPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

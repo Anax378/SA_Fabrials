@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -93,7 +92,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
 
     @Override
     public Component getDisplayName() {
-        return new TextComponent("Spren Catching Station");
+        return Component.literal("Spren Catching Station");
     }
 
     @Override

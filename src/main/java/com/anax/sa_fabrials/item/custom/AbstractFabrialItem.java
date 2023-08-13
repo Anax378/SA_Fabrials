@@ -5,7 +5,6 @@ import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -38,13 +37,13 @@ public abstract class AbstractFabrialItem extends Item {
         if(!itemStack.getOrCreateTag().contains("is_attractor")){itemStack.getOrCreateTag().putBoolean("is_attractor", true);}
 
         itemStack.getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(handler -> {storedAndMaxStormlight[0] = handler.getStormlightStored();storedAndMaxStormlight[1] = handler.getMaxStormlightStored();});
-        componentList.add(new TranslatableComponent("tooltip.sa_fabrials.stored_stormlight").append(" " + Integer.toString(storedAndMaxStormlight[0]) + "/" + Integer.toString(storedAndMaxStormlight[1])));
+        componentList.add(Component.translatable("tooltip.sa_fabrials.stored_stormlight").append(" " + Integer.toString(storedAndMaxStormlight[0]) + "/" + Integer.toString(storedAndMaxStormlight[1])));
         if(Screen.hasShiftDown()){
-            componentList.add(new TranslatableComponent("tooltip.sa_fabrials.spren").append(" " + (itemStack.getOrCreateTag().getString("spren").isEmpty() ? "none" : itemStack.getOrCreateTag().getString("spren"))));
-            componentList.add(new TranslatableComponent("tooltip.sa_fabrials.power").append(" " + (itemStack.getOrCreateTag().getInt("power"))));
-            componentList.add(new TranslatableComponent("tooltip.sa_fabrials.is_attractor").append(" " + (itemStack.getOrCreateTag().getBoolean("is_attractor") ? "§c+" : "§b-")));
+            componentList.add(Component.translatable("tooltip.sa_fabrials.spren").append(" " + (itemStack.getOrCreateTag().getString("spren").isEmpty() ? "none" : itemStack.getOrCreateTag().getString("spren"))));
+            componentList.add(Component.translatable("tooltip.sa_fabrials.power").append(" " + (itemStack.getOrCreateTag().getInt("power"))));
+            componentList.add(Component.translatable("tooltip.sa_fabrials.is_attractor").append(" " + (itemStack.getOrCreateTag().getBoolean("is_attractor") ? "§c+" : "§b-")));
         }else {
-            componentList.add(new TranslatableComponent("tooltip.sa_fabrials.shift_for_info"));
+            componentList.add(Component.translatable("tooltip.sa_fabrials.shift_for_info"));
         }
 
     }

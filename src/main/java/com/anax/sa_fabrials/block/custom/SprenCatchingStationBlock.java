@@ -23,8 +23,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-import static net.minecraftforge.network.NetworkHooks.openGui;
-
 public class SprenCatchingStationBlock extends BaseEntityBlock {
 
     public static VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
@@ -69,7 +67,7 @@ public class SprenCatchingStationBlock extends BaseEntityBlock {
         if (!level.isClientSide()) {
             BlockEntity entity = level.getBlockEntity(blockPos);
             if(entity instanceof SprenCatchingStationBlockEntity) {
-                NetworkHooks.openGui((ServerPlayer) player,(SprenCatchingStationBlockEntity) entity, blockPos);
+                NetworkHooks.openScreen((ServerPlayer) player,(SprenCatchingStationBlockEntity) entity, blockPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }

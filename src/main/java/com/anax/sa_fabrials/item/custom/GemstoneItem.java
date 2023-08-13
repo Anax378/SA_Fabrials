@@ -4,7 +4,6 @@ import com.anax.sa_fabrials.item.ItemStormlightStorageProvider;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -36,8 +35,8 @@ public class GemstoneItem extends Item {
         if(!itemStack.getOrCreateTag().contains("spren")){itemStack.getOrCreateTag().putString("spren", "none");}
         final int[] storedStormlight = {0};
         itemStack.getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(handler -> {storedStormlight[0] = handler.getStormlightStored();});
-        componentList.add(new TranslatableComponent("tooltip.sa_fabrials.stored_stormlight").append(" " + Integer.toString(storedStormlight[0]) + "/" + Integer.toString(capacity)));
-        componentList.add(new TranslatableComponent("tooltip.sa_fabrials.spren").append(" " + itemStack.getOrCreateTag().getString("spren")));
+        componentList.add(Component.translatable("tooltip.sa_fabrials.stored_stormlight").append(" " + Integer.toString(storedStormlight[0]) + "/" + Integer.toString(capacity)));
+        componentList.add(Component.translatable("tooltip.sa_fabrials.spren").append(" " + itemStack.getOrCreateTag().getString("spren")));
     }
 
     @Override

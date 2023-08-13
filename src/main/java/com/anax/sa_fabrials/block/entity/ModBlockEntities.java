@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModBlockEntities {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, SAFabrials.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, SAFabrials.MOD_ID);
 
     public static final RegistryObject<BlockEntityType<TopazCrystalBlockEntity>> TOPAZ_CRYSTAL_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("topaz_crystal_block_entity", () ->

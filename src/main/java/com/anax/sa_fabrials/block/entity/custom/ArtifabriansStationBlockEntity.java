@@ -13,7 +13,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -67,7 +66,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("menu.sa_fabrials.artifabrians_station");
+        return Component.translatable("menu.sa_fabrials.artifabrians_station");
     }
 
     @Nullable

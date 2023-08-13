@@ -12,7 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(ForgeRegistries.CONTAINERS, SAFabrials.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.MENU_TYPES, SAFabrials.MOD_ID);
 
     public static final RegistryObject<MenuType<CrystalMenu>> CRYSTAL_MENU =
             registerMenuType(CrystalMenu::new, "crystal_menu");

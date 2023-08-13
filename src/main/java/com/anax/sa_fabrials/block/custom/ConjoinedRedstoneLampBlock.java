@@ -7,6 +7,7 @@ import com.anax.sa_fabrials.item.SAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -115,7 +116,7 @@ public class ConjoinedRedstoneLampBlock extends BaseEntityBlock {
         }
     }
     @Override
-    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, Random random) {
+    public void tick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource random) {
         BlockPos pair = null;
         boolean hasNeighborSignal = serverLevel.hasNeighborSignal(blockPos);
         if(serverLevel.getBlockEntity(blockPos) instanceof  ConjoinedRedstoneLampBlockEntity){

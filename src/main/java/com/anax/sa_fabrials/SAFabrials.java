@@ -58,8 +58,6 @@ public class SAFabrials
 
     }
     private void clientSetup(final FMLClientSetupEvent event){
-        ItemBlockRenderTypes.setRenderLayer(ModBlocks.ARTIFABRIANS_STATION_BLOCK.get(), RenderType.translucent());
-
         MenuScreens.register(ModMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
         MenuScreens.register(ModMenuTypes.SPREN_CATCHING_STATION_MENU.get(), SprenCatchingStationScreen::new);
         MenuScreens.register(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), ArtifabriansStationScreen::new);

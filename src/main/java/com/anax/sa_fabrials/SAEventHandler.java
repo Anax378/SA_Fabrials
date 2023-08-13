@@ -28,7 +28,7 @@ public class SAEventHandler {
 */
     @SubscribeEvent
     public static void onLivingHurt(LivingHurtEvent event){
-        LivingEntity entity = event.getEntityLiving();
+        LivingEntity entity = event.getEntity();
         if(event.getAmount() <= 0){return;}
         for(ItemStack stack : entity.getArmorSlots()){
             if(stack.is(SAItems.SHARDPLATE_CHESTPLATE.get())){

@@ -6,7 +6,6 @@ import com.anax.sa_fabrials.util.fabrial.GemCapacities;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -169,7 +168,7 @@ public class SAItems {
                 @Override
                 public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> componentList, TooltipFlag tooltipFlag) {
                    //super.appendHoverText(itemStack, level, componentList, tooltipFlag);
-                    componentList.add(new TranslatableComponent("tooltip.sa_fabrials.stored_stormlight").append("∞/∞"));
+                    componentList.add(Component.translatable("tooltip.sa_fabrials.stored_stormlight").append("∞/∞"));
                 }
             });
 
