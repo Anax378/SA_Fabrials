@@ -1,10 +1,7 @@
 package com.anax.sa_fabrials.block.entity;
 import com.anax.sa_fabrials.SAFabrials;
 import com.anax.sa_fabrials.block.ModBlocks;
-import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
-import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
-import com.anax.sa_fabrials.block.entity.custom.StormlightPipeBlockEntity;
-import com.anax.sa_fabrials.block.entity.custom.TopazCrystalBlockEntity;
+import com.anax.sa_fabrials.block.entity.custom.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -36,6 +33,10 @@ public class ModBlockEntities {
                     BlockEntityType.Builder.of(ArtifabriansStationBlockEntity::new,
                             ModBlocks.ARTIFABRIANS_STATION_BLOCK.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<ConjoinedRedstoneLampBlockEntity>> CONJOINED_REDSTONE_LAMP_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("conjoined_redstone_lamp_block_entity", () ->
+                    BlockEntityType.Builder.of(ConjoinedRedstoneLampBlockEntity::new,
+                            ModBlocks.ARTIFABRIANS_STATION_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus){
         BLOCK_ENTITIES.register(eventBus);

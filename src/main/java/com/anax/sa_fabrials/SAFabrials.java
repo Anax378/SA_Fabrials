@@ -7,13 +7,14 @@ import com.anax.sa_fabrials.block.screen.CrystalScreen;
 import com.anax.sa_fabrials.block.screen.ModMenuTypes;
 import com.anax.sa_fabrials.block.screen.SprenCatchingStationScreen;
 import com.anax.sa_fabrials.entity.ModEntityTypes;
-import com.anax.sa_fabrials.item.ModItems;
+import com.anax.sa_fabrials.item.SAItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,11 +38,13 @@ public class SAFabrials
         eventBus.addListener(this::clientSetup);
         MinecraftForge.EVENT_BUS.register(this);
 
-        ModItems.register(eventBus);
+        SAItems.register(eventBus);
         ModBlocks.register(eventBus);
         ModBlockEntities.register(eventBus);
         ModMenuTypes.register(eventBus);
         ModEntityTypes.register(eventBus);
+
+        MinecraftForge.EVENT_BUS.register(SAEventHandler.class);
 
     }
 

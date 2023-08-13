@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "sa_fabrials:block/conjoined_redstone_lamp_block"
+  }
+}

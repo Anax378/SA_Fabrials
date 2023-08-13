@@ -1,16 +1,16 @@
 package com.anax.sa_fabrials.item;
 
 import com.anax.sa_fabrials.SAFabrials;
-import com.anax.sa_fabrials.item.custom.FabrialItem;
-import com.anax.sa_fabrials.item.custom.GemstoneItem;
-import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
+import com.anax.sa_fabrials.item.custom.*;
 import com.anax.sa_fabrials.util.fabrial.GemCapacities;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ModItems {
+public class SAItems {
     public static final DeferredRegister<Item> ITEMS =
             DeferredRegister.create(ForgeRegistries.ITEMS, SAFabrials.MOD_ID);
     public static final RegistryObject<Item> TOPAZ = ITEMS.register("topaz",
@@ -122,6 +122,21 @@ public class ModItems {
 
     public static final RegistryObject<Item> ZINC_NUGGET = ITEMS.register("zinc_nugget",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
+
+    public static final RegistryObject<ShardplateArmorItem> SHARDPLATE_CHESTPLATE = ITEMS.register("shardplate_chestplate", () ->
+            new ShardplateArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant().setNoRepair().rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ShardplateHelperArmorItem> SHARDPLATE_LEGGINGS = ITEMS.register("shardplate_leggings", () ->
+            new ShardplateHelperArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ShardplateHelperArmorItem> SHARDPLATE_HELMET = ITEMS.register("shardplate_helmet", () ->
+            new ShardplateHelperArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ShardplateHelperArmorItem> SHARDPLATE_BOOTS = ITEMS.register("shardplate_boots", () ->
+            new ShardplateHelperArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).rarity(Rarity.EPIC)));
+
+    public static final RegistryObject<ConjoinedRedstoneLampPlacerItem> CONJOINED_REDSTONE_LAMP_PLACER = ITEMS.register("conjoined_redstone_lamp_placer",
+            () -> new ConjoinedRedstoneLampPlacerItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1)));
 
 
 

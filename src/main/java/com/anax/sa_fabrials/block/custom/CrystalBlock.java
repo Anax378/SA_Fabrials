@@ -86,8 +86,10 @@ public abstract class CrystalBlock extends BaseEntityBlock {
 
     @Override
     public int getLightEmission(BlockState state, BlockGetter level, BlockPos pos) {
-        CrystalBlockEntity entity = (CrystalBlockEntity) level.getBlockEntity(pos);
-        if(entity != null){return Math.round(((float) entity.stormlightStorage.getStormlightStored() / (float) entity.stormlightStorage.getMaxStormlightStored())*15f);}
+        if(level.getBlockEntity(pos) instanceof CrystalBlockEntity){
+            CrystalBlockEntity entity = (CrystalBlockEntity) level.getBlockEntity(pos);
+            if(entity != null){return Math.round(((float) entity.stormlightStorage.getStormlightStored() / (float) entity.stormlightStorage.getMaxStormlightStored())*15f);}
+        }
         return 0;
     }
 

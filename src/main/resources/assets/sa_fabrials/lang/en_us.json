@@ -31,16 +31,17 @@
   "tooltip.sa_fabrials.power": "Power:",
   "menu.sa_fabrials.artifabrians_station": "",
 
-  "item.sa_fabrials.throwable_topaz_fabrials": "Throwable Topaz Fabrial",
-  "item.sa_fabrials.throwable_sapphire_fabrials": "Throwable Sapphire Fabrial",
-  "item.sa_fabrials.throwable_smokestone_fabrials": "Throwable Smokestone Fabrial",
-  "item.sa_fabrials.throwable_ruby_fabrials": "Throwable Ruby Fabrial",
-  "item.sa_fabrials.throwable_garnet_fabrials": "Throwable Garnet Fabrial",
-  "item.sa_fabrials.throwable_zircon_fabrials": "Throwable Zircon Fabrial",
-  "item.sa_fabrials.throwable_heliodor_fabrials": "Throwable Heliodor Fabrial",
-  "item.sa_fabrials.throwable_diamond_fabrials": "Throwable Diamond Fabrial",
-  "item.sa_fabrials.throwable_emerald_fabrials": "Throwable Emerald Fabrial",
-  "item.sa_fabrials.throwable_amethyst_fabrials": "Throwable Amethyst Fabrial",
+  "item.sa_fabrials.throwable_topaz_fabrial": "Throwable Topaz Fabrial",
+  "item.sa_fabrials.throwable_sapphire_fabrial": "Throwable Sapphire Fabrial",
+  "item.sa_fabrials.throwable_smokestone_fabrial": "Throwable Smokestone Fabrial",
+  "item.sa_fabrials.throwable_ruby_fabrial": "Throwable Ruby Fabrial",
+  "item.sa_fabrials.throwable_garnet_fabrial": "Throwable Garnet Fabrial",
+  "item.sa_fabrials.throwable_zircon_fabrial": "Throwable Zircon Fabrial",
+  "item.sa_fabrials.throwable_heliodor_fabrial": "Throwable Heliodor Fabrial",
+  "item.sa_fabrials.throwable_diamond_fabrial": "Throwable Diamond Fabrial",
+  "item.sa_fabrials.throwable_emerald_fabrial": "Throwable Emerald Fabrial",
+  "item.sa_fabrials.throwable_amethyst_fabrial": "Throwable Amethyst Fabrial",
+
 
   "item.sa_fabrials.topaz_fabrial": "Topaz Fabrial",
   "item.sa_fabrials.sapphire_fabrial": "Sapphire Fabrial",
@@ -58,6 +59,10 @@
   "item.sa_fabrials.throwable_fabrial_casing": "Throwable Fabrials Casing",
   "item.sa_fabrials.fabrial_casing": "Fabrials Casing",
   "item.sa_fabrials.zinc_nugget": "Zinc Nugget",
-  "item.sa_fabrials.steel_ingot": "Steel Ingot"
+  "item.sa_fabrials.steel_ingot": "Steel Ingot",
+  "item.sa_fabrials.shardplate_chestplate": "Shardplate Chestplate",
+  "item.sa_fabrials.shardplate_helmet": "Shardplate Helmet",
+  "item.sa_fabrials.shardplate_leggings": "Shardplate Leggings",
+  "item.sa_fabrials.shardplate_boots": "Shardplate Boots"
 
 }

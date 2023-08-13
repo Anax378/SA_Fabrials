@@ -2,7 +2,7 @@ package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.block.screen.ArtifabriansStationMenu;
-import com.anax.sa_fabrials.item.ModItems;
+import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.AbstractFabrialItem;
 import com.anax.sa_fabrials.item.custom.FabrialItem;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
@@ -13,7 +13,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
@@ -26,7 +25,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.CraftingTableBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -134,20 +132,20 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 ItemStack gemItemStack = null;
 
                 if (itemStackHandler.getStackInSlot(2).getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial(itemStackHandler.getStackInSlot(2).getItem()) != null) {
-                    itemStackHandler.setStackInSlot(3, ModItems.THROWABLE_FABRIAL_CASING.get().getDefaultInstance());
+                    itemStackHandler.setStackInSlot(3, SAItems.THROWABLE_FABRIAL_CASING.get().getDefaultInstance());
                     gemItemStack = FabrialClassification.gem_from_throwable_fabrial(itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
                 }
 
                 if (itemStackHandler.getStackInSlot(2).getItem() instanceof FabrialItem && FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()) != null) {
-                    itemStackHandler.setStackInSlot(3, ModItems.FABRIAL_CASING.get().getDefaultInstance());
+                    itemStackHandler.setStackInSlot(3, SAItems.FABRIAL_CASING.get().getDefaultInstance());
                     gemItemStack = FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
                 }
 
 
                 if(gemItemStack != null) {
                     itemStackHandler.setStackInSlot(1, itemStackHandler.getStackInSlot(2).getOrCreateTag().getBoolean("is_attractor")
-                            ? Items.IRON_INGOT.getDefaultInstance() : ModItems.STEEL_INGOT.get().getDefaultInstance());
-                    itemStackHandler.setStackInSlot(4, ModItems.ZINC_NUGGET.get().getDefaultInstance());
+                            ? Items.IRON_INGOT.getDefaultInstance() : SAItems.STEEL_INGOT.get().getDefaultInstance());
+                    itemStackHandler.setStackInSlot(4, SAItems.ZINC_NUGGET.get().getDefaultInstance());
                     itemStackHandler.getStackInSlot(4).setCount(itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("power"));
 
                     gemItemStack.getOrCreateTag().putString("spren", itemStackHandler.getStackInSlot(2).getOrCreateTag().getString("spren"));
@@ -164,11 +162,11 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         if(has_valid_recipe()){
             ItemStack resultItemStack = null;
 
-            if(itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get())){
+            if(itemStackHandler.getStackInSlot(3).is(SAItems.THROWABLE_FABRIAL_CASING.get())){
                 resultItemStack = FabrialClassification.throwable_fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()).getDefaultInstance();
             }
 
-            if(itemStackHandler.getStackInSlot(3).is(ModItems.FABRIAL_CASING.get())){
+            if(itemStackHandler.getStackInSlot(3).is(SAItems.FABRIAL_CASING.get())){
                 resultItemStack = FabrialClassification.fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()).getDefaultInstance();
             }
 
@@ -202,7 +200,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     boolean has_valid_recipe(){
         return (itemStackHandler.getStackInSlot(0).getItem() instanceof GemstoneItem
                 && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS))
-                && (itemStackHandler.getStackInSlot(3).is(ModItems.THROWABLE_FABRIAL_CASING.get()) || itemStackHandler.getStackInSlot(3).is(ModItems.FABRIAL_CASING.get()))
+                && (itemStackHandler.getStackInSlot(3).is(SAItems.THROWABLE_FABRIAL_CASING.get()) || itemStackHandler.getStackInSlot(3).is(SAItems.FABRIAL_CASING.get()))
                 && isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), ModTags.Items.ZINC_NUGGETS)
                 && (FabrialClassification.throwable_fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null || FabrialClassification.fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null)
         );

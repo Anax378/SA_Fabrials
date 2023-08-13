@@ -1,7 +1,6 @@
 package com.anax.sa_fabrials.block.entity.custom;
 import com.anax.sa_fabrials.block.ModBlocks;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
-import com.anax.sa_fabrials.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;

@@ -1,14 +1,9 @@
 package com.anax.sa_fabrials.block;
 
 import com.anax.sa_fabrials.SAFabrials;
-import com.anax.sa_fabrials.block.custom.ArtifabriansStationBlock;
-import com.anax.sa_fabrials.block.custom.SprenCatchingStationBlock;
-import com.anax.sa_fabrials.block.custom.StormlightPipeBlock;
-import com.anax.sa_fabrials.block.custom.TopazCrystalBlock;
-import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
-import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
+import com.anax.sa_fabrials.block.custom.*;
 import com.anax.sa_fabrials.item.ModCreativeModeTab;
-import com.anax.sa_fabrials.item.ModItems;
+import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.CrystalBlockItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -45,7 +40,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> ARTIFABRIANS_STATION_BLOCK = registerBlock("artifabrians_station_block",
             () -> new ArtifabriansStationBlock(BlockBehaviour.Properties.of(Material.METAL).noOcclusion()), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
-
+    public static final RegistryObject<Block> CONJOINED_REDSTONE_LAMP_BLOCK = registerBlockWithoutItem("conjoined_redstone_lamp_block",
+            () -> new ConjoinedRedstoneLampBlock(BlockBehaviour.Properties.of(Material.METAL)), ModCreativeModeTab.SA_FABRIALS_MOD_TAB);
 
     private static <T extends Block> RegistryObject<T> registerBlock
             (String name, Supplier<T> block, CreativeModeTab tab){
@@ -62,14 +58,14 @@ public class ModBlocks {
 
     private static <T extends Block>RegistryObject<Item> registerBlockItem
             (String name, RegistryObject<T> block, CreativeModeTab tab){
-        return ModItems.ITEMS.register(
+        return SAItems.ITEMS.register(
                 name,
                 () -> new BlockItem(block.get(),new Item.Properties().tab(tab)));
     }
 
     private static <T extends Block>RegistryObject<Item> registerCrystalBLockItem
             (String name, RegistryObject<T> block, CreativeModeTab tab){
-        return ModItems.ITEMS.register(
+        return SAItems.ITEMS.register(
                 name,
                 () -> new CrystalBlockItem(block.get(),new Item.Properties().tab(tab)));
     }
@@ -84,7 +80,7 @@ public class ModBlocks {
 
     private static <T extends Block>RegistryObject<Item> registerBlockItem
             (String name, RegistryObject<T> block, CreativeModeTab tab, String tooltipKey){
-        return ModItems.ITEMS.register(
+        return SAItems.ITEMS.register(
                 name,
                 () -> new BlockItem(block.get(),new Item.Properties().tab(tab)){
                     @Override

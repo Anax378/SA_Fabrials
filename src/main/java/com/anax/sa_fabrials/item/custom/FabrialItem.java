@@ -1,6 +1,8 @@
 package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -9,10 +11,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.EnderpearlItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SnowballItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class FabrialItem extends AbstractFabrialItem {
     public FabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight) {
@@ -30,14 +36,15 @@ public class FabrialItem extends AbstractFabrialItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand){
-        if(player.getItemInHand(interactionHand).getOrCreateTag().getString("spren").equals("wind")){
+        if (player.getItemInHand(interactionHand).getOrCreateTag().getString("spren").equals("wind")) {
             FabrialEffects.launchEntity(player, player.getLookAngle(), player.getItemInHand(interactionHand).getOrCreateTag().getInt("power"), player.getItemInHand(interactionHand).getOrCreateTag().getBoolean("is_attractor"));
             player.getCooldowns().addCooldown(this, 5);
         }
-        if(player.getItemInHand(interactionHand).getOrCreateTag().getString("spren").equals("health")){
+        if (player.getItemInHand(interactionHand).getOrCreateTag().getString("spren").equals("health")) {
             FabrialEffects.health(player, player.getItemInHand(interactionHand).getOrCreateTag().getInt("power"), player.getItemInHand(interactionHand).getOrCreateTag().getBoolean("is_attractor"));
             player.getCooldowns().addCooldown(this, 5);
         }
+
         return super.use(level, player, interactionHand);
     }
 
@@ -46,6 +53,6 @@ public class FabrialItem extends AbstractFabrialItem {
         if(itemStack.getOrCreateTag().getString("spren").equals("fire")){FabrialEffects.setEntityFire(livingEntity, itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
         if(itemStack.getOrCreateTag().getString("spren").equals("wind")){FabrialEffects.launchEntity(livingEntity, player.getLookAngle(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
         if(itemStack.getOrCreateTag().getString("spren").equals("health")){FabrialEffects.health(livingEntity, itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
-        return super.interactLivingEntity(itemStack, player, livingEntity, interactionHand);
+        return InteractionResult.CONSUME;
     }
 }
