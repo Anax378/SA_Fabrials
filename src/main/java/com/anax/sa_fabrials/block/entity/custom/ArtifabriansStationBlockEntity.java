@@ -9,6 +9,8 @@ import com.anax.sa_fabrials.item.custom.GemstoneItem;
 import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
 import com.anax.sa_fabrials.util.ModTags;
 import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
+import leaf.cosmere.api.Metals;
+import leaf.cosmere.common.registry.ItemsRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -28,10 +30,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -78,7 +81,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     @NotNull
     @Override
     public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) {
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY){
+        if(cap == ForgeCapabilities.ITEM_HANDLER){
             return lazyItemHandler.cast();
         }
         return super.getCapability(cap);
@@ -122,7 +125,8 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     }
 
     public static boolean isHasItemTag(Item item, TagKey<Item> tag){
-        return Registry.ITEM.getHolderOrThrow(Registry.ITEM.getResourceKey(item).get()).is(tag);
+        if(ForgeRegistries.ITEMS.tags() == null){return false;}
+        return ForgeRegistries.ITEMS.tags().getTag(tag).contains(item);
     }
 
     public void updateContents(){
@@ -143,8 +147,8 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
                 if(gemItemStack != null) {
                     itemStackHandler.setStackInSlot(1, itemStackHandler.getStackInSlot(2).getOrCreateTag().getBoolean("is_attractor")
-                            ? Items.IRON_INGOT.getDefaultInstance() : SAItems.STEEL_INGOT.get().getDefaultInstance());
-                    itemStackHandler.setStackInSlot(4, SAItems.ZINC_NUGGET.get().getDefaultInstance());
+                            ? Items.IRON_INGOT.getDefaultInstance() : ItemsRegistry.METAL_INGOTS.get(Metals.MetalType.STEEL).get().getDefaultInstance());
+                    itemStackHandler.setStackInSlot(4, ItemsRegistry.METAL_NUGGETS.get(Metals.MetalType.ZINC).get().getDefaultInstance());
                     itemStackHandler.getStackInSlot(4).setCount(itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("power"));
 
                     gemItemStack.getOrCreateTag().putString("spren", itemStackHandler.getStackInSlot(2).getOrCreateTag().getString("spren"));

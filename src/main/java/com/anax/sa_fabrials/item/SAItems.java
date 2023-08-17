@@ -115,24 +115,13 @@ public class SAItems {
 
     public static final RegistryObject<Item> FABRIAL_CASING = ITEMS.register("fabrial_casing",
             ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64).fireResistant()));
-
+/*
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
 
     public static final RegistryObject<Item> ZINC_NUGGET = ITEMS.register("zinc_nugget",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
-
-    public static final RegistryObject<ShardplateArmorItem> SHARDPLATE_CHESTPLATE = ITEMS.register("shardplate_chestplate", () ->
-            new ShardplateArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.CHEST, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant().setNoRepair().rarity(Rarity.EPIC)));
-
-    public static final RegistryObject<ShardplateHelperArmorItem> SHARDPLATE_LEGGINGS = ITEMS.register("shardplate_leggings", () ->
-            new ShardplateHelperArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.LEGS, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).rarity(Rarity.EPIC)));
-
-    public static final RegistryObject<ShardplateHelperArmorItem> SHARDPLATE_HELMET = ITEMS.register("shardplate_helmet", () ->
-            new ShardplateHelperArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.HEAD, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).rarity(Rarity.EPIC)));
-
-    public static final RegistryObject<ShardplateHelperArmorItem> SHARDPLATE_BOOTS = ITEMS.register("shardplate_boots", () ->
-            new ShardplateHelperArmorItem(SAArmorMaterials.SHARD, EquipmentSlot.FEET, new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).rarity(Rarity.EPIC)));
+*/
 
     public static final RegistryObject<ConjoinedRedstoneLampPlacerItem> CONJOINED_REDSTONE_LAMP_PLACER = ITEMS.register("conjoined_redstone_lamp_placer",
             () -> new ConjoinedRedstoneLampPlacerItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1)));
