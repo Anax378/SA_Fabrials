@@ -1,6 +1,0 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "sa_fabrials:item/zinc_nugget"
-  }
-}

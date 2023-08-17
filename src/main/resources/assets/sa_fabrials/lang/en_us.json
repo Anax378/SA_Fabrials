@@ -57,12 +57,5 @@
   "block.sa_fabrials.artifabrians_station_block": "Artifabrians Station",
 
   "item.sa_fabrials.throwable_fabrial_casing": "Throwable Fabrials Casing",
-  "item.sa_fabrials.fabrial_casing": "Fabrials Casing",
-  "item.sa_fabrials.zinc_nugget": "Zinc Nugget",
-  "item.sa_fabrials.steel_ingot": "Steel Ingot",
-  "item.sa_fabrials.shardplate_chestplate": "Shardplate Chestplate",
-  "item.sa_fabrials.shardplate_helmet": "Shardplate Helmet",
-  "item.sa_fabrials.shardplate_leggings": "Shardplate Leggings",
-  "item.sa_fabrials.shardplate_boots": "Shardplate Boots"
-
+  "item.sa_fabrials.fabrial_casing": "Fabrials Casing"
 }
