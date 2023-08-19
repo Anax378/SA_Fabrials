@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "sa_fabrials:block/conjoined_redstone_lamp_block"
+  }
+}

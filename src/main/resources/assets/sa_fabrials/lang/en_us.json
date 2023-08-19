@@ -57,5 +57,6 @@
   "block.sa_fabrials.artifabrians_station_block": "Artifabrians Station",
 
   "item.sa_fabrials.throwable_fabrial_casing": "Throwable Fabrials Casing",
-  "item.sa_fabrials.fabrial_casing": "Fabrials Casing"
+  "item.sa_fabrials.fabrial_casing": "Fabrials Casing",
+  "item.sa_fabrials.conjoined_redstone_lamp_placer": "Conjoined Redstone Lamp"
 }
