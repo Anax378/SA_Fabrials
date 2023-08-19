@@ -4,7 +4,7 @@ cosmere fabrials and such for minecraft forge
 
 current version: 1.19.2
 
-dependencies :
+dependencies:
 the cosmere mod by leafreynolds: https://www.curseforge.com/minecraft/mc-mods/cosmere
 the dependencies of the cosmere mod.
 
