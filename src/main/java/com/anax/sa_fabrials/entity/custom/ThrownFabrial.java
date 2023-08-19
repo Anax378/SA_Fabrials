@@ -84,35 +84,27 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         if(itemStack != null){
-            if(itemStack.getOrCreateTag().getString("spren").equals("fire")){FabrialEffects.setFire(level, blockHitResult.getBlockPos(),blockHitResult.getDirection(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
-            if(itemStack.getOrCreateTag().getString("spren").equals("lightning")){FabrialEffects.lightning(level, this.position(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
-            if(itemStack.getOrCreateTag().getString("spren").equals("explosion")){FabrialEffects.explode(level, this.position(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));}
-            drop(level, this.getX(), this.getY(), this.getZ());
+            int power = itemStack.getOrCreateTag().getInt("power");
+            boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
+            String spren = itemStack.getOrCreateTag().getString("spren");
+            Vec3 pos = new Vec3(blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
+            FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren);
         }
+        this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
         this.discard();
         super.onHitBlock(blockHitResult);
     }
 
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
-        if(itemStack != null){
-            if(itemStack.getOrCreateTag().getString("spren").equals("fire")){
-                FabrialEffects.setEntityFire(entityHitResult.getEntity(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));
-                drop(level, this.getX(), this.getY(), this.getZ());
-                this.discard();
-            }
-            if(itemStack.getOrCreateTag().getString("spren").equals("wind")){
-                FabrialEffects.launchEntity(entityHitResult.getEntity(), new Vec3(0, 1, 0), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));
-                drop(level, this.getX(), this.getY(), this.getZ());
-                this.discard();
-            }
-            if(itemStack.getOrCreateTag().getString("spren").equals("health")){
-                FabrialEffects.health((LivingEntity) entityHitResult.getEntity(), itemStack.getOrCreateTag().getInt("power"), itemStack.getOrCreateTag().getBoolean("is_attractor"));
-                drop(level, this.getX(), this.getY(), this.getZ());
-                this.discard();
-            }
-
+        if(itemStack != null && entityHitResult.getEntity() instanceof LivingEntity){
+            int power = itemStack.getOrCreateTag().getInt("power");
+            boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
+            String spren = itemStack.getOrCreateTag().getString("spren");
+            FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false);
         }
+        this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
+        this.discard();
         super.onHitEntity(entityHitResult);
     }
 
