@@ -45,11 +45,11 @@ the conjoined redstone lamp item will only drop from the first conjoined redston
 
 ### list of spren and their item baits:
 
-wind spren: feather, elytra
-health spren: glistering melon slice
-fire spren: flint and steel, fire charge
-explosion spren: gunpowder, tnt
-lightning spren: lightning rod
+wind spren: feather, elytra <br>
+health spren: glistering melon slice <br>
+fire spren: flint and steel, fire charge <br>
+explosion spren: gunpowder, tnt <br>
+lightning spren: lightning rod <br>
 
 (more will certainly be coming in the future)
 
