@@ -129,7 +129,19 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         return ForgeRegistries.ITEMS.tags().getTag(tag).contains(item);
     }
 
+    public boolean areOuterSlotsEmpty(){
+        return
+                itemStackHandler.getStackInSlot(0).isEmpty() &&
+                itemStackHandler.getStackInSlot(1).isEmpty() &&
+                itemStackHandler.getStackInSlot(3).isEmpty() &&
+                itemStackHandler.getStackInSlot(4).isEmpty();
+    }
+
     public void updateContents(){
+
+
+
+
         if(itemStackHandler.getStackInSlot(0).isEmpty() && itemStackHandler.getStackInSlot(1).isEmpty() && itemStackHandler.getStackInSlot(3).isEmpty() && itemStackHandler.getStackInSlot(4).isEmpty()) {
             if (itemStackHandler.getStackInSlot(2).getItem() instanceof AbstractFabrialItem) {
                 ItemStack gemItemStack = null;
