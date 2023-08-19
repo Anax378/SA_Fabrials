@@ -35,9 +35,9 @@ public class ArtifabriansStationRecipes {
             }
             @Override
             public boolean canDeconstruct(ItemStack middle) {
-                if(middle.getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial(middle.getItem()) != null){}else{return false;}
-                if(middle.getItem() instanceof FabrialItem && FabrialClassification.gem_from_fabrial(middle.getItem()) != null){}else{return false;}
-                return true;
+                if(middle.getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial(middle.getItem()) != null){return true;}
+                if(middle.getItem() instanceof FabrialItem && FabrialClassification.gem_from_fabrial(middle.getItem()) != null){return true;}
+                return false;
             }
 
             @Override

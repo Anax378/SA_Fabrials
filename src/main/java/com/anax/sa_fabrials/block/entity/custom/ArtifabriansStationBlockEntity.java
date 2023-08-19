@@ -40,20 +40,40 @@ import org.jetbrains.annotations.Nullable;
 
 public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuProvider {
     private boolean isHasCraftedItem = false;
+    static int topSlot = 0;
+    static int leftSlot = 1;
+    static int middleSlot = 2;
+    static int rightSlot = 3;
+    static int bottomSlot = 4;
+
     public ItemStackHandler itemStackHandler = new ItemStackHandler(5){
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            if(slot == 2){
-                if(itemStackHandler.getStackInSlot(0).isEmpty() && itemStackHandler.getStackInSlot(1).isEmpty() && itemStackHandler.getStackInSlot(3).isEmpty() && itemStackHandler.getStackInSlot(4).isEmpty()  &&  ((FabrialClassification.gem_from_fabrial(stack.getItem()) != null) || (FabrialClassification.gem_from_throwable_fabrial(stack.getItem()) != null))) {
-                    return true;
-                }else return false;
-            }
+            if(slot == 2 && !areOuterSlotsEmpty()){return false;}
             return super.isItemValid(slot, stack);
         }
 
         @Override
         protected void onContentsChanged(int slot) {
-            if(slot == 2 && isHasCraftedItem && itemStackHandler.getStackInSlot(slot).isEmpty()){consume_ingredients();}
+            System.out.println("content changed");
+            AbstractArtifabriansStationRecipe recipe;
+            if(slot == 2 && isHasCraftedItem && itemStackHandler.getStackInSlot(slot).isEmpty() &&
+                    (recipe = ArtifabriansStationRecipes.getConstructionRecipe(
+                            itemStackHandler.getStackInSlot(topSlot),
+                            itemStackHandler.getStackInSlot(leftSlot),
+                            itemStackHandler.getStackInSlot(rightSlot),
+                            itemStackHandler.getStackInSlot(bottomSlot))
+                    ) != null){
+
+                recipe.consumeIngredients(
+                        itemStackHandler.getStackInSlot(topSlot),
+                        itemStackHandler.getStackInSlot(leftSlot),
+                        itemStackHandler.getStackInSlot(rightSlot),
+                        itemStackHandler.getStackInSlot(bottomSlot)
+                );
+                isHasCraftedItem = false;
+                System.out.println("consumed ingredients");
+            }
             setChanged();
         }
     };
@@ -111,7 +131,22 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         super.load(tag);
     }
     public void drops(){
-        if(isHasCraftedItem){consume_ingredients();isHasCraftedItem = false;}
+        AbstractArtifabriansStationRecipe recipe;
+        if(isHasCraftedItem && (
+                recipe = ArtifabriansStationRecipes.getConstructionRecipe(
+                itemStackHandler.getStackInSlot(topSlot),
+                itemStackHandler.getStackInSlot(leftSlot),
+                itemStackHandler.getStackInSlot(rightSlot),
+                itemStackHandler.getStackInSlot(bottomSlot))
+        ) != null){
+            recipe.consumeIngredients(
+                    itemStackHandler.getStackInSlot(topSlot),
+                    itemStackHandler.getStackInSlot(leftSlot),
+                    itemStackHandler.getStackInSlot(rightSlot),
+                    itemStackHandler.getStackInSlot(bottomSlot)
+            );
+            isHasCraftedItem = false;
+        }
         SimpleContainer inventory = new SimpleContainer(itemStackHandler.getSlots());
         for (int i = 0; i < itemStackHandler.getSlots(); i++) {
             inventory.setItem(i, itemStackHandler.getStackInSlot(i));
@@ -131,17 +166,45 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
     public boolean areOuterSlotsEmpty(){
         return
-                itemStackHandler.getStackInSlot(0).isEmpty() &&
-                itemStackHandler.getStackInSlot(1).isEmpty() &&
-                itemStackHandler.getStackInSlot(3).isEmpty() &&
-                itemStackHandler.getStackInSlot(4).isEmpty();
+                itemStackHandler.getStackInSlot(topSlot).isEmpty() &&
+                itemStackHandler.getStackInSlot(leftSlot).isEmpty() &&
+                itemStackHandler.getStackInSlot(rightSlot).isEmpty() &&
+                itemStackHandler.getStackInSlot(bottomSlot).isEmpty();
     }
 
     public void updateContents(){
+        if(areOuterSlotsEmpty()) {
+            AbstractArtifabriansStationRecipe recipe = ArtifabriansStationRecipes.getDeconstructionRecipe(itemStackHandler.getStackInSlot(2));
+            if(recipe != null){
+                System.out.println("recipe exists");
+                ItemStack[] ingredients = recipe.deconstruct(itemStackHandler.getStackInSlot(middleSlot));
+                itemStackHandler.setStackInSlot(topSlot, ingredients[0]);
+                itemStackHandler.setStackInSlot(leftSlot, ingredients[1]);
+                itemStackHandler.setStackInSlot(rightSlot, ingredients[2]);
+                itemStackHandler.setStackInSlot(bottomSlot, ingredients[3]);
+                isHasCraftedItem = false;
+                itemStackHandler.setStackInSlot(middleSlot, ItemStack.EMPTY);
+            }
+        }
+        AbstractArtifabriansStationRecipe recipe;
+        if(
+                (recipe = ArtifabriansStationRecipes.getConstructionRecipe(
+                itemStackHandler.getStackInSlot(topSlot),
+                itemStackHandler.getStackInSlot(leftSlot),
+                itemStackHandler.getStackInSlot(rightSlot),
+                itemStackHandler.getStackInSlot(bottomSlot))) != null ){
 
+            System.out.println("created middle slot");
+            ItemStack middle = recipe.constructMiddle(itemStackHandler.getStackInSlot(topSlot), itemStackHandler.getStackInSlot(leftSlot), itemStackHandler.getStackInSlot(rightSlot), itemStackHandler.getStackInSlot(bottomSlot));
+            itemStackHandler.setStackInSlot(middleSlot, middle);
+            isHasCraftedItem = true;
 
-
-
+        }else{
+            itemStackHandler.setStackInSlot(middleSlot, ItemStack.EMPTY);
+            isHasCraftedItem = false;
+        }
+        return;
+/*
         if(itemStackHandler.getStackInSlot(0).isEmpty() && itemStackHandler.getStackInSlot(1).isEmpty() && itemStackHandler.getStackInSlot(3).isEmpty() && itemStackHandler.getStackInSlot(4).isEmpty()) {
             if (itemStackHandler.getStackInSlot(2).getItem() instanceof AbstractFabrialItem) {
                 ItemStack gemItemStack = null;
@@ -204,6 +267,8 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
             isHasCraftedItem = false;
             itemStackHandler.setStackInSlot(2, ItemStack.EMPTY);
         }
+
+*/
     }
     void consume_ingredients(){
         itemStackHandler.getStackInSlot(0).shrink(1);
