@@ -36,31 +36,22 @@ public class ConjoinedRedstoneLampPlacerItem extends Item {
     @Override
     public InteractionResult useOn(UseOnContext useOnContext) {
         if(!useOnContext.getLevel().isClientSide) {
-            System.out.println("is ClientSide");
             BlockPlaceContext placeContext = new BlockPlaceContext(useOnContext);
             if (placeContext.canPlace()) {
-                System.out.println("can place");
                 BlockState state = ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get().getStateForPlacement(placeContext);
                 if (state != null && this.canPlace(placeContext, state)) {
-                    System.out.println("state not null and can place");
                     if (placeBlock(placeContext, state)) {
-                        System.out.println("yes, place block");
                         BlockEntity entity = useOnContext.getLevel().getBlockEntity(placeContext.getClickedPos());
                         if (entity instanceof ConjoinedRedstoneLampBlockEntity) {
-                            System.out.println("instance of no. 1");
                             CompoundTag placerItemTag = useOnContext.getItemInHand().getOrCreateTag();
                             boolean pairExists = false;
                             BlockPos pair = null;
                             if (placerItemTag.contains("sa_fabrials.is_pair_null") && !placerItemTag.getBoolean("sa_fabrials.is_pair_null") && placerItemTag.contains("sa_fabrials.pair_x") && placerItemTag.contains("sa_fabrials.pair_y") && placerItemTag.contains("sa_fabrials.pair_z") && placerItemTag.contains("sa_fabrials.pair_id")) {
-                                System.out.println("contains all necessary tags");
                                 pair = new BlockPos(placerItemTag.getInt("sa_fabrials.pair_x"), placerItemTag.getInt("sa_fabrials.pair_y"), placerItemTag.getInt("sa_fabrials.pair_z"));
                                 if (useOnContext.getLevel().getBlockState(pair).is(ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())) {
-                                    System.out.println("correct block at location");
                                     BlockEntity pairEntity = useOnContext.getLevel().getBlockEntity(pair);
                                     if (pairEntity instanceof ConjoinedRedstoneLampBlockEntity) {
-                                        System.out.println("instance of entity");
                                         if (((ConjoinedRedstoneLampBlockEntity) pairEntity).pairId == placerItemTag.getLong("sa_fabrials.pair_id")) {
-                                            System.out.println("valid id");
                                             pairExists = true;
                                             long pairId = useOnContext.getItemInHand().getOrCreateTag().getLong("sa_fabrials.pair_id");
 
@@ -84,7 +75,6 @@ public class ConjoinedRedstoneLampPlacerItem extends Item {
                             }
                             if (!pairExists) {
                                 long randomId = new Random().nextLong();
-                                System.out.println("pair does not exist");
                                 ((ConjoinedRedstoneLampBlockEntity) entity).setPairPos(null);
                                 useOnContext.getItemInHand().getOrCreateTag().putBoolean("sa_fabrials.is_pair_null", false);
                                 useOnContext.getItemInHand().getOrCreateTag().putInt("sa_fabrials.pair_x", placeContext.getClickedPos().getX());

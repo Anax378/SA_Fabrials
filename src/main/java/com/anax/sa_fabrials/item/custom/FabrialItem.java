@@ -34,9 +34,8 @@ public class FabrialItem extends AbstractFabrialItem {
         String spren = context.getItemInHand().getOrCreateTag().getString("spren");
         Vec3 direction = context.getPlayer().getLookAngle();
         Vec3 pos = new Vec3(context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ());
-        FabrialEffects.targetBlock(pos, context.getLevel(), power, charge, direction == null ? Vec3.directionFromRotation(0, context.getRotation()) : direction, context.getClickedFace(), spren);
+        FabrialEffects.targetBlock(pos, context.getLevel(), power, charge, direction == null ? Vec3.directionFromRotation(0, context.getRotation()) : direction, context.getClickedFace(), spren, false);
 
-        System.out.println("useOn");
 
         return super.useOn(context);
 
@@ -48,8 +47,7 @@ public class FabrialItem extends AbstractFabrialItem {
         int power = player.getItemInHand(interactionHand).getOrCreateTag().getInt("power");
         boolean charge = player.getItemInHand(interactionHand).getOrCreateTag().getBoolean("is_attractor");
         String spren = player.getItemInHand(interactionHand).getOrCreateTag().getString("spren");
-        FabrialEffects.targetEntity(player, level, power, charge, player.getLookAngle(), spren, true);
-        System.out.println("use");
+        FabrialEffects.targetEntity(player, level, power, charge, player.getLookAngle(), spren, true, false);
         return super.use(level, player, interactionHand);
 
 
@@ -60,8 +58,7 @@ public class FabrialItem extends AbstractFabrialItem {
         int power = player.getItemInHand(interactionHand).getOrCreateTag().getInt("power");
         boolean charge = player.getItemInHand(interactionHand).getOrCreateTag().getBoolean("is_attractor");
         String spren = player.getItemInHand(interactionHand).getOrCreateTag().getString("spren");
-        FabrialEffects.targetEntity(livingEntity, player.getLevel(), power, charge, player.getLookAngle(), spren, false);
-        System.out.println("interactLivingEntity");
+        FabrialEffects.targetEntity(livingEntity, player.getLevel(), power, charge, player.getLookAngle(), spren, false, false);
         return InteractionResult.CONSUME;
     }
 }

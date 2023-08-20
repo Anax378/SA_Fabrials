@@ -16,17 +16,12 @@ public class SprenManifestation implements ISprenManifestation{
     }
 
     @Override
-    public void targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side) {
-
+    public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
+        return 0;
     }
 
     @Override
-    public void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction) {
-
-    }
-
-    @Override
-    public int getCost(int power, boolean charge) {
+    public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
         return 0;
     }
 

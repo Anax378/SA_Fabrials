@@ -44,7 +44,27 @@ public class GemstoneItem extends Item {
         return super.useOn(pContext);
     }
 
+    @Override
+    public int getBarWidth(ItemStack pStack) {
+        int stormlight = pStack.getOrCreateTag().getInt("stormlight");
+        int maxStormlight = pStack.getOrCreateTag().getInt("stormlight_capacity");
+        return (int) Math.round( ((float)stormlight/(float)maxStormlight)*13.0);
+    }
 
+    @Override
+    public int getBarColor(ItemStack pStack) {
+        int stormlight = pStack.getOrCreateTag().getInt("stormlight");
+        int maxStormlight = pStack.getOrCreateTag().getInt("stormlight_capacity");
+        float normalized = (float)stormlight/(float)maxStormlight;
+        int red = (int)Math.round((1.0-normalized)*255);
+        int green = (int)Math.round(normalized*255);
+        return (red << 16) | (green << 8);
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack pStack) {
+        return true;
+    }
 
     @Nullable
     @Override

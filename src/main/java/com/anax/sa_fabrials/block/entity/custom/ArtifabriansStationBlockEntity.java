@@ -55,7 +55,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
         @Override
         protected void onContentsChanged(int slot) {
-            System.out.println("content changed");
             AbstractArtifabriansStationRecipe recipe;
             if(slot == 2 && isHasCraftedItem && itemStackHandler.getStackInSlot(slot).isEmpty() &&
                     (recipe = ArtifabriansStationRecipes.getConstructionRecipe(
@@ -72,7 +71,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                         itemStackHandler.getStackInSlot(bottomSlot)
                 );
                 isHasCraftedItem = false;
-                System.out.println("consumed ingredients");
             }
             setChanged();
         }
@@ -176,7 +174,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
         if(areOuterSlotsEmpty()) {
             AbstractArtifabriansStationRecipe recipe = ArtifabriansStationRecipes.getDeconstructionRecipe(itemStackHandler.getStackInSlot(2));
             if(recipe != null){
-                System.out.println("recipe exists");
                 ItemStack[] ingredients = recipe.deconstruct(itemStackHandler.getStackInSlot(middleSlot));
                 itemStackHandler.setStackInSlot(topSlot, ingredients[0]);
                 itemStackHandler.setStackInSlot(leftSlot, ingredients[1]);
@@ -194,7 +191,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 itemStackHandler.getStackInSlot(rightSlot),
                 itemStackHandler.getStackInSlot(bottomSlot))) != null ){
 
-            System.out.println("created middle slot");
             ItemStack middle = recipe.constructMiddle(itemStackHandler.getStackInSlot(topSlot), itemStackHandler.getStackInSlot(leftSlot), itemStackHandler.getStackInSlot(rightSlot), itemStackHandler.getStackInSlot(bottomSlot));
             itemStackHandler.setStackInSlot(middleSlot, middle);
             isHasCraftedItem = true;

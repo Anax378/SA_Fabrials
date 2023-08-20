@@ -1,11 +1,12 @@
 # Stormlight Archive: Fabrials
 
-cosmere fabrials and such for minecraft forge
+Miencraft mod for cosmere fabrials for minecraft forge. <br>
+this mod is inspired by the works of Brandon Sanderson.
 
-current version: 1.19.2
+current Miencraft version: 1.19.2
 
 dependencies:
-the cosmere mod by leafreynolds: https://www.curseforge.com/minecraft/mc-mods/cosmere
+the cosmere mod by leafreynolds: https://www.curseforge.com/minecraft/mc-mods/cosmere <br>
 the dependencies of the cosmere mod.
 
 ## Guide:

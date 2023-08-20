@@ -169,7 +169,6 @@ public class StormlightPipeBlock extends BaseEntityBlock {
         if(rLoc.y > bounds.maxY){return Direction.UP;}
         if(rLoc.y < bounds.minY){return Direction.DOWN;}
 
-        System.out.println("its null");
         return null;
 
     }
@@ -178,7 +177,6 @@ public class StormlightPipeBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {
         if(!level.isClientSide() && interactionHand == InteractionHand.MAIN_HAND) {
             Direction direction = getClickedDirection(blockHitResult.getLocation(), CORE, blockPos);
-            System.out.println(direction);
             if (direction == null) {
                 return super.use(blockState, level, blockPos, player, interactionHand, blockHitResult);
             }

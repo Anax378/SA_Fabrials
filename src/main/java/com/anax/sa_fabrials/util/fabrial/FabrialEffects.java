@@ -77,10 +77,13 @@ public class FabrialEffects {
     }
     public static SprenManifestation WIND_MANIFESTATION = new SprenManifestation(){
         @Override
-        public void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction) {
-            direction = direction.normalize().scale(power);
-            if(!charge){direction = direction.reverse();}
-            entity.lerpMotion(direction.x, direction.y, direction.z);
+        public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
+            if(!simulate){
+                direction = direction.normalize().scale(power);
+                if(!charge){direction = direction.reverse();}
+                entity.lerpMotion(direction.x, direction.y, direction.z);
+            }
+            return 0;
         }
 
         @Override
@@ -95,13 +98,15 @@ public class FabrialEffects {
     };
     public static SprenManifestation HEALTH_MANIFESTATION = new SprenManifestation(){
         @Override
-        public void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction) {
-            if(charge){
-                entity.heal(power*2);
+        public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
+            if(!simulate) {
+                if (charge) {
+                    entity.heal(power * 2);
+                } else {
+                    entity.hurt(DamageSource.MAGIC, power * 2);
+                }
             }
-            else{
-                entity.hurt(DamageSource.MAGIC, power*2);
-            }
+            return 0;
         }
         @Override
         public String getSprenName() {
@@ -115,33 +120,40 @@ public class FabrialEffects {
     };
     public static SprenManifestation FIRE_MANIFESTATION = new SprenManifestation(){
         @Override
-        public void targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side) {
-            BlockPos position = new BlockPos(pos);
-            if(level.getBlockState(position).is(Blocks.TNT)){
-                TntBlock.explode(level, position);
-                level.setBlock(position, Blocks.AIR.defaultBlockState(), 3);
-                return;
-            }
-            BlockState blockstate = level.getBlockState(position);
-            if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate) && !CandleCakeBlock.canLight(blockstate)) {
-                BlockPos blockpos1 = position.relative(side);
-                if (BaseFireBlock.canBePlacedAt(level, blockpos1, side)) {
-                    BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
-                    level.setBlock(blockpos1, blockstate1, 11);
+        public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
+
+            if(!simulate){
+                BlockPos position = new BlockPos(pos);
+                if(level.getBlockState(position).is(Blocks.TNT)){
+                    TntBlock.explode(level, position);
+                    level.setBlock(position, Blocks.AIR.defaultBlockState(), 3);
+                    return 0;
                 }
-            } else {
-                level.setBlock(position, blockstate.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+                BlockState blockstate = level.getBlockState(position);
+                if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate) && !CandleCakeBlock.canLight(blockstate)) {
+                    BlockPos blockpos1 = position.relative(side);
+                    if (BaseFireBlock.canBePlacedAt(level, blockpos1, side)) {
+                        BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
+                        level.setBlock(blockpos1, blockstate1, 11);
+                    }
+                } else {
+                    level.setBlock(position, blockstate.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
+                }
             }
+            return 0;
         }
 
         @Override
-        public void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction) {
+        public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
             if(charge){
-                if (entity instanceof Creeper){((Creeper)entity).ignite();return;}
+                if (entity instanceof Creeper){
+                    ((Creeper)entity).ignite();return 0;
+                }
                 entity.setRemainingFireTicks(Math.round(power*20));
             }else{
                 entity.clearFire();
             }
+            return 0;
         }
 
         @Override
@@ -156,17 +168,20 @@ public class FabrialEffects {
     };
     public static SprenManifestation LIGHTNING_MANIFESTATION = new SprenManifestation(){
         @Override
-        public void targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side) {
-            if(!level.isClientSide()) {
-                LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
-                lightningBolt.setPos(new Vec3(pos.x(), pos.y(), pos.z()));
-                level.addFreshEntity(lightningBolt);
+        public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
+            if(!simulate) {
+                if (!level.isClientSide()) {
+                    LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
+                    lightningBolt.setPos(new Vec3(pos.x(), pos.y(), pos.z()));
+                    level.addFreshEntity(lightningBolt);
+                }
             }
+            return 0;
         }
 
         @Override
-        public void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction) {
-            this.targetBlock(entity.position(), level, power, charge, direction, Direction.UP);
+        public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
+            return this.targetBlock(entity.position(), level, power, charge, direction, Direction.UP, simulate);
         }
 
         @Override
@@ -181,15 +196,18 @@ public class FabrialEffects {
     };
     public static SprenManifestation EXPLOSION_MANIFESTATION = new SprenManifestation(){
         @Override
-        public void targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side) {
-            if(!level.isClientSide()) {
-                level.explode(null, pos.x(), pos.y(), pos.z(), power, Explosion.BlockInteraction.BREAK);
+        public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
+            if(!simulate){
+                if(!level.isClientSide()) {
+                    level.explode(null, pos.x(), pos.y(), pos.z(), power, Explosion.BlockInteraction.BREAK);
+                }
             }
+            return 0;
         }
 
         @Override
-        public void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction) {
-            this.targetBlock(entity.position(), level, power, charge, direction, Direction.UP);
+        public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
+            return this.targetBlock(entity.position(), level, power, charge, direction, Direction.UP, simulate);
         }
 
         @Override
@@ -213,17 +231,19 @@ public class FabrialEffects {
         sprenManifestationsMap.put(EXPLOSION_MANIFESTATION.getSprenName(), EXPLOSION_MANIFESTATION);
     }
 
-    public static void targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, String spren){
+    public static int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, String spren, boolean simulate){
         if(sprenManifestationsMap.containsKey(spren)){
-            sprenManifestationsMap.get(spren).targetBlock(pos, level, power, charge, direction, side);
+            return sprenManifestationsMap.get(spren).targetBlock(pos, level, power, charge, direction, side, simulate);
         }
+        return 0;
     }
 
-    public static void targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, String spren, boolean isUsingOnSelf){
+    public static int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, String spren, boolean isUsingOnSelf, boolean simulate){
         if(sprenManifestationsMap.containsKey(spren)){
-            if(isUsingOnSelf && !sprenManifestationsMap.get(spren).isUseOnSelf()){return;}
-            sprenManifestationsMap.get(spren).targetEntity(entity, level, power, charge, direction);
+            if(isUsingOnSelf && !sprenManifestationsMap.get(spren).isUseOnSelf()){return 0;}
+            return sprenManifestationsMap.get(spren).targetEntity(entity, level, power, charge, direction, simulate);
         }
+        return 0;
     }
 
 

@@ -88,7 +88,7 @@ public class ThrownFabrial extends ThrowableItemProjectile {
             boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
             String spren = itemStack.getOrCreateTag().getString("spren");
             Vec3 pos = new Vec3(blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
-            FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren);
+            FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren, false);
         }
         this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
         this.discard();
@@ -101,7 +101,7 @@ public class ThrownFabrial extends ThrowableItemProjectile {
             int power = itemStack.getOrCreateTag().getInt("power");
             boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
             String spren = itemStack.getOrCreateTag().getString("spren");
-            FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false);
+            FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false, false);
         }
         this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
         this.discard();

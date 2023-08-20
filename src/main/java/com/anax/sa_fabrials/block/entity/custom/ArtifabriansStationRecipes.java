@@ -44,7 +44,7 @@ public class ArtifabriansStationRecipes {
             @Nullable
             public ItemStack[] deconstruct(ItemStack middle) {
                 if(!this.canDeconstruct(middle)){return null;}
-                ItemStack top = middle.getItem() instanceof FabrialItem ? FabrialClassification.fabrial_from_gem(middle.getItem()).getDefaultInstance() : FabrialClassification.gem_from_throwable_fabrial(middle.getItem()).getDefaultInstance();
+                ItemStack top = middle.getItem() instanceof FabrialItem ? FabrialClassification.gem_from_fabrial(middle.getItem()).getDefaultInstance() : FabrialClassification.gem_from_throwable_fabrial(middle.getItem()).getDefaultInstance();
                 top.getOrCreateTag().putString("spren", middle.getOrCreateTag().getString("spren"));
                 top.getOrCreateTag().putInt("stormlight", middle.getOrCreateTag().getInt("stormlight"));
                 ItemStack left = middle.getOrCreateTag().getBoolean("is_attractor") ? Items.IRON_INGOT.getDefaultInstance() : ItemsRegistry.METAL_INGOTS.get(Metals.MetalType.STEEL).get().getDefaultInstance();

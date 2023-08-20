@@ -5,9 +5,11 @@ import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
@@ -57,5 +59,25 @@ public abstract class AbstractFabrialItem extends Item {
     public boolean canBeHurtBy(DamageSource damageSource) {
         if(damageSource.isExplosion() || damageSource.isFire() || DamageSource.LIGHTNING_BOLT.getMsgId().equals(damageSource.getMsgId())){return false;}
         return super.canBeHurtBy(damageSource);
+    }
+
+    @Override
+    public int getBarWidth(ItemStack pStack) {
+        int stormlight = pStack.getOrCreateTag().getInt("stormlight");
+        int maxStormlight = pStack.getOrCreateTag().getInt("stormlight_capacity");
+        return (int) Math.round( ((float)stormlight/(float)maxStormlight)*13.0);
+    }
+    @Override
+    public int getBarColor(ItemStack pStack) {
+        int stormlight = pStack.getOrCreateTag().getInt("stormlight");
+        int maxStormlight = pStack.getOrCreateTag().getInt("stormlight_capacity");
+        float normalized = (float)stormlight/(float)maxStormlight;
+        return Mth.hsvToRgb(normalized / 3.0F, 1.0F, 1.0F);
+
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack pStack) {
+        return true;
     }
 }
