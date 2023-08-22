@@ -88,7 +88,13 @@ public class ThrownFabrial extends ThrowableItemProjectile {
             boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
             String spren = itemStack.getOrCreateTag().getString("spren");
             Vec3 pos = new Vec3(blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
-            FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren, false);
+
+            int stormlight = itemStack.getOrCreateTag().getInt("stormlight");
+            int stormlightNeeded = FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren, true);
+            if(stormlight >= stormlightNeeded){
+                FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren, false);
+                itemStack.getOrCreateTag().putInt("stormlight", stormlight - stormlightNeeded);
+            }
         }
         this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
         this.discard();
@@ -101,7 +107,14 @@ public class ThrownFabrial extends ThrowableItemProjectile {
             int power = itemStack.getOrCreateTag().getInt("power");
             boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
             String spren = itemStack.getOrCreateTag().getString("spren");
-            FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false, false);
+
+            int stormlight = itemStack.getOrCreateTag().getInt("stormlight");
+            int stormlightNeeded = FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false, true);
+
+            if(stormlight >= stormlightNeeded){
+                FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false, true);
+                itemStack.getOrCreateTag().putInt("stormlight", stormlight - stormlightNeeded);
+            }
         }
         this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
         this.discard();

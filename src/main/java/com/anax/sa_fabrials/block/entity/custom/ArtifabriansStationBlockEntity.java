@@ -3,16 +3,10 @@ package com.anax.sa_fabrials.block.entity.custom;
 import com.anax.sa_fabrials.block.entity.ModBlockEntities;
 import com.anax.sa_fabrials.block.screen.ArtifabriansStationMenu;
 import com.anax.sa_fabrials.item.SAItems;
-import com.anax.sa_fabrials.item.custom.AbstractFabrialItem;
-import com.anax.sa_fabrials.item.custom.FabrialItem;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
-import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
 import com.anax.sa_fabrials.util.ModTags;
 import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
-import leaf.cosmere.api.Metals;
-import leaf.cosmere.common.registry.ItemsRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
@@ -24,7 +18,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -210,7 +203,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                     gemItemStack = FabrialClassification.gem_from_throwable_fabrial(itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
                 }
 
-                if (itemStackHandler.getStackInSlot(2).getItem() instanceof FabrialItem && FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()) != null) {
+                if (itemStackHandler.getStackInSlot(2).getItem() instanceof PulseFabrialItem && FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()) != null) {
                     itemStackHandler.setStackInSlot(3, SAItems.FABRIAL_CASING.get().getDefaultInstance());
                     gemItemStack = FabrialClassification.gem_from_fabrial(itemStackHandler.getStackInSlot(2).getItem()).getDefaultInstance();
                 }

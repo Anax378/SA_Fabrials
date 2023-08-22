@@ -19,62 +19,6 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashMap;
 
 public class FabrialEffects {
-    public static void explode(Level level,Vec3 position, float power, boolean charge){
-        if(!level.isClientSide()) {
-            level.explode(null, position.x, position.y, position.z, power, Explosion.BlockInteraction.BREAK);
-        }
-    }
-
-    public static void lightning(Level level, Vec3 position, float power, boolean charge){
-        if(!level.isClientSide()) {
-            LightningBolt lightningBolt = new LightningBolt(EntityType.LIGHTNING_BOLT, level);
-            lightningBolt.setPos(position);
-            level.addFreshEntity(lightningBolt);
-        }
-    }
-
-    public static void setFire(Level level, BlockPos position, Direction direction, float power, boolean charge){
-        if(level.getBlockState(position).is(Blocks.TNT)){
-            TntBlock.explode(level, position);
-            level.setBlock(position, Blocks.AIR.defaultBlockState(), 3);
-            return;
-        }
-        BlockState blockstate = level.getBlockState(position);
-        if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate) && !CandleCakeBlock.canLight(blockstate)) {
-            BlockPos blockpos1 = position.relative(direction);
-            if (BaseFireBlock.canBePlacedAt(level, blockpos1, direction)) {
-                BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
-                level.setBlock(blockpos1, blockstate1, 11);
-            }
-        } else {
-            level.setBlock(position, blockstate.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
-        }
-
-    }
-
-    public static void setEntityFire(Entity entity, float power, boolean charge){
-        if(charge){
-            if (entity instanceof Creeper){((Creeper)entity).ignite();return;}
-            entity.setRemainingFireTicks(Math.round(power*20));
-        }else{
-            entity.clearFire();
-        }
-    }
-
-    public static void launchEntity(Entity entity, Vec3 direction, float power, boolean charge){
-        direction = direction.normalize().scale(power);
-        if(!charge){direction = direction.reverse();}
-        entity.lerpMotion(direction.x, direction.y, direction.z);
-    }
-
-    public static void health(LivingEntity entity, float power, boolean charge){
-        if(!charge){
-            entity.hurt(DamageSource.MAGIC, power*2);
-        }
-        if(charge){
-            entity.heal(power*2);
-        }
-    }
     public static SprenManifestation WIND_MANIFESTATION = new SprenManifestation(){
         @Override
         public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
@@ -83,7 +27,7 @@ public class FabrialEffects {
                 if(!charge){direction = direction.reverse();}
                 entity.lerpMotion(direction.x, direction.y, direction.z);
             }
-            return 0;
+            return 800*power;
         }
 
         @Override
@@ -99,14 +43,15 @@ public class FabrialEffects {
     public static SprenManifestation HEALTH_MANIFESTATION = new SprenManifestation(){
         @Override
         public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
-            if(!simulate) {
-                if (charge) {
-                    entity.heal(power * 2);
-                } else {
-                    entity.hurt(DamageSource.MAGIC, power * 2);
-                }
+        if (charge) {
+            if(entity.getHealth() >= entity.getMaxHealth()){return 0;}
+            if(!simulate){entity.heal(power * 2);}
+            return 1000*power;
+        }
+        else {
+            if(!simulate){entity.hurt(DamageSource.MAGIC, power * 2);}
+            return 1000*power;
             }
-            return 0;
         }
         @Override
         public String getSprenName() {
@@ -121,26 +66,34 @@ public class FabrialEffects {
     public static SprenManifestation FIRE_MANIFESTATION = new SprenManifestation(){
         @Override
         public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
-
-            if(!simulate){
-                BlockPos position = new BlockPos(pos);
-                if(level.getBlockState(position).is(Blocks.TNT)){
+            BlockPos position = new BlockPos(pos);
+            if(level.getBlockState(position).is(Blocks.TNT)){
+                if(!simulate) {
                     TntBlock.explode(level, position);
                     level.setBlock(position, Blocks.AIR.defaultBlockState(), 3);
+                }
+                return 150;
+            }
+            BlockState blockstate = level.getBlockState(position);
+            if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate) && !CandleCakeBlock.canLight(blockstate)) {
+                BlockPos blockpos1 = position.relative(side);
+                if (BaseFireBlock.canBePlacedAt(level, blockpos1, side)) {
+                    BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
+                    if(!simulate) {level.setBlock(blockpos1, blockstate1, 11);}
+                    return 150;
+                }
+                else{
                     return 0;
                 }
-                BlockState blockstate = level.getBlockState(position);
-                if (!CampfireBlock.canLight(blockstate) && !CandleBlock.canLight(blockstate) && !CandleCakeBlock.canLight(blockstate)) {
-                    BlockPos blockpos1 = position.relative(side);
-                    if (BaseFireBlock.canBePlacedAt(level, blockpos1, side)) {
-                        BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
-                        level.setBlock(blockpos1, blockstate1, 11);
-                    }
-                } else {
+            } else {
+                if(level.getBlockState(position).getValue(BlockStateProperties.LIT)){
+                    return 0;
+                }
+                if(!simulate){
                     level.setBlock(position, blockstate.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
                 }
+                return 150;
             }
-            return 0;
         }
 
         @Override
@@ -153,7 +106,7 @@ public class FabrialEffects {
             }else{
                 entity.clearFire();
             }
-            return 0;
+            return 150;
         }
 
         @Override
@@ -176,7 +129,7 @@ public class FabrialEffects {
                     level.addFreshEntity(lightningBolt);
                 }
             }
-            return 0;
+            return 2000;
         }
 
         @Override
@@ -202,7 +155,7 @@ public class FabrialEffects {
                     level.explode(null, pos.x(), pos.y(), pos.z(), power, Explosion.BlockInteraction.BREAK);
                 }
             }
-            return 0;
+            return 500*power;
         }
 
         @Override

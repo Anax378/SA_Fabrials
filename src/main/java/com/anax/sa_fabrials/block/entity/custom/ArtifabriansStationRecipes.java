@@ -1,8 +1,7 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.item.SAItems;
-import com.anax.sa_fabrials.item.custom.AbstractFabrialItem;
-import com.anax.sa_fabrials.item.custom.FabrialItem;
+import com.anax.sa_fabrials.item.custom.PulseFabrialItem;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
 import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
 import com.anax.sa_fabrials.util.ModTags;
@@ -36,7 +35,7 @@ public class ArtifabriansStationRecipes {
             @Override
             public boolean canDeconstruct(ItemStack middle) {
                 if(middle.getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial(middle.getItem()) != null){return true;}
-                if(middle.getItem() instanceof FabrialItem && FabrialClassification.gem_from_fabrial(middle.getItem()) != null){return true;}
+                if(middle.getItem() instanceof PulseFabrialItem && FabrialClassification.gem_from_fabrial(middle.getItem()) != null){return true;}
                 return false;
             }
 
@@ -44,11 +43,11 @@ public class ArtifabriansStationRecipes {
             @Nullable
             public ItemStack[] deconstruct(ItemStack middle) {
                 if(!this.canDeconstruct(middle)){return null;}
-                ItemStack top = middle.getItem() instanceof FabrialItem ? FabrialClassification.gem_from_fabrial(middle.getItem()).getDefaultInstance() : FabrialClassification.gem_from_throwable_fabrial(middle.getItem()).getDefaultInstance();
+                ItemStack top = middle.getItem() instanceof PulseFabrialItem ? FabrialClassification.gem_from_fabrial(middle.getItem()).getDefaultInstance() : FabrialClassification.gem_from_throwable_fabrial(middle.getItem()).getDefaultInstance();
                 top.getOrCreateTag().putString("spren", middle.getOrCreateTag().getString("spren"));
                 top.getOrCreateTag().putInt("stormlight", middle.getOrCreateTag().getInt("stormlight"));
                 ItemStack left = middle.getOrCreateTag().getBoolean("is_attractor") ? Items.IRON_INGOT.getDefaultInstance() : ItemsRegistry.METAL_INGOTS.get(Metals.MetalType.STEEL).get().getDefaultInstance();
-                ItemStack right = middle.getItem() instanceof FabrialItem ? SAItems.FABRIAL_CASING.get().getDefaultInstance() : SAItems.THROWABLE_FABRIAL_CASING.get().getDefaultInstance();
+                ItemStack right = middle.getItem() instanceof PulseFabrialItem ? SAItems.FABRIAL_CASING.get().getDefaultInstance() : SAItems.THROWABLE_FABRIAL_CASING.get().getDefaultInstance();
                 ItemStack bottom = ItemsRegistry.METAL_NUGGETS.get(Metals.MetalType.ZINC).get().getDefaultInstance();
                 bottom.setCount(middle.getOrCreateTag().getInt("power"));
                 return new ItemStack[]{top, left, right, bottom};

@@ -43,16 +43,16 @@
   "item.sa_fabrials.throwable_amethyst_fabrial": "Throwable Amethyst Fabrial",
 
 
-  "item.sa_fabrials.topaz_fabrial": "Topaz Fabrial",
-  "item.sa_fabrials.sapphire_fabrial": "Sapphire Fabrial",
-  "item.sa_fabrials.smokestone_fabrial": "Smokestone Fabrial",
-  "item.sa_fabrials.ruby_fabrial": "Ruby Fabrial",
-  "item.sa_fabrials.garnet_fabrial": "Garnet Fabrial",
-  "item.sa_fabrials.zircon_fabrial": "Zircon Fabrial",
-  "item.sa_fabrials.heliodor_fabrial": "Heliodor Fabrial",
-  "item.sa_fabrials.diamond_fabrial": "Diamond Fabrial",
-  "item.sa_fabrials.emerald_fabrial": "Emerald Fabrial",
-  "item.sa_fabrials.amethyst_fabrial": "Amethyst Fabrial",
+  "item.sa_fabrials.topaz_fabrial": "Topaz Pulse Fabrial",
+  "item.sa_fabrials.sapphire_fabrial": "Sapphire Pulse Fabrial",
+  "item.sa_fabrials.smokestone_fabrial": "Smokestone Pulse Fabrial",
+  "item.sa_fabrials.ruby_fabrial": "Ruby Pulse Fabrial",
+  "item.sa_fabrials.garnet_fabrial": "Garnet Pulse Fabrial",
+  "item.sa_fabrials.zircon_fabrial": "Zircon Pulse Fabrial",
+  "item.sa_fabrials.heliodor_fabrial": "Heliodor Pulse Fabrial",
+  "item.sa_fabrials.diamond_fabrial": "Diamond Pulse Fabrial",
+  "item.sa_fabrials.emerald_fabrial": "Emerald Pulse Fabrial",
+  "item.sa_fabrials.amethyst_fabrial": "Amethyst Pulse Fabrial",
 
   "block.sa_fabrials.artifabrians_station_block": "Artifabrians Station",
 
