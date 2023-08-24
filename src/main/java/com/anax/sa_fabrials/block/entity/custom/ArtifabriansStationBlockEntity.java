@@ -210,16 +210,16 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
 
                 if(gemItemStack != null) {
-                    itemStackHandler.setStackInSlot(1, itemStackHandler.getStackInSlot(2).getOrCreateTag().getBoolean("is_attractor")
+                    itemStackHandler.setStackInSlot(1, itemStackHandler.getStackInSlot(2).getOrCreateTag().getBoolean(NBTHelper.NBTKeys.FABRIAL_CHARGE)
                             ? Items.IRON_INGOT.getDefaultInstance() : ItemsRegistry.METAL_INGOTS.get(Metals.MetalType.STEEL).get().getDefaultInstance());
                     itemStackHandler.setStackInSlot(4, ItemsRegistry.METAL_NUGGETS.get(Metals.MetalType.ZINC).get().getDefaultInstance());
-                    itemStackHandler.getStackInSlot(4).setCount(itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("power"));
+                    itemStackHandler.getStackInSlot(4).setCount(itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt(NBTHelper.NBTKeys.FABRIAL_POWER));
 
-                    gemItemStack.getOrCreateTag().putString("spren", itemStackHandler.getStackInSlot(2).getOrCreateTag().getString("spren"));
-                    gemItemStack.getOrCreateTag().putInt("stormlight_capacity", itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("stormlight_capacity"));
-                    gemItemStack.getOrCreateTag().putInt("stormlight_maxReceive", itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("stormlight_maxReceive"));
-                    gemItemStack.getOrCreateTag().putInt("stormlight_maxExtract", itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("stormlight_maxExtract"));
-                    gemItemStack.getOrCreateTag().putInt("stormlight", itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("stormlight"));
+                    gemItemStack.getOrCreateTag().putString(NBTHelper.NBTKeys.CAPTURED_SPREN, itemStackHandler.getStackInSlot(2).getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN));
+                    gemItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.MAX_STORMLIGHT, itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_STORMLIGHT));
+                    gemItemStack.getOrCreateTag().putInt("NBTHelper.NBTKeys.MAX_RECEIVE", itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt("NBTHelper.NBTKeys.MAX_RECEIVE"));
+                    gemItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.MAX_EXTRACT, itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_EXTRACT));
+                    gemItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, itemStackHandler.getStackInSlot(2).getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT));
                     itemStackHandler.setStackInSlot(0, gemItemStack);
                 }
                 itemStackHandler.setStackInSlot(2, ItemStack.EMPTY);
@@ -238,14 +238,14 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
             }
 
             if(resultItemStack != null) {
-                resultItemStack.getOrCreateTag().putString("spren", itemStackHandler.getStackInSlot(0).getOrCreateTag().getString("spren"));
-                resultItemStack.getOrCreateTag().putInt("stormlight_capacity", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_capacity"));
-                resultItemStack.getOrCreateTag().putInt("stormlight_maxReceive", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_maxReceive"));
-                resultItemStack.getOrCreateTag().putInt("stormlight_maxExtract", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_maxExtract"));
-                resultItemStack.getOrCreateTag().putInt("stormlight", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight"));
+                resultItemStack.getOrCreateTag().putString(NBTHelper.NBTKeys.CAPTURED_SPREN, itemStackHandler.getStackInSlot(0).getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN));
+                resultItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.MAX_STORMLIGHT, itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_STORMLIGHT));
+                resultItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.MAX_RECEIVE, itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_RECEIVE));
+                resultItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.MAX_EXTRACT, itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_EXTRACT));
+                resultItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT));
 
-                resultItemStack.getOrCreateTag().putBoolean("is_attractor", isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.IRON_INGOTS));
-                resultItemStack.getOrCreateTag().putInt("power", Math.min(itemStackHandler.getStackInSlot(4).getCount(), 5));
+                resultItemStack.getOrCreateTag().putBoolean(NBTHelper.NBTKeys.FABRIAL_CHARGE, isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.IRON_INGOTS));
+                resultItemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.FABRIAL_POWER, Math.min(itemStackHandler.getStackInSlot(4).getCount(), 5));
                 itemStackHandler.setStackInSlot(2, resultItemStack);
                 isHasCraftedItem = true;
             }else{

@@ -111,11 +111,32 @@ public class SAItems {
     public static final RegistryObject<Item> THROWABLE_FABRIAL_CASING = ITEMS.register("throwable_fabrial_casing",
             ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
 
+    public static final RegistryObject<Item> TOGGLE_FABRIAL_CASING = ITEMS.register("toggle_fabrial_casing",
+            ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
+
     public static final RegistryObject<Item> FABRIAL_CASING = ITEMS.register("fabrial_casing",
             ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
 
-    public static final RegistryObject<ToggleFabrialItem> TOGGLE_FABRIAL = ITEMS.register("toggle_fabrial",
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_TOPAZ_FABRIAL = ITEMS.register("toggle_topaz_fabrial",
             () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_SMOKESTONE_FABRIAL = ITEMS.register("toggle_smokestone_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_GARNET_FABRIAL = ITEMS.register("toggle_garnet_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_ZIRCON_FABRIAL = ITEMS.register("toggle_zircon_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_RUBY_FABRIAL = ITEMS.register("toggle_ruby_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_SAPPHIRE_FABRIAL = ITEMS.register("toggle_sapphire_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_HELIODOR_FABRIAL = ITEMS.register("toggle_heliodor_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_DIAMOND_FABRIAL = ITEMS.register("toggle_diamond_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_EMERALD_FABRIAL = ITEMS.register("toggle_emerald_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0));
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_AMETHYST_FABRIAL = ITEMS.register("toggle_amethyst_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0));
 
 /*
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",

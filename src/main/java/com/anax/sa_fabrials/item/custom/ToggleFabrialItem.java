@@ -1,5 +1,6 @@
 package com.anax.sa_fabrials.item.custom;
 
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -30,15 +31,15 @@ public class ToggleFabrialItem extends AbstractFabrialItem{
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         if(pStack.getOrCreateTag().getBoolean("is_on") && pEntity instanceof LivingEntity){
-            int stormlight = pStack.getOrCreateTag().getInt("stormlight");
-            int power = pStack.getOrCreateTag().getInt("power");
-            boolean charge = pStack.getOrCreateTag().getBoolean("is_attractor");
-            String spren = pStack.getOrCreateTag().getString("spren");
+            int stormlight = pStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
+            int power = pStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.FABRIAL_POWER);
+            boolean charge = pStack.getOrCreateTag().getBoolean(NBTHelper.NBTKeys.FABRIAL_CHARGE);
+            String spren = pStack.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN);
             if(FabrialEffects.isUseOnSelf(spren, charge)){
                 int stormlightNeeded = FabrialEffects.targetEntity((LivingEntity)pEntity, pLevel, power, charge, pEntity.getLookAngle(), spren, true, true);
                 if(stormlight >= stormlightNeeded){
                     FabrialEffects.targetEntity((LivingEntity)pEntity, pLevel, power, charge, pEntity.getLookAngle(), spren, true, false);
-                    pStack.getOrCreateTag().putInt("stormlight", stormlight-stormlightNeeded);
+                    pStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight-stormlightNeeded);
                 }
             }
             else{
@@ -60,14 +61,14 @@ public class ToggleFabrialItem extends AbstractFabrialItem{
                         int stormlightNeeded = FabrialEffects.targetBlock(position, pLevel, power, charge, pEntity.getLookAngle(), blockHitResult.getDirection(), spren, true);
                         if(stormlight >= stormlightNeeded){
                             FabrialEffects.targetBlock(position, pLevel, power, charge, pEntity.getLookAngle(), blockHitResult.getDirection(), spren, false);
-                            pStack.getOrCreateTag().putInt("stormlight", stormlight-stormlightNeeded);
+                            pStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight-stormlightNeeded);
                         }
                     }
                 }else{
                     int stormlightNeeded = FabrialEffects.targetEntity((LivingEntity)entityHitResult.getEntity(), pLevel, power, charge, pEntity.getLookAngle(), spren, false, true);
                     if(stormlight >= stormlightNeeded){
                         FabrialEffects.targetEntity((LivingEntity)entityHitResult.getEntity(), pLevel, power, charge, pEntity.getLookAngle(), spren, false, false);
-                        pStack.getOrCreateTag().putInt("stormlight", stormlight-stormlightNeeded);
+                        pStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight-stormlightNeeded);
                     }
                 }
 

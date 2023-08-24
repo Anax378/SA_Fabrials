@@ -241,6 +241,33 @@ public class FabrialEffects {
         }
     };
 
+    public static SprenManifestation ICE_MANIFESTATION = new SprenManifestation(){
+        @Override
+        public String getSprenName() {
+            return "ice";
+        }
+
+        @Override
+        public boolean isUseOnSelf(boolean charge) {
+            return false;
+        }
+
+        @Override
+        public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
+            if(charge){
+                BlockPos placePos = new BlockPos(pos);
+                placePos = placePos.relative(side);
+                if(level.getBlockState(placePos).getMaterial().isReplaceable()){
+                    if(!simulate){
+                        level.setBlock(placePos, Blocks.ICE.defaultBlockState(), 11);
+                    }
+                    return 500;
+                }
+            }
+            return 0;
+        }
+    };
+
     public static HashMap<String, SprenManifestation> sprenManifestationsMap = new HashMap<>();
 
     static {
@@ -250,6 +277,7 @@ public class FabrialEffects {
         sprenManifestationsMap.put(LIGHTNING_MANIFESTATION.getSprenName(), LIGHTNING_MANIFESTATION);
         sprenManifestationsMap.put(EXPLOSION_MANIFESTATION.getSprenName(), EXPLOSION_MANIFESTATION);
         sprenManifestationsMap.put(GRAVITY_MANIFESTATION.getSprenName(), GRAVITY_MANIFESTATION);
+        sprenManifestationsMap.put(ICE_MANIFESTATION.getSprenName(), ICE_MANIFESTATION);
     }
 
     public static int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, String spren, boolean simulate){

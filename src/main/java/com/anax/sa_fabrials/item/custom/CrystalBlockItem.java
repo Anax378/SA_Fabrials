@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.block.entity.custom.CrystalBlockEntity;
+import com.anax.sa_fabrials.util.NBTHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
@@ -19,7 +20,7 @@ public class CrystalBlockItem extends BlockItem {
     @Override
     protected boolean updateCustomBlockEntityTag(BlockPos blockPos, Level level, @Nullable Player player, ItemStack itemStack, BlockState blockState) {
         CrystalBlockEntity entity = (CrystalBlockEntity) level.getBlockEntity(blockPos);
-        entity.stormlightStorage.receiveStormlight(itemStack.getOrCreateTag().getInt("stormlight"), false);
+        entity.stormlightStorage.receiveStormlight(itemStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT), false);
         return super.updateCustomBlockEntityTag(blockPos, level, player, itemStack, blockState);
     }
 }

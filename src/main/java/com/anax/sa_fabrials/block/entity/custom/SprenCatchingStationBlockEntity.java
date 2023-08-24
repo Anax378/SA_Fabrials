@@ -2,6 +2,7 @@ package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.screen.SprenCatchingStationMenu;
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.SATags;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
@@ -112,6 +113,8 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
         if(isHasItemTag(item, SATags.Items.LIGHTNING_SPREN_ATTRACTORS)){return "lightning";}
         if(isHasItemTag(item, SATags.Items.WIND_SPREN_ATTRACTORS)){return "wind";}
         if(isHasItemTag(item, SATags.Items.HEALTH_SPREN_ATTRACTORS)){return "health";}
+        if(isHasItemTag(item, SATags.Items.GRAVITY_SPREN_ATTRACTORS)){return "gravity";}
+        if(isHasItemTag(item, SATags.Items.ICE_SPREN_ATTRACTORS)){return "ice";}
         return null;
     }
 
@@ -139,13 +142,14 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
             if(isFinishedCrafting[0] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.CAN_HOLD_SPREN)){
                 if(getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()) != null) {
                     pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1);
-                    pBlockEntity.itemStackHandler.getStackInSlot(1).getOrCreateTag().putString("spren", getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()));
+                    pBlockEntity.itemStackHandler.getStackInSlot(1).getOrCreateTag().putString(NBTHelper.NBTKeys.CAPTURED_SPREN, getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()));
                 }
                 pBlockEntity.isCrafting = false;
             }
         }
         else {
             if (getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()) != null && pBlockEntity.itemStackHandler.getStackInSlot(1).getCapability(StormlightStorage.STORMLIGHT_STORAGE).isPresent() && pBlockEntity.itemStackHandler.getStackInSlot(2).getCapability(StormlightStorage.STORMLIGHT_STORAGE).isPresent()) {
+                System.out.println("got caps");
                 int[] capacities = {0, 0};
                 boolean[] data = {false, false};
                 pBlockEntity.itemStackHandler.getStackInSlot(1).getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(

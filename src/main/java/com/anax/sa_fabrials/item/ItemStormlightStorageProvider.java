@@ -1,5 +1,6 @@
 package com.anax.sa_fabrials.item;
 
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.stormlight.IStormlightStorage;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.Direction;
@@ -27,11 +28,11 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
         this.stack = stack;
 
         CompoundTag tag = stack.getOrCreateTag();
-        if(!tag.contains("stormlight_capacity")){tag.putInt("stormlight_capacity", capacity);}
-        if(!tag.contains("stormlight_maxReceive")){ tag.putInt("stormlight_maxReceive", maxReceive);}
-        if(!tag.contains("stormlight_maxExtract")){ tag.putInt("stormlight_maxExtract", maxExtract);}
-        if(!tag.contains("stormlight")){ tag.putInt("stormlight", stormlight);}else{
-            this.stormlight = tag.getInt("stormlight");
+        if(!tag.contains(NBTHelper.NBTKeys.MAX_STORMLIGHT)){tag.putInt(NBTHelper.NBTKeys.MAX_STORMLIGHT, capacity);}
+        if(!tag.contains(NBTHelper.NBTKeys.MAX_RECEIVE)){ tag.putInt(NBTHelper.NBTKeys.MAX_RECEIVE, maxReceive);}
+        if(!tag.contains(NBTHelper.NBTKeys.MAX_EXTRACT)){ tag.putInt(NBTHelper.NBTKeys.MAX_EXTRACT, maxExtract);}
+        if(!tag.contains(NBTHelper.NBTKeys.STORED_STORMLIGHT)){ tag.putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight);}else{
+            this.stormlight = tag.getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
         }
     }
 
@@ -51,7 +52,7 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
         if (!simulate) {
             this.stormlight += energyReceived;
         }
-        stack.getOrCreateTag().putInt("stormlight", stormlight);
+        stack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight);
         return energyReceived;
     }
 
@@ -62,7 +63,7 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
         if (!simulate) {
             this.stormlight -= energyExtracted;
         }
-        stack.getOrCreateTag().putInt("stormlight", stormlight);
+        stack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight);
         return energyExtracted;
     }
 
@@ -87,6 +88,6 @@ public class ItemStormlightStorageProvider implements ICapabilityProvider, IStor
     }
 
     public void updateStormlight(){
-        this.stormlight = stack.getOrCreateTag().getInt("stormlight");
+        this.stormlight = stack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
     }
 }

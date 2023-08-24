@@ -2,6 +2,7 @@ package com.anax.sa_fabrials.entity.custom;
 
 import com.anax.sa_fabrials.entity.SAEntityTypes;
 import com.anax.sa_fabrials.item.SAItems;
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
@@ -84,16 +85,16 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         if(itemStack != null){
-            int power = itemStack.getOrCreateTag().getInt("power");
-            boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
-            String spren = itemStack.getOrCreateTag().getString("spren");
+            int power = itemStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.FABRIAL_POWER);
+            boolean charge = itemStack.getOrCreateTag().getBoolean(NBTHelper.NBTKeys.FABRIAL_CHARGE);
+            String spren = itemStack.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN);
             Vec3 pos = new Vec3(blockHitResult.getBlockPos().getX(), blockHitResult.getBlockPos().getY(), blockHitResult.getBlockPos().getZ());
 
-            int stormlight = itemStack.getOrCreateTag().getInt("stormlight");
+            int stormlight = itemStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
             int stormlightNeeded = FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren, true);
             if(stormlight >= stormlightNeeded){
                 FabrialEffects.targetBlock(pos, this.getLevel(), power, charge, this.getDeltaMovement(), blockHitResult.getDirection(), spren, false);
-                itemStack.getOrCreateTag().putInt("stormlight", stormlight - stormlightNeeded);
+                itemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight - stormlightNeeded);
             }
         }
         this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());
@@ -104,16 +105,16 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
         if(itemStack != null && entityHitResult.getEntity() instanceof LivingEntity){
-            int power = itemStack.getOrCreateTag().getInt("power");
-            boolean charge = itemStack.getOrCreateTag().getBoolean("is_attractor");
-            String spren = itemStack.getOrCreateTag().getString("spren");
+            int power = itemStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.FABRIAL_POWER);
+            boolean charge = itemStack.getOrCreateTag().getBoolean(NBTHelper.NBTKeys.FABRIAL_CHARGE);
+            String spren = itemStack.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN);
 
-            int stormlight = itemStack.getOrCreateTag().getInt("stormlight");
+            int stormlight = itemStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
             int stormlightNeeded = FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false, true);
 
             if(stormlight >= stormlightNeeded){
                 FabrialEffects.targetEntity((LivingEntity) entityHitResult.getEntity(), this.getLevel(), power, charge, this.getDeltaMovement(), spren, false, true);
-                itemStack.getOrCreateTag().putInt("stormlight", stormlight - stormlightNeeded);
+                itemStack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight - stormlightNeeded);
             }
         }
         this.drop(this.getLevel(), this.getX(), this.getY(), this.getZ());

@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.block.screen.CrystalMenu;
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -166,7 +167,7 @@ public abstract class CrystalBlockEntity extends BlockEntity implements MenuProv
             inventory.setItem(i, itemHandler.getStackInSlot(i));
         }
         ItemStack stack = getItem().getDefaultInstance();
-        stack.getOrCreateTag().putInt("stormlight", this.stormlightStorage.getStormlightStored());
+        stack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, this.stormlightStorage.getStormlightStored());
         inventory.setItem(itemHandler.getSlots(), stack);
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }

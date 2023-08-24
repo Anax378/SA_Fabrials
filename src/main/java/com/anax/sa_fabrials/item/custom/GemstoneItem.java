@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.item.ItemStormlightStorageProvider;
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -32,11 +33,11 @@ public class GemstoneItem extends Item {
     @Override
     public void appendHoverText(ItemStack itemStack, @Nullable Level level, List<Component> componentList, TooltipFlag tooltipFlag) {
         super.appendHoverText(itemStack, level, componentList, tooltipFlag);
-        if(!itemStack.getOrCreateTag().contains("spren")){itemStack.getOrCreateTag().putString("spren", "none");}
+        if(!itemStack.getOrCreateTag().contains(NBTHelper.NBTKeys.CAPTURED_SPREN)){itemStack.getOrCreateTag().putString(NBTHelper.NBTKeys.CAPTURED_SPREN, "none");}
         final int[] storedStormlight = {0};
         itemStack.getCapability(StormlightStorage.STORMLIGHT_STORAGE).ifPresent(handler -> {storedStormlight[0] = handler.getStormlightStored();});
         componentList.add(Component.translatable("tooltip.sa_fabrials.stored_stormlight").append(" " + Integer.toString(storedStormlight[0]) + "/" + Integer.toString(capacity)));
-        componentList.add(Component.translatable("tooltip.sa_fabrials.spren").append(" " + itemStack.getOrCreateTag().getString("spren")));
+        componentList.add(Component.translatable("tooltip.sa_fabrials.spren").append(" " + itemStack.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN)));
     }
 
     @Override
@@ -46,15 +47,15 @@ public class GemstoneItem extends Item {
 
     @Override
     public int getBarWidth(ItemStack pStack) {
-        int stormlight = pStack.getOrCreateTag().getInt("stormlight");
-        int maxStormlight = pStack.getOrCreateTag().getInt("stormlight_capacity");
+        int stormlight = pStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
+        int maxStormlight = pStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_STORMLIGHT);
         return (int) Math.round( ((float)stormlight/(float)maxStormlight)*13.0);
     }
 
     @Override
     public int getBarColor(ItemStack pStack) {
-        int stormlight = pStack.getOrCreateTag().getInt("stormlight");
-        int maxStormlight = pStack.getOrCreateTag().getInt("stormlight_capacity");
+        int stormlight = pStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
+        int maxStormlight = pStack.getOrCreateTag().getInt(NBTHelper.NBTKeys.MAX_STORMLIGHT);
         float normalized = (float)stormlight/(float)maxStormlight;
         int red = (int)Math.round((1.0-normalized)*255);
         int green = (int)Math.round(normalized*255);

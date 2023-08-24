@@ -35,7 +35,16 @@
     "sa_fabrials:zircon_fabrial",
     "sa_fabrials:smokestone_fabrial",
 
-    "sa_fabrials:toggle_fabrial"
+    "sa_fabrials:toggle_topaz_fabrial",
+    "sa_fabrials:toggle_heliodor_fabrial",
+    "sa_fabrials:toggle_ruby_fabrial",
+    "sa_fabrials:toggle_sapphire_fabrial",
+    "sa_fabrials:toggle_diamond_fabrial",
+    "sa_fabrials:toggle_emerald_fabrial",
+    "sa_fabrials:toggle_amethyst_fabrial",
+    "sa_fabrials:toggle_garnet_fabrial",
+    "sa_fabrials:toggle_zircon_fabrial",
+    "sa_fabrials:toggle_smokestone_fabrial"
   ]
 
 }

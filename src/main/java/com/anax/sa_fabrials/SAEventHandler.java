@@ -2,6 +2,7 @@ package com.anax.sa_fabrials;
 
 import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.ToggleFabrialItem;
+import com.anax.sa_fabrials.util.NBTHelper;
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import com.google.common.collect.Iterables;
 import net.minecraft.advancements.critereon.LightningStrikeTrigger;
@@ -44,14 +45,14 @@ public class SAEventHandler {
                 }
                 for(ItemStack stack : slots){
                     if(stack.getItem() instanceof ToggleFabrialItem){
-                        if(stack.getOrCreateTag().getBoolean("is_on") && !(stack.getOrCreateTag().getBoolean("charge")) && stack.getOrCreateTag().getString("spren").equals(FabrialEffects.LIGHTNING_MANIFESTATION.getSprenName())){
-                            int power = stack.getOrCreateTag().getInt("power");
+                        if(stack.getOrCreateTag().getBoolean("is_on") && !(stack.getOrCreateTag().getBoolean("charge")) && stack.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN).equals(FabrialEffects.LIGHTNING_MANIFESTATION.getSprenName())){
+                            int power = stack.getOrCreateTag().getInt(NBTHelper.NBTKeys.FABRIAL_POWER);
                             if(levelEntity.distanceTo(entity) > power*10){return;}
-                            int stormlight = stack.getOrCreateTag().getInt("stormlight");
+                            int stormlight = stack.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT);
                             int stormlightNeeded = FabrialEffects.targetEntity(event.getEntity(), event.getLevel(), power, false, levelEntity.getLookAngle(), FabrialEffects.LIGHTNING_MANIFESTATION.getSprenName(), false, true);
                             if(stormlight > stormlightNeeded){
                                 event.setCanceled(true);
-                                stack.getOrCreateTag().putInt("stormlight", stormlight-stormlightNeeded);
+                                stack.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, stormlight-stormlightNeeded);
                                 doBreak = true;
                                 break;
                             }
