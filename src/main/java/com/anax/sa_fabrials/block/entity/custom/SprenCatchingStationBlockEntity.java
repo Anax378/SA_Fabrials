@@ -2,7 +2,7 @@ package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.screen.SprenCatchingStationMenu;
-import com.anax.sa_fabrials.util.ModTags;
+import com.anax.sa_fabrials.util.SATags;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
@@ -107,11 +107,11 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
 
     @Nullable
     public static String getAssociatedSpren(Item item){
-        if(isHasItemTag(item, ModTags.Items.EXPLOSION_SPREN_ATTRACTORS)){return "explosion";}
-        if(isHasItemTag(item, ModTags.Items.FIRE_SPREN_ATTRACTORS)){return "fire";}
-        if(isHasItemTag(item, ModTags.Items.LIGHTNING_SPREN_ATTRACTORS)){return "lightning";}
-        if(isHasItemTag(item, ModTags.Items.WIND_SPREN_ATTRACTORS)){return "wind";}
-        if(isHasItemTag(item, ModTags.Items.HEALTH_SPREN_ATTRACTORS)){return "health";}
+        if(isHasItemTag(item, SATags.Items.EXPLOSION_SPREN_ATTRACTORS)){return "explosion";}
+        if(isHasItemTag(item, SATags.Items.FIRE_SPREN_ATTRACTORS)){return "fire";}
+        if(isHasItemTag(item, SATags.Items.LIGHTNING_SPREN_ATTRACTORS)){return "lightning";}
+        if(isHasItemTag(item, SATags.Items.WIND_SPREN_ATTRACTORS)){return "wind";}
+        if(isHasItemTag(item, SATags.Items.HEALTH_SPREN_ATTRACTORS)){return "health";}
         return null;
     }
 
@@ -136,7 +136,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
                     }
             );
 
-            if(isFinishedCrafting[0] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.CAN_HOLD_SPREN)){
+            if(isFinishedCrafting[0] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.CAN_HOLD_SPREN)){
                 if(getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()) != null) {
                     pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1);
                     pBlockEntity.itemStackHandler.getStackInSlot(1).getOrCreateTag().putString("spren", getAssociatedSpren(pBlockEntity.itemStackHandler.getStackInSlot(0).getItem()));
@@ -160,7 +160,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
                             capacities[1] = handler.getMaxStormlightStored();
                         }
                 );
-                if (data[0] && data[1] && (capacities[0] <= capacities[1] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.CAN_HOLD_SPREN))) {
+                if (data[0] && data[1] && (capacities[0] <= capacities[1] && isHasItemTag(pBlockEntity.itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.CAN_HOLD_SPREN))) {
                     pBlockEntity.isCrafting = true;
                     pLevel.playSound(null, pPos.getX(), pPos.getY(), pPos.getZ(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.BLOCKS, 1, 1);
                 }

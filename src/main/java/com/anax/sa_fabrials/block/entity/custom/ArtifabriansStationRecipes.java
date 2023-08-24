@@ -4,7 +4,7 @@ import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.PulseFabrialItem;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
 import com.anax.sa_fabrials.item.custom.ThrowableFabrialItem;
-import com.anax.sa_fabrials.util.ModTags;
+import com.anax.sa_fabrials.util.SATags;
 import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import leaf.cosmere.api.Metals;
 import leaf.cosmere.common.registry.ItemsRegistry;
@@ -27,9 +27,9 @@ public class ArtifabriansStationRecipes {
             @Override
             public boolean isValidRecipe(ItemStack top, ItemStack left, ItemStack right, ItemStack bottom) {
                 if(top.getItem() instanceof GemstoneItem){}else{return false;}
-                if(isHasItemTag(left.getItem(), ModTags.Items.IRON_INGOTS) || isHasItemTag(left.getItem(), ModTags.Items.STEEL_INGOTS)){}else{return false;}
+                if(isHasItemTag(left.getItem(), SATags.Items.IRON_INGOTS) || isHasItemTag(left.getItem(), SATags.Items.STEEL_INGOTS)){}else{return false;}
                 if(right.is(SAItems.FABRIAL_CASING.get()) || right.is(SAItems.THROWABLE_FABRIAL_CASING.get())){}else{return false;}
-                if(isHasItemTag(bottom.getItem(), ModTags.Items.ZINC_NUGGETS)){}else{return false;}
+                if(isHasItemTag(bottom.getItem(), SATags.Items.ZINC_NUGGETS)){}else{return false;}
                 return true;
             }
             @Override
@@ -60,7 +60,7 @@ public class ArtifabriansStationRecipes {
                 middle.getOrCreateTag().putInt("stormlight", top.getOrCreateTag().getInt("stormlight"));
                 middle.getOrCreateTag().putString("spren", top.getOrCreateTag().getString("spren"));
                 middle.getOrCreateTag().putInt("power", Math.min(bottom.getCount(), 5));
-                middle.getOrCreateTag().putBoolean("is_attractor", isHasItemTag(left.getItem(), ModTags.Items.IRON_INGOTS));
+                middle.getOrCreateTag().putBoolean("is_attractor", isHasItemTag(left.getItem(), SATags.Items.IRON_INGOTS));
                 return middle;
             }
 

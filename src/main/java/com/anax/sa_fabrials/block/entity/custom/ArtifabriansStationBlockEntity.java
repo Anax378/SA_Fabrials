@@ -4,7 +4,7 @@ import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.screen.ArtifabriansStationMenu;
 import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
-import com.anax.sa_fabrials.util.ModTags;
+import com.anax.sa_fabrials.util.SATags;
 import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -244,7 +244,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 resultItemStack.getOrCreateTag().putInt("stormlight_maxExtract", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight_maxExtract"));
                 resultItemStack.getOrCreateTag().putInt("stormlight", itemStackHandler.getStackInSlot(0).getOrCreateTag().getInt("stormlight"));
 
-                resultItemStack.getOrCreateTag().putBoolean("is_attractor", isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS));
+                resultItemStack.getOrCreateTag().putBoolean("is_attractor", isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.IRON_INGOTS));
                 resultItemStack.getOrCreateTag().putInt("power", Math.min(itemStackHandler.getStackInSlot(4).getCount(), 5));
                 itemStackHandler.setStackInSlot(2, resultItemStack);
                 isHasCraftedItem = true;
@@ -268,9 +268,9 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
     boolean has_valid_recipe(){
         return (itemStackHandler.getStackInSlot(0).getItem() instanceof GemstoneItem
-                && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), ModTags.Items.IRON_INGOTS))
+                && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.IRON_INGOTS))
                 && (itemStackHandler.getStackInSlot(3).is(SAItems.THROWABLE_FABRIAL_CASING.get()) || itemStackHandler.getStackInSlot(3).is(SAItems.FABRIAL_CASING.get()))
-                && isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), ModTags.Items.ZINC_NUGGETS)
+                && isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), SATags.Items.ZINC_NUGGETS)
                 && (FabrialClassification.throwable_fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null || FabrialClassification.fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null)
         );
     }

@@ -8,7 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
-public class ModTags {
+public class SATags {
     public static class Blocks {
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(new ResourceLocation(SAFabrials.MOD_ID, name));
@@ -25,6 +25,7 @@ public class ModTags {
         public static final TagKey<Item> LIGHTNING_SPREN_ATTRACTORS = tag("lightning_spren_attractors");
         public static final TagKey<Item> WIND_SPREN_ATTRACTORS = tag("wind_spren_attractors");
         public static final TagKey<Item> HEALTH_SPREN_ATTRACTORS = tag("health_spren_attractors");
+        public static final TagKey<Item> GRAVITY_SPREN_ATTRACTOR = tag("gravity_spren_attractors");
 
         public static final TagKey<Item> CAN_HOLD_SPREN = tag("can_hold_spren");
 
