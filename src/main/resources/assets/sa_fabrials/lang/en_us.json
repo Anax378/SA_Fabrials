@@ -43,21 +43,34 @@
   "item.sa_fabrials.throwable_amethyst_fabrial": "Throwable Amethyst Fabrial",
 
 
-  "item.sa_fabrials.topaz_fabrial": "Topaz Pulse Fabrial",
-  "item.sa_fabrials.sapphire_fabrial": "Sapphire Pulse Fabrial",
-  "item.sa_fabrials.smokestone_fabrial": "Smokestone Pulse Fabrial",
-  "item.sa_fabrials.ruby_fabrial": "Ruby Pulse Fabrial",
-  "item.sa_fabrials.garnet_fabrial": "Garnet Pulse Fabrial",
-  "item.sa_fabrials.zircon_fabrial": "Zircon Pulse Fabrial",
-  "item.sa_fabrials.heliodor_fabrial": "Heliodor Pulse Fabrial",
-  "item.sa_fabrials.diamond_fabrial": "Diamond Pulse Fabrial",
-  "item.sa_fabrials.emerald_fabrial": "Emerald Pulse Fabrial",
-  "item.sa_fabrials.amethyst_fabrial": "Amethyst Pulse Fabrial",
+  "item.sa_fabrials.topaz_fabrial": "Pulse Topaz Fabrial",
+  "item.sa_fabrials.sapphire_fabrial": "Pulse Sapphire Fabrial",
+  "item.sa_fabrials.smokestone_fabrial": "Pulse Smokestone Fabrial",
+  "item.sa_fabrials.ruby_fabrial": "Pulse Ruby Fabrial",
+  "item.sa_fabrials.garnet_fabrial": "Pulse Garnet Fabrial",
+  "item.sa_fabrials.zircon_fabrial": "Pulse Zircon Fabrial",
+  "item.sa_fabrials.heliodor_fabrial": "Pulse Heliodor Fabrial",
+  "item.sa_fabrials.diamond_fabrial": "Pulse Diamond Fabrial",
+  "item.sa_fabrials.emerald_fabrial": "Pulse Emerald Fabrial",
+  "item.sa_fabrials.amethyst_fabrial": "Pulse Amethyst Fabrial",
 
   "block.sa_fabrials.artifabrians_station_block": "Artifabrians Station",
 
   "item.sa_fabrials.throwable_fabrial_casing": "Throwable Fabrials Casing",
   "item.sa_fabrials.fabrial_casing": "Fabrials Casing",
   "item.sa_fabrials.conjoined_redstone_lamp_placer": "Conjoined Redstone Lamp",
-  "effects.sa_fabrials.gravity": "Gravity"
+  "effects.sa_fabrials.gravity": "Gravity",
+
+  "item.sa_fabrials.toggle_topaz_fabrial": "Toggle Topaz Fabrial",
+  "item.sa_fabrials.toggle_sapphire_fabrial": "Toggle Sapphire Fabrial",
+  "item.sa_fabrials.toggle_smokestone_fabrial": "Toggle Smokestone Fabrial",
+  "item.sa_fabrials.toggle_ruby_fabrial": "Toggle Ruby Fabrial",
+  "item.sa_fabrials.toggle_garnet_fabrial": "Toggle Garnet Fabrial",
+  "item.sa_fabrials.toggle_zircon_fabrial": "Toggle Zircon Fabrial",
+  "item.sa_fabrials.toggle_heliodor_fabrial": "Toggle Heliodor Fabrial",
+  "item.sa_fabrials.toggle_diamond_fabrial": "Toggle Diamond Fabrial",
+  "item.sa_fabrials.toggle_emerald_fabrial": "Toggle Emerald Fabrial",
+  "item.sa_fabrials.toggle_amethyst_fabrial": "Toggle Amethyst Fabrial",
+
+  "item.sa_fabrials.toggle_fabrial_casing": "Toggle Fabrial Casing"
 }
