@@ -1,6 +1,6 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.screen.ArtifabriansStationMenu;
 import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.item.custom.GemstoneItem;
@@ -75,7 +75,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     }
 
     public ArtifabriansStationBlockEntity(BlockPos pos, BlockState state){
-        super(ModBlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get(), pos, state);
+        super(SABlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -147,7 +147,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
     @Override
     public BlockEntityType<?> getType() {
-        return ModBlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get();
+        return SABlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get();
     }
 
     public static boolean isHasItemTag(Item item, TagKey<Item> tag){

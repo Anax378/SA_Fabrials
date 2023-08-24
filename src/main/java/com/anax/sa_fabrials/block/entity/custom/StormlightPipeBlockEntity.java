@@ -1,7 +1,7 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
 import com.anax.sa_fabrials.block.custom.StormlightPipeBlock;
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,7 +35,7 @@ public class StormlightPipeBlockEntity extends BlockEntity {
     private LazyOptional<StormlightStorage> lazyStormlightStorage = LazyOptional.empty();
 
     public StormlightPipeBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.STORMLIGHT_PIPE_BLOCK_ENTITY.get(), blockPos, blockState);
+        super(SABlockEntities.STORMLIGHT_PIPE_BLOCK_ENTITY.get(), blockPos, blockState);
         stormlightStorage = new StormlightStorage(1050, 10000, 10000, 0) {
             @Override public void onChanged() {setChanged();}
 
@@ -81,7 +81,7 @@ public class StormlightPipeBlockEntity extends BlockEntity {
     @Override
     @NotNull
     public BlockEntityType<?> getType(){
-        return ModBlockEntities.STORMLIGHT_PIPE_BLOCK_ENTITY.get();
+        return SABlockEntities.STORMLIGHT_PIPE_BLOCK_ENTITY.get();
     }
 
     @Override

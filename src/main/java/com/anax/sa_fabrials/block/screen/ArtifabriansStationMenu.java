@@ -1,20 +1,18 @@
 package com.anax.sa_fabrials.block.screen;
 
-import com.anax.sa_fabrials.block.ModBlocks;
+import com.anax.sa_fabrials.block.SABlocks;
 import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 
 public class ArtifabriansStationMenu extends AbstractContainerMenu {
     private final ArtifabriansStationBlockEntity blockEntity;
@@ -24,7 +22,7 @@ public class ArtifabriansStationMenu extends AbstractContainerMenu {
     }
 
     public ArtifabriansStationMenu (int containerId, Inventory inv, BlockEntity entity){
-        super(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), containerId);
+        super(SAMenuTypes.ARTIFABRIANS_STATION_MENU.get(), containerId);
         checkContainerSize(inv, 5);
         level = inv.player.level;
         blockEntity = (ArtifabriansStationBlockEntity)entity;
@@ -43,7 +41,7 @@ public class ArtifabriansStationMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.ARTIFABRIANS_STATION_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, SABlocks.ARTIFABRIANS_STATION_BLOCK.get());
     }
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {

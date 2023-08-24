@@ -114,6 +114,9 @@ public class SAItems {
     public static final RegistryObject<Item> FABRIAL_CASING = ITEMS.register("fabrial_casing",
             ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
 
+    public static final RegistryObject<ToggleFabrialItem> TOGGLE_FABRIAL = ITEMS.register("toggle_fabrial",
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
+
 /*
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));

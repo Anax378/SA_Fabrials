@@ -24,7 +24,7 @@ public class CrystalMenu extends AbstractContainerMenu {
     }
 
     public CrystalMenu(int pContainerId, Inventory inv, BlockEntity entity, Block userBlock, ContainerData data) {
-        super(ModMenuTypes.CRYSTAL_MENU.get(), pContainerId);
+        super(SAMenuTypes.CRYSTAL_MENU.get(), pContainerId);
         this.userBlock = userBlock;
         checkContainerSize(inv, 2);
         blockEntity = ((CrystalBlockEntity) entity);

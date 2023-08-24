@@ -1,6 +1,6 @@
 package com.anax.sa_fabrials.block.screen;
 
-import com.anax.sa_fabrials.block.ModBlocks;
+import com.anax.sa_fabrials.block.SABlocks;
 import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -22,7 +22,7 @@ public class SprenCatchingStationMenu extends AbstractContainerMenu {
         this(containerId, inv, inv.player.level.getBlockEntity(extraData.readBlockPos()));
     }
     public SprenCatchingStationMenu(int containerId, Inventory inv, BlockEntity entity) {
-        super(ModMenuTypes.SPREN_CATCHING_STATION_MENU.get(), containerId);
+        super(SAMenuTypes.SPREN_CATCHING_STATION_MENU.get(), containerId);
         level = inv.player.level;
         blockEntity = (SprenCatchingStationBlockEntity)entity;
         addPlayerInventory(inv);
@@ -37,7 +37,7 @@ public class SprenCatchingStationMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, ModBlocks.SPREN_CATCHING_STATION.get());
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), player, SABlocks.SPREN_CATCHING_STATION.get());
     }
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {

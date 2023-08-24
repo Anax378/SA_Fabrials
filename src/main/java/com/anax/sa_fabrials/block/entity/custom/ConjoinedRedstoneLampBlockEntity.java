@@ -1,12 +1,10 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
-import com.anax.sa_fabrials.block.ModBlocks;
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.SABlocks;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Position;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 import javax.annotation.Nullable;
@@ -15,7 +13,7 @@ public class ConjoinedRedstoneLampBlockEntity extends BlockEntity {
     BlockPos pair;
     public Long pairId;
     public ConjoinedRedstoneLampBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.CONJOINED_REDSTONE_LAMP_BLOCK_ENTITY.get(), blockPos, blockState);
+        super(SABlockEntities.CONJOINED_REDSTONE_LAMP_BLOCK_ENTITY.get(), blockPos, blockState);
         pair = null;
         pairId = 0L;
     }
@@ -23,7 +21,7 @@ public class ConjoinedRedstoneLampBlockEntity extends BlockEntity {
     @Nullable
     public BlockPos getPairPos(){
         if(pair == null){return null;}
-        if(this.getLevel().getBlockState(pair).is(ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())){
+        if(this.getLevel().getBlockState(pair).is(SABlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())){
             return pair;
         }
         return null;

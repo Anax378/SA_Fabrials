@@ -1,6 +1,6 @@
 package com.anax.sa_fabrials.block.custom;
 
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -65,7 +65,7 @@ public class ArtifabriansStationBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> tBlockEntityType) {
-        return createTickerHelper(tBlockEntityType, ModBlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get(), ArtifabriansStationBlockEntity::tick);
+        return createTickerHelper(tBlockEntityType, SABlockEntities.ARTIFABRIANS_STATION_BLOCK_ENTITY.get(), ArtifabriansStationBlockEntity::tick);
     }
     @Override
     public InteractionResult use(BlockState blockState, Level level, BlockPos blockPos, Player player, InteractionHand interactionHand, BlockHitResult blockHitResult) {

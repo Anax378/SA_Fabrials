@@ -2,6 +2,7 @@ package com.anax.sa_fabrials.util.fabrial;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -11,7 +12,7 @@ public class SprenManifestation implements ISprenManifestation{
     SprenManifestation(){};
 
     @Override
-    public boolean isUseOnSelf() {
+    public boolean isUseOnSelf(boolean charge) {
         return false;
     }
 
@@ -21,7 +22,7 @@ public class SprenManifestation implements ISprenManifestation{
     }
 
     @Override
-    public int targetEntity(LivingEntity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
+    public int targetEntity(Entity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
         return 0;
     }
 

@@ -1,8 +1,7 @@
 package com.anax.sa_fabrials.block.custom;
 
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.entity.custom.SprenCatchingStationBlockEntity;
-import com.anax.sa_fabrials.block.entity.custom.TopazCrystalBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -59,7 +58,7 @@ public class SprenCatchingStationBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> tBlockEntityType) {
-        return createTickerHelper(tBlockEntityType, ModBlockEntities.SPREN_CATCHING_STATION_ENTITY.get(), SprenCatchingStationBlockEntity::tick);
+        return createTickerHelper(tBlockEntityType, SABlockEntities.SPREN_CATCHING_STATION_ENTITY.get(), SprenCatchingStationBlockEntity::tick);
     }
 
     @Override

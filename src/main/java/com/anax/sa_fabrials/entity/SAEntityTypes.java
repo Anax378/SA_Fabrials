@@ -4,17 +4,13 @@ import com.anax.sa_fabrials.SAFabrials;
 import com.anax.sa_fabrials.entity.custom.ThrownFabrial;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.item.Items;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.function.Supplier;
 
-
-public class ModEntityTypes {
+public class SAEntityTypes {
 
     public static final DeferredRegister<EntityType<?>>
             ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, SAFabrials.MOD_ID);

@@ -33,7 +33,9 @@
     "sa_fabrials:amethyst_fabrial",
     "sa_fabrials:garnet_fabrial",
     "sa_fabrials:zircon_fabrial",
-    "sa_fabrials:smokestone_fabrial"
+    "sa_fabrials:smokestone_fabrial",
+
+    "sa_fabrials:toggle_fabrial"
   ]
 
 }

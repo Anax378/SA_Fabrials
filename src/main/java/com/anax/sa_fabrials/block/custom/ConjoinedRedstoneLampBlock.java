@@ -1,20 +1,17 @@
 package com.anax.sa_fabrials.block.custom;
 
-import com.anax.sa_fabrials.block.ModBlocks;
+import com.anax.sa_fabrials.block.SABlocks;
 import com.anax.sa_fabrials.block.entity.custom.ConjoinedRedstoneLampBlockEntity;
-import com.anax.sa_fabrials.block.entity.custom.CrystalBlockEntity;
 import com.anax.sa_fabrials.item.SAItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -23,8 +20,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.Random;
 
 public class ConjoinedRedstoneLampBlock extends BaseEntityBlock {
     public static final BooleanProperty LIT = RedstoneTorchBlock.LIT;
@@ -58,8 +53,8 @@ public class ConjoinedRedstoneLampBlock extends BaseEntityBlock {
 
                             pLevel.addFreshEntity(new ItemEntity(pLevel, pPos.getX(), pPos.getY(), pPos.getZ(), toDrop));
                             BlockPos pairPos = entity.getPairPos();
-                            if(pLevel.getBlockState(pairPos).is(ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())){
-                                ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get().neighborChanged(pLevel.getBlockState(pairPos), pLevel, pairPos, ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get(), null, false);
+                            if(pLevel.getBlockState(pairPos).is(SABlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())){
+                                SABlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get().neighborChanged(pLevel.getBlockState(pairPos), pLevel, pairPos, SABlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get(), null, false);
                             }
 
                             super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
@@ -162,7 +157,7 @@ public class ConjoinedRedstoneLampBlock extends BaseEntityBlock {
         if(tag.contains("sa_fabrials.is_pair_null") && tag.contains("sa_fabrials.pair_x") && tag.contains("sa_fabrials.pair_y") && tag.contains("sa_fabrials.pair_z") && tag.contains("sa_fabrials.pair_id")){
             if(!tag.getBoolean("sa_fabrials.is_pair_null")){
                 BlockPos pair = new BlockPos(tag.getInt("sa_fabrials.pair_x"), tag.getInt("sa_fabrials.pair_y"), tag.getInt("sa_fabrials.pair_z"));
-                if(blockPlaceContext.getLevel().getBlockState(pair).is(ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())){
+                if(blockPlaceContext.getLevel().getBlockState(pair).is(SABlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get())){
                     BlockEntity entity = blockPlaceContext.getLevel().getBlockEntity(pair);
                     if(entity instanceof ConjoinedRedstoneLampBlockEntity){
                         if(((ConjoinedRedstoneLampBlockEntity) entity).pairId == tag.getLong("sa_fabrials.pair_id")){
@@ -173,6 +168,6 @@ public class ConjoinedRedstoneLampBlock extends BaseEntityBlock {
                 }
             }
         }
-        return ModBlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get().defaultBlockState().setValue(ConjoinedRedstoneLampBlock.LIT, Boolean.valueOf(isLit));
+        return SABlocks.CONJOINED_REDSTONE_LAMP_BLOCK.get().defaultBlockState().setValue(ConjoinedRedstoneLampBlock.LIT, Boolean.valueOf(isLit));
     }
 }

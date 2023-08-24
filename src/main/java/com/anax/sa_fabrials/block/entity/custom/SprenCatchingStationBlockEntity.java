@@ -1,28 +1,23 @@
 package com.anax.sa_fabrials.block.entity.custom;
 
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.screen.SprenCatchingStationMenu;
 import com.anax.sa_fabrials.util.ModTags;
-import com.anax.sa_fabrials.util.fabrial.GemCapacities;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
-import net.minecraft.client.gui.components.VolumeSlider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -46,7 +41,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
     };
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     public SprenCatchingStationBlockEntity(BlockPos blockPos, BlockState blockState) {
-        super(ModBlockEntities.SPREN_CATCHING_STATION_ENTITY.get(), blockPos, blockState);
+        super(SABlockEntities.SPREN_CATCHING_STATION_ENTITY.get(), blockPos, blockState);
     }
 
     @NotNull
@@ -97,7 +92,7 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
 
     @Override
     public BlockEntityType<?> getType() {
-        return ModBlockEntities.SPREN_CATCHING_STATION_ENTITY.get();
+        return SABlockEntities.SPREN_CATCHING_STATION_ENTITY.get();
     }
 
     @Nullable

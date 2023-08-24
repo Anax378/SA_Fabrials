@@ -1,6 +1,6 @@
 package com.anax.sa_fabrials.entity.custom;
 
-import com.anax.sa_fabrials.entity.ModEntityTypes;
+import com.anax.sa_fabrials.entity.SAEntityTypes;
 import com.anax.sa_fabrials.item.SAItems;
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.core.particles.ItemParticleOption;
@@ -29,11 +29,11 @@ public class ThrownFabrial extends ThrowableItemProjectile {
     }
 
     public ThrownFabrial(Level level, LivingEntity entity){
-        super(ModEntityTypes.THROWN_FABRIAL.get(), entity, level);
+        super(SAEntityTypes.THROWN_FABRIAL.get(), entity, level);
     }
 
     public ThrownFabrial(Level level, LivingEntity entity, ItemStack itemStack){
-        super(ModEntityTypes.THROWN_FABRIAL.get(), entity, level);
+        super(SAEntityTypes.THROWN_FABRIAL.get(), entity, level);
         init(itemStack);
     }
 

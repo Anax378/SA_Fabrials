@@ -1,7 +1,6 @@
 package com.anax.sa_fabrials.block.custom;
 
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
-import com.anax.sa_fabrials.block.entity.custom.CrystalBlockEntity;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.entity.custom.TopazCrystalBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -10,7 +9,6 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.NetworkHooks;
-import net.minecraftforge.registries.RegistryObject;
 
 public class TopazCrystalBlock extends CrystalBlock{
 
@@ -36,6 +34,6 @@ public class TopazCrystalBlock extends CrystalBlock{
 
     @Override
     <T extends BlockEntity> BlockEntityTicker<T> buildCreateTickHelper(BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, ModBlockEntities.TOPAZ_CRYSTAL_BLOCK_ENTITY.get(), TopazCrystalBlockEntity::tick);
+        return createTickerHelper(pBlockEntityType, SABlockEntities.TOPAZ_CRYSTAL_BLOCK_ENTITY.get(), TopazCrystalBlockEntity::tick);
     }
 }

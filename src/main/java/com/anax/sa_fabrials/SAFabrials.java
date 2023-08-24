@@ -1,20 +1,18 @@
 package com.anax.sa_fabrials;
 
-import com.anax.sa_fabrials.block.ModBlocks;
-import com.anax.sa_fabrials.block.entity.ModBlockEntities;
+import com.anax.sa_fabrials.block.SABlocks;
+import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.screen.ArtifabriansStationScreen;
 import com.anax.sa_fabrials.block.screen.CrystalScreen;
-import com.anax.sa_fabrials.block.screen.ModMenuTypes;
+import com.anax.sa_fabrials.block.screen.SAMenuTypes;
 import com.anax.sa_fabrials.block.screen.SprenCatchingStationScreen;
-import com.anax.sa_fabrials.entity.ModEntityTypes;
+import com.anax.sa_fabrials.effect.SAEffects;
+import com.anax.sa_fabrials.entity.SAEntityTypes;
 import com.anax.sa_fabrials.item.SAItems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.level.block.RedstoneLampBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,10 +37,11 @@ public class SAFabrials
         MinecraftForge.EVENT_BUS.register(this);
 
         SAItems.register(eventBus);
-        ModBlocks.register(eventBus);
-        ModBlockEntities.register(eventBus);
-        ModMenuTypes.register(eventBus);
-        ModEntityTypes.register(eventBus);
+        SABlocks.register(eventBus);
+        SABlockEntities.register(eventBus);
+        SAMenuTypes.register(eventBus);
+        SAEntityTypes.register(eventBus);
+        SAEffects.register(eventBus);
 
         MinecraftForge.EVENT_BUS.register(SAEventHandler.class);
 
@@ -50,7 +49,7 @@ public class SAFabrials
 
     @SubscribeEvent
     public static void do_setup(FMLClientSetupEvent event){
-        EntityRenderers.register(ModEntityTypes.THROWN_FABRIAL.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(SAEntityTypes.THROWN_FABRIAL.get(), ThrownItemRenderer::new);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -58,8 +57,8 @@ public class SAFabrials
 
     }
     private void clientSetup(final FMLClientSetupEvent event){
-        MenuScreens.register(ModMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
-        MenuScreens.register(ModMenuTypes.SPREN_CATCHING_STATION_MENU.get(), SprenCatchingStationScreen::new);
-        MenuScreens.register(ModMenuTypes.ARTIFABRIANS_STATION_MENU.get(), ArtifabriansStationScreen::new);
+        MenuScreens.register(SAMenuTypes.CRYSTAL_MENU.get(), CrystalScreen::new);
+        MenuScreens.register(SAMenuTypes.SPREN_CATCHING_STATION_MENU.get(), SprenCatchingStationScreen::new);
+        MenuScreens.register(SAMenuTypes.ARTIFABRIANS_STATION_MENU.get(), ArtifabriansStationScreen::new);
     }
 }
