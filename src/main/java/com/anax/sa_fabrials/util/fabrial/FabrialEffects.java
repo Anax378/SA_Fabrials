@@ -54,6 +54,7 @@ public class FabrialEffects {
         @Override
         public int targetEntity(Entity pentity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
         if(!(pentity instanceof LivingEntity)){return 0;}
+        if(!pentity.isAlive()){return 0;}
         LivingEntity entity = (LivingEntity)pentity;
 
         if (charge) {
