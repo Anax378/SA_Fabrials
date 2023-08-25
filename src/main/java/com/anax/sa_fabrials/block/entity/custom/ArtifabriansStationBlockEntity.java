@@ -39,6 +39,8 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     static int rightSlot = 3;
     static int bottomSlot = 4;
 
+    private boolean disableInventoryUpdate = false;
+
     public ItemStackHandler itemStackHandler = new ItemStackHandler(5){
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -46,8 +48,91 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
             return super.isItemValid(slot, stack);
         }
 
+        AbstractArtifabriansStationRecipe getConstructionRecipe(){
+            return ArtifabriansStationRecipes.getConstructionRecipe(
+                    itemStackHandler.getStackInSlot(topSlot),
+                    itemStackHandler.getStackInSlot(leftSlot),
+                    itemStackHandler.getStackInSlot(rightSlot),
+                    itemStackHandler.getStackInSlot(bottomSlot)
+            );
+        }
+
+        AbstractArtifabriansStationRecipe getDeconstructionRecipe(){
+            return ArtifabriansStationRecipes.getDeconstructionRecipe(itemStackHandler.getStackInSlot(middleSlot));
+        }
+
+        void consumeIngredients(AbstractArtifabriansStationRecipe recipe){
+            recipe.consumeIngredients(
+                    itemStackHandler.getStackInSlot(topSlot),
+                    itemStackHandler.getStackInSlot(leftSlot),
+                    itemStackHandler.getStackInSlot(rightSlot),
+                    itemStackHandler.getStackInSlot(bottomSlot)
+            );
+        }
+
+        ItemStack[] deconstructFromRecipe(AbstractArtifabriansStationRecipe recipe){
+            return recipe.deconstruct(itemStackHandler.getStackInSlot(middleSlot));
+        }
+
+        ItemStack constructFromRecipe(AbstractArtifabriansStationRecipe recipe){
+            return recipe.constructMiddle(
+                    itemStackHandler.getStackInSlot(topSlot),
+                    itemStackHandler.getStackInSlot(leftSlot),
+                    itemStackHandler.getStackInSlot(rightSlot),
+                    itemStackHandler.getStackInSlot(bottomSlot)
+            );
+        }
+
         @Override
         protected void onContentsChanged(int slot) {
+            if(!disableInventoryUpdate){
+                if(slot == middleSlot){
+                    if(itemStackHandler.getStackInSlot(middleSlot).isEmpty()){
+                        //consume ingredients
+                        AbstractArtifabriansStationRecipe recipe = this.getConstructionRecipe();
+                        if(recipe != null){
+                            disableInventoryUpdate = true;
+                            consumeIngredients(recipe);
+                            disableInventoryUpdate = false;
+                        }
+                    }else{
+                        //deconstruct
+                        AbstractArtifabriansStationRecipe recipe = this.getDeconstructionRecipe();
+                        if(recipe != null){
+                            ItemStack[] ingredients = this.deconstructFromRecipe(recipe);
+                            disableInventoryUpdate = true;
+                            itemStackHandler.setStackInSlot(topSlot, ingredients[0]);
+                            itemStackHandler.setStackInSlot(leftSlot, ingredients[1]);
+                            itemStackHandler.setStackInSlot(rightSlot, ingredients[2]);
+                            itemStackHandler.setStackInSlot(bottomSlot, ingredients[3]);
+                            disableInventoryUpdate = false;
+
+                        }
+
+                    }
+                }else{
+                    //construct;
+                    AbstractArtifabriansStationRecipe recipe = this.getConstructionRecipe();
+                    if(recipe != null){
+                        ItemStack product = this.constructFromRecipe(recipe);
+                        disableInventoryUpdate = true;
+                        itemStackHandler.setStackInSlot(middleSlot, product);
+                        disableInventoryUpdate = false;
+                    }else{
+                        disableInventoryUpdate = true;
+                        itemStackHandler.setStackInSlot(middleSlot, ItemStack.EMPTY);
+                        disableInventoryUpdate = false;
+                    }
+
+                }
+                setChanged();
+            }
+
+
+
+
+
+            /*
             AbstractArtifabriansStationRecipe recipe;
             if(slot == 2 && isHasCraftedItem && itemStackHandler.getStackInSlot(slot).isEmpty() &&
                     (recipe = ArtifabriansStationRecipes.getConstructionRecipe(
@@ -66,6 +151,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 isHasCraftedItem = false;
             }
             setChanged();
+             */
         }
     };
 
@@ -259,12 +345,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
 
 */
     }
-    void consume_ingredients(){
-        itemStackHandler.getStackInSlot(0).shrink(1);
-        itemStackHandler.getStackInSlot(1).shrink(1);
-        itemStackHandler.getStackInSlot(3).shrink(1);
-        itemStackHandler.getStackInSlot(4).shrink(5);
-    }
 
     boolean has_valid_recipe(){
         return (itemStackHandler.getStackInSlot(0).getItem() instanceof GemstoneItem
@@ -276,6 +356,6 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ArtifabriansStationBlockEntity pBlockEntity){
-        pBlockEntity.updateContents();
+        //pBlockEntity.updateContents();
     }
 }
