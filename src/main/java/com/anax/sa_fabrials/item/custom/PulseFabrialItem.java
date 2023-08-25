@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.util.NBTHelper;
+import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -13,8 +14,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class PulseFabrialItem extends AbstractFabrialItem {
-    public PulseFabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight) {
-        super(properties, capacity, maxExtract, maxReceive, initialStormlight);
+    public PulseFabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight, FabrialClassification.GemType gemType) {
+        super(properties, capacity, maxExtract, maxReceive, initialStormlight, gemType);
     }
 
 

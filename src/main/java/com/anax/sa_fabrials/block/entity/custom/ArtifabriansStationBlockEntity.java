@@ -271,7 +271,7 @@ public class ArtifabriansStationBlockEntity extends BlockEntity implements MenuP
                 && (isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.STEEL_INGOTS) || isHasItemTag(itemStackHandler.getStackInSlot(1).getItem(), SATags.Items.IRON_INGOTS))
                 && (itemStackHandler.getStackInSlot(3).is(SAItems.THROWABLE_FABRIAL_CASING.get()) || itemStackHandler.getStackInSlot(3).is(SAItems.FABRIAL_CASING.get()))
                 && isHasItemTag(itemStackHandler.getStackInSlot(4).getItem(), SATags.Items.ZINC_NUGGETS)
-                && (FabrialClassification.throwable_fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null || FabrialClassification.fabrial_from_gem(itemStackHandler.getStackInSlot(0).getItem()) != null)
+                && (FabrialClassification.throwableFabrialFromType(((GemstoneItem) itemStackHandler.getStackInSlot(0).getItem()).getGemType()) != null || FabrialClassification.pulseFabrialFromType(((GemstoneItem) itemStackHandler.getStackInSlot(0).getItem()).getGemType()) != null)
         );
     }
 

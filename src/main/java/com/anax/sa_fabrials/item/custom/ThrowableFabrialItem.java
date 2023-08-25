@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.entity.custom.ThrownFabrial;
+import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,8 +12,8 @@ import net.minecraft.world.item.SnowballItem;
 import net.minecraft.world.level.Level;
 
 public class ThrowableFabrialItem extends AbstractFabrialItem {
-    public ThrowableFabrialItem(Properties properties, int capacity, int maxExtract,int maxReceive, int initialStormlight) {
-        super(properties, capacity, maxExtract, maxReceive, initialStormlight);
+    public ThrowableFabrialItem(Properties properties, int capacity, int maxExtract,int maxReceive, int initialStormlight, FabrialClassification.GemType gemType) {
+        super(properties, capacity, maxExtract, maxReceive, initialStormlight, gemType);
 
     }
 

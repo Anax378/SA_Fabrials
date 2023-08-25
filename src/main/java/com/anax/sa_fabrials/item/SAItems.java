@@ -2,6 +2,7 @@ package com.anax.sa_fabrials.item;
 
 import com.anax.sa_fabrials.SAFabrials;
 import com.anax.sa_fabrials.item.custom.*;
+import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import com.anax.sa_fabrials.util.fabrial.GemCapacities;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -44,68 +45,68 @@ public class SAItems {
             () -> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB)));
 
     public static final RegistryObject<GemstoneItem> TOPAZ_GEM = ITEMS.register("topaz_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, FabrialClassification.TOPAZ));
     public static final RegistryObject<GemstoneItem> SMOKESTONE_GEM = ITEMS.register("smokestone_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500,500, FabrialClassification.SMOKESTONE));
     public static final RegistryObject<GemstoneItem> GARNET_GEM = ITEMS.register("garnet_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.GARNET_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.GARNET_GEM_CAPACITY, 500,500, FabrialClassification.GARNET));
     public static final RegistryObject<GemstoneItem> ZIRCON_GEM = ITEMS.register("zircon_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.ZIRCON_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.ZIRCON_GEM_CAPACITY, 500,500, FabrialClassification.ZIRCON));
     public static final RegistryObject<GemstoneItem> RUBY_GEM = ITEMS.register("ruby_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.RUBY_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.RUBY_GEM_CAPACITY, 500,500, FabrialClassification.RUBY));
     public static final RegistryObject<GemstoneItem> SAPPHIRE_GEM = ITEMS.register("sapphire_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500,500, FabrialClassification.SAPPHIRE));
     public static final RegistryObject<GemstoneItem> HELIODOR_GEM = ITEMS.register("heliodor_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.HELIODOR_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.HELIODOR_GEM_CAPACITY, 500,500, FabrialClassification.HELIODOR));
     public static final RegistryObject<GemstoneItem> DIAMOND_GEM = ITEMS.register("diamond_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.DIAMOND_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.DIAMOND_GEM_CAPACITY, 500,500, FabrialClassification.DIAMOND));
     public static final RegistryObject<GemstoneItem> EMERALD_GEM = ITEMS.register("emerald_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.EMERALD_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.EMERALD_GEM_CAPACITY, 500,500, FabrialClassification.EMERALD));
     public static final RegistryObject<GemstoneItem> AMETHYST_GEM = ITEMS.register("amethyst_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.AMETHYST_GEM_CAPACITY, 500,500));
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), GemCapacities.AMETHYST_GEM_CAPACITY, 500,500, FabrialClassification.AMETHYST));
 
 
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_TOPAZ_FABRIAL = ITEMS.register("throwable_topaz_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0, FabrialClassification.TOPAZ));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_SMOKESTONE_FABRIAL = ITEMS.register("throwable_smokestone_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0, FabrialClassification.SMOKESTONE));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_GARNET_FABRIAL = ITEMS.register("throwable_garnet_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0, FabrialClassification.GARNET));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_ZIRCON_FABRIAL = ITEMS.register("throwable_zircon_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0, FabrialClassification.ZIRCON));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_RUBY_FABRIAL = ITEMS.register("throwable_ruby_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0, FabrialClassification.RUBY));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_SAPPHIRE_FABRIAL = ITEMS.register("throwable_sapphire_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0, FabrialClassification.SAPPHIRE));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_HELIODOR_FABRIAL = ITEMS.register("throwable_heliodor_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0, FabrialClassification.HELIODOR));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_DIAMOND_FABRIAL = ITEMS.register("throwable_diamond_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0, FabrialClassification.DIAMOND));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_EMERALD_FABRIAL = ITEMS.register("throwable_emerald_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0, FabrialClassification.EMERALD));
     public static final RegistryObject<ThrowableFabrialItem> THROWABLE_AMETHYST_FABRIAL = ITEMS.register("throwable_amethyst_fabrial",
-            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0));
+            ()-> new ThrowableFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0, FabrialClassification.AMETHYST));
 
     public static final RegistryObject<PulseFabrialItem> TOPAZ_FABRIAL = ITEMS.register("topaz_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0, FabrialClassification.TOPAZ));
     public static final RegistryObject<PulseFabrialItem> SMOKESTONE_FABRIAL = ITEMS.register("smokestone_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0, FabrialClassification.SMOKESTONE));
     public static final RegistryObject<PulseFabrialItem> GARNET_FABRIAL = ITEMS.register("garnet_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0, FabrialClassification.GARNET));
     public static final RegistryObject<PulseFabrialItem> ZIRCON_FABRIAL = ITEMS.register("zircon_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0, FabrialClassification.ZIRCON));
     public static final RegistryObject<PulseFabrialItem> RUBY_FABRIAL = ITEMS.register("ruby_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0, FabrialClassification.RUBY));
     public static final RegistryObject<PulseFabrialItem> SAPPHIRE_FABRIAL = ITEMS.register("sapphire_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0, FabrialClassification.SAPPHIRE));
     public static final RegistryObject<PulseFabrialItem> HELIODOR_FABRIAL = ITEMS.register("heliodor_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0, FabrialClassification.HELIODOR));
     public static final RegistryObject<PulseFabrialItem> DIAMOND_FABRIAL = ITEMS.register("diamond_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0, FabrialClassification.DIAMOND));
     public static final RegistryObject<PulseFabrialItem> EMERALD_FABRIAL = ITEMS.register("emerald_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0, FabrialClassification.EMERALD));
     public static final RegistryObject<PulseFabrialItem> AMETHYST_FABRIAL = ITEMS.register("amethyst_fabrial",
-            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0));
+            ()-> new PulseFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1).fireResistant(), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0, FabrialClassification.AMETHYST));
 
 
     public static final RegistryObject<Item> THROWABLE_FABRIAL_CASING = ITEMS.register("throwable_fabrial_casing",
@@ -118,25 +119,25 @@ public class SAItems {
             ()-> new Item(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(64)));
 
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_TOPAZ_FABRIAL = ITEMS.register("toggle_topaz_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.TOPAZ_GEM_CAPACITY, 500, 500, 0, FabrialClassification.TOPAZ));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_SMOKESTONE_FABRIAL = ITEMS.register("toggle_smokestone_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.SMOKESTONE_GEM_CAPACITY, 500, 500, 0, FabrialClassification.SMOKESTONE));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_GARNET_FABRIAL = ITEMS.register("toggle_garnet_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.GARNET_GEM_CAPACITY, 500, 500, 0, FabrialClassification.GARNET));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_ZIRCON_FABRIAL = ITEMS.register("toggle_zircon_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.ZIRCON_GEM_CAPACITY, 500, 500, 0, FabrialClassification.ZIRCON));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_RUBY_FABRIAL = ITEMS.register("toggle_ruby_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.RUBY_GEM_CAPACITY, 500, 500, 0, FabrialClassification.RUBY));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_SAPPHIRE_FABRIAL = ITEMS.register("toggle_sapphire_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.SAPPHIRE_GEM_CAPACITY, 500, 500, 0, FabrialClassification.SAPPHIRE));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_HELIODOR_FABRIAL = ITEMS.register("toggle_heliodor_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.HELIODOR_GEM_CAPACITY, 500, 500, 0, FabrialClassification.HELIODOR));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_DIAMOND_FABRIAL = ITEMS.register("toggle_diamond_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.DIAMOND_GEM_CAPACITY, 500, 500, 0, FabrialClassification.DIAMOND));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_EMERALD_FABRIAL = ITEMS.register("toggle_emerald_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.EMERALD_GEM_CAPACITY, 500, 500, 0, FabrialClassification.EMERALD));
     public static final RegistryObject<ToggleFabrialItem> TOGGLE_AMETHYST_FABRIAL = ITEMS.register("toggle_amethyst_fabrial",
-            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0));
+            () -> new ToggleFabrialItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).fireResistant().stacksTo(1), GemCapacities.AMETHYST_GEM_CAPACITY, 500, 500, 0, FabrialClassification.AMETHYST));
 
 /*
     public static final RegistryObject<Item> STEEL_INGOT = ITEMS.register("steel_ingot",
@@ -152,7 +153,7 @@ public class SAItems {
 
 
     public static final RegistryObject<GemstoneItem> CREATIVE_GEM = ITEMS.register("creative_gem",
-            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500){
+            () -> new GemstoneItem(new Item.Properties().tab(ModCreativeModeTab.SA_FABRIALS_MOD_TAB).stacksTo(1), 2000, 500,500, new FabrialClassification.GemType(-1)){
                 @Override
                 public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
                     return new ItemStormlightStorageProvider(100000000, 100000000, 100000000, 100000000, stack){

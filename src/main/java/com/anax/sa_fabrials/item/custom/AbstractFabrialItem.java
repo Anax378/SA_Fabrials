@@ -2,7 +2,10 @@ package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.item.ItemStormlightStorageProvider;
 import com.anax.sa_fabrials.util.NBTHelper;
+import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
+import leaf.cosmere.api.IHasGemType;
+import leaf.cosmere.api.Roshar;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -18,17 +21,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public abstract class AbstractFabrialItem extends Item {
+public abstract class AbstractFabrialItem extends Item implements FabrialClassification.IHasGemType {
     int capacity;
     int maxExtract;
     int maxReceive;
     int initialStormlight;
-    public AbstractFabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight) {
+    FabrialClassification.GemType gemType;
+    public AbstractFabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight, FabrialClassification.GemType gemType) {
         super(properties);
         this.capacity = capacity;
         this.initialStormlight = initialStormlight;
         this.maxExtract = maxExtract;
         this.maxReceive = maxReceive;
+        this.gemType = gemType;
     }
 
     @Override
@@ -80,5 +85,10 @@ public abstract class AbstractFabrialItem extends Item {
     @Override
     public boolean isBarVisible(ItemStack pStack) {
         return true;
+    }
+
+    @Override
+    public FabrialClassification.GemType getGemType() {
+        return gemType;
     }
 }

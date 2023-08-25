@@ -1,6 +1,7 @@
 package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.util.NBTHelper;
+import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import com.anax.sa_fabrials.util.fabrial.FabrialEffects;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -17,8 +18,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 
 public class ToggleFabrialItem extends AbstractFabrialItem{
-    public ToggleFabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight) {
-        super(properties, capacity, maxExtract, maxReceive, initialStormlight);
+    public ToggleFabrialItem(Properties properties, int capacity, int maxExtract, int maxReceive, int initialStormlight, FabrialClassification.GemType gemType) {
+        super(properties, capacity, maxExtract, maxReceive, initialStormlight, gemType);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.anax.sa_fabrials.item.custom;
 
 import com.anax.sa_fabrials.item.ItemStormlightStorageProvider;
 import com.anax.sa_fabrials.util.NBTHelper;
+import com.anax.sa_fabrials.util.fabrial.FabrialClassification;
 import com.anax.sa_fabrials.util.stormlight.StormlightStorage;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -16,17 +17,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GemstoneItem extends Item {
+public class GemstoneItem extends Item implements FabrialClassification.IHasGemType {
     int capacity;
     int maxReceive;
     int maxExtract;
     int initialStormlight;
-    public GemstoneItem(Properties properties, int capacity, int maxReceive, int maxExtract){
+    FabrialClassification.GemType gemType;
+    public GemstoneItem(Properties properties, int capacity, int maxReceive, int maxExtract, FabrialClassification.GemType gemType){
         super(properties);
         this.capacity = capacity;
         this.maxExtract = maxExtract;
         this.maxReceive = maxReceive;
         this.initialStormlight = 0;
+        this.gemType = gemType;
     }
     public int getCapacity(){return capacity;}
 
@@ -74,4 +77,8 @@ public class GemstoneItem extends Item {
     }
 
 
+    @Override
+    public FabrialClassification.GemType getGemType() {
+        return gemType;
+    }
 }

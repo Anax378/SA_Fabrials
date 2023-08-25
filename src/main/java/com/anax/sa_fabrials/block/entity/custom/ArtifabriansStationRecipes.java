@@ -36,9 +36,9 @@ public class ArtifabriansStationRecipes {
             }
             @Override
             public boolean canDeconstruct(ItemStack middle) {
-                if(middle.getItem() instanceof ThrowableFabrialItem && FabrialClassification.gem_from_throwable_fabrial(middle.getItem()) != null){return true;}
-                if(middle.getItem() instanceof PulseFabrialItem && FabrialClassification.gem_from_fabrial(middle.getItem()) != null){return true;}
-                if(middle.getItem() instanceof ToggleFabrialItem && FabrialClassification.gem_from_toggle_fabrial(middle.getItem()) != null){return true;}
+                if(middle.getItem() instanceof ThrowableFabrialItem && FabrialClassification.gemFromType(((ThrowableFabrialItem) middle.getItem()).getGemType()) != null){return true;}
+                if(middle.getItem() instanceof PulseFabrialItem && FabrialClassification.gemFromType(((PulseFabrialItem) middle.getItem()).getGemType()) != null){return true;}
+                if(middle.getItem() instanceof ToggleFabrialItem && FabrialClassification.gemFromType(((ToggleFabrialItem) middle.getItem()).getGemType()) != null){return true;}
                 return false;
             }
 
@@ -47,10 +47,10 @@ public class ArtifabriansStationRecipes {
             public ItemStack[] deconstruct(ItemStack middle) {
                 if(!this.canDeconstruct(middle)){return null;}
                 ItemStack top = middle.getItem() instanceof PulseFabrialItem ?
-                        FabrialClassification.gem_from_fabrial(middle.getItem()).getDefaultInstance() :
+                        FabrialClassification.gemFromType(((PulseFabrialItem) middle.getItem()).getGemType()).getDefaultInstance() :
                         middle.getItem() instanceof ThrowableFabrialItem ?
-                                FabrialClassification.gem_from_throwable_fabrial(middle.getItem()).getDefaultInstance() :
-                                FabrialClassification.gem_from_toggle_fabrial(middle.getItem()).getDefaultInstance();
+                                FabrialClassification.gemFromType(((ThrowableFabrialItem) middle.getItem()).getGemType()).getDefaultInstance() :
+                                FabrialClassification.gemFromType(((ToggleFabrialItem)middle.getItem()).getGemType()).getDefaultInstance();
 
                 top.getOrCreateTag().putString(NBTHelper.NBTKeys.CAPTURED_SPREN, middle.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN));
                 top.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, middle.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT));
@@ -72,10 +72,10 @@ public class ArtifabriansStationRecipes {
                 if(isValidRecipe(top, left, right, bottom)){}else{return null;}
 
                 ItemStack middle = right.is(SAItems.FABRIAL_CASING.get()) ?
-                        FabrialClassification.fabrial_from_gem(top.getItem()).getDefaultInstance() :
+                        FabrialClassification.pulseFabrialFromType(((GemstoneItem)top.getItem()).getGemType()).getDefaultInstance() :
                         right.is(SAItems.THROWABLE_FABRIAL_CASING.get()) ?
-                                FabrialClassification.throwable_fabrial_from_gem(top.getItem()).getDefaultInstance() :
-                                FabrialClassification.toggle_fabrial_from_gem(top.getItem()).getDefaultInstance();
+                                FabrialClassification.throwableFabrialFromType(((GemstoneItem)top.getItem()).getGemType()).getDefaultInstance() :
+                                FabrialClassification.toggleFabrialFromType(((GemstoneItem)top.getItem()).getGemType()).getDefaultInstance();
 
                 middle.getOrCreateTag().putInt(NBTHelper.NBTKeys.STORED_STORMLIGHT, top.getOrCreateTag().getInt(NBTHelper.NBTKeys.STORED_STORMLIGHT));
                 middle.getOrCreateTag().putString(NBTHelper.NBTKeys.CAPTURED_SPREN, top.getOrCreateTag().getString(NBTHelper.NBTKeys.CAPTURED_SPREN));
