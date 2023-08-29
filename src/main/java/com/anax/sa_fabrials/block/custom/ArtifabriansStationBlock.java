@@ -2,6 +2,9 @@ package com.anax.sa_fabrials.block.custom;
 
 import com.anax.sa_fabrials.block.entity.SABlockEntities;
 import com.anax.sa_fabrials.block.entity.custom.ArtifabriansStationBlockEntity;
+import net.minecraft.client.renderer.entity.BoatRenderer;
+import net.minecraft.client.renderer.entity.FallingBlockRenderer;
+import net.minecraft.client.renderer.entity.MinecartRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;

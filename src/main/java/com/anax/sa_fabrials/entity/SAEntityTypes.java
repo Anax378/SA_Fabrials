@@ -1,7 +1,9 @@
 package com.anax.sa_fabrials.entity;
 
 import com.anax.sa_fabrials.SAFabrials;
+import com.anax.sa_fabrials.entity.custom.SmokeCloud;
 import com.anax.sa_fabrials.entity.custom.ThrownFabrial;
+import com.anax.sa_fabrials.item.SAItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,6 +25,14 @@ public class SAEntityTypes {
                     .sized(0.25f, 0.25f)
                     .clientTrackingRange(10)
                     .build("thrown_fabrial"));
+
+    public static final RegistryObject<EntityType<SmokeCloud>> SMOKE_CLOUD =
+            ENTITIES.register("smoke_cloud",
+                    () -> EntityType.Builder.of(SmokeCloud::new,
+                            MobCategory.MISC)
+                            .sized(0.1f, 0.1f)
+                            .build(SAFabrials.MOD_ID + ":smoke_cloud")
+            );
 
 
     public static void register(IEventBus eventBus){
