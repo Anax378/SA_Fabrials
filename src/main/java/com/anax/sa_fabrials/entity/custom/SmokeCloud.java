@@ -1,16 +1,25 @@
 package com.anax.sa_fabrials.entity.custom;
 
+import com.anax.sa_fabrials.effect.SAEffects;
+import com.anax.sa_fabrials.effect.SmokeEffect;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Slime;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.NetherPortalBlock;
+import net.minecraft.world.phys.AABB;
 
 public class SmokeCloud extends Entity {
 
@@ -70,6 +79,21 @@ public class SmokeCloud extends Entity {
     @Override
     public void tick() {
         if(!this.getLevel().isClientSide()) {
+            if(this.getLifeTime() >= 0) {
+                AABB bb = new AABB(
+                        this.getX() - (this.getSize() / 2f),
+                        this.getY() - (this.getSize() / 2f),
+                        this.getZ() - (this.getSize() / 2f),
+                        this.getX() + (this.getSize() / 2f),
+                        this.getY() + (this.getSize() / 2f),
+                        this.getZ() + (this.getSize() / 2f)
+                );
+                for (Entity entity : this.getLevel().getEntities(this, bb, (entity) -> {
+                    return entity instanceof LivingEntity;
+                })) {
+                    ((LivingEntity) entity).addEffect(new MobEffectInstance(SAEffects.SMOKE_EFFECT.get(), 5));
+                }
+            }
             if (!this.isStable) {
                 this.setLifeTime(this.getLifeTime() - 1);
                 if (this.getLifeTime() < -20) {
