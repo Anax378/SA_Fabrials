@@ -15,6 +15,9 @@ public class SAEffects {
 
     public static final RegistryObject<GravityMobEffect> GRAVITY = MOB_EFFECTS.register("gravity",
             () -> new GravityMobEffect(MobEffectCategory.NEUTRAL, 46874655));
+
+    public static final RegistryObject<SmokeEffect> SMOKE_EFFECT = MOB_EFFECTS.register("smoke",
+            () -> new SmokeEffect(MobEffectCategory.HARMFUL, 1922233));
     public static void register(IEventBus eventBus){
         MOB_EFFECTS.register(eventBus);
     }

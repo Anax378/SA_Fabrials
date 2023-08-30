@@ -1,4 +1,4 @@
-package com.anax.sa_fabrials.entity.client;
+package com.anax.sa_fabrials;
 
 import com.anax.sa_fabrials.SAFabrials;
 import com.anax.sa_fabrials.entity.SAEntityTypes;
@@ -29,3 +29,5 @@ public class ClientSetup {
         event.registerLayerDefinition(SmokeCloudRenderer.SMOKE_CLOUD_MODEL_LAYER_LOCATION, SmokeCloudModel::createBodyLayer);
     }
 }
+
+
