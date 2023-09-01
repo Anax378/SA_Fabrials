@@ -1,6 +1,8 @@
 package com.anax.sa_fabrials.util.fabrial;
 
 import com.anax.sa_fabrials.effect.SAEffects;
+import com.anax.sa_fabrials.entity.SAEntityTypes;
+import com.anax.sa_fabrials.entity.custom.SmokeCloud;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
@@ -88,9 +90,10 @@ public class FabrialEffects {
     public static SprenManifestation FIRE_MANIFESTATION = new SprenManifestation(){
         @Override
         public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
-            BlockPos position = new BlockPos(pos);
-            if(level.getBlockState(position).is(Blocks.TNT)){
-                if(!simulate) {
+            if (charge){
+                BlockPos position = new BlockPos(pos);
+            if (level.getBlockState(position).is(Blocks.TNT)) {
+                if (!simulate) {
                     TntBlock.explode(level, position);
                     level.setBlock(position, Blocks.AIR.defaultBlockState(), 3);
                 }
@@ -101,20 +104,43 @@ public class FabrialEffects {
                 BlockPos blockpos1 = position.relative(side);
                 if (BaseFireBlock.canBePlacedAt(level, blockpos1, side)) {
                     BlockState blockstate1 = BaseFireBlock.getState(level, blockpos1);
-                    if(!simulate) {level.setBlock(blockpos1, blockstate1, 11);}
+                    if (!simulate) {
+                        level.setBlock(blockpos1, blockstate1, 11);
+                    }
                     return 150;
-                }
-                else{
+                } else {
                     return 0;
                 }
             } else {
-                if(level.getBlockState(position).getValue(BlockStateProperties.LIT)){
+                if (level.getBlockState(position).getValue(BlockStateProperties.LIT)) {
                     return 0;
                 }
-                if(!simulate){
+                if (!simulate) {
                     level.setBlock(position, blockstate.setValue(BlockStateProperties.LIT, Boolean.valueOf(true)), 11);
                 }
                 return 150;
+            }
+            }else{
+                int range = power*2;
+                int fireRemoved = 0;
+                for(int x = -range; x <= range; x++){
+                    for(int y = -range; y <= range; y++){
+                        for(int z = -range; z <= range; z++){
+                            double dist = Math.sqrt(x*x + y*y + z*z);
+                            if(dist <= range){
+                                BlockPos blockPos = new BlockPos(pos.x()+x, pos.y()+y, pos.z()+z);
+                                BlockState blockState = level.getBlockState(blockPos);
+                                if(blockState.is(Blocks.FIRE) || blockState.is(Blocks.SOUL_FIRE)){
+                                    if(!simulate){
+                                        level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 1|2);
+                                    }
+                                    fireRemoved++;
+                                }
+                            }
+                        }
+                    }
+                }
+                return 150*power*fireRemoved;
             }
         }
 
@@ -269,6 +295,61 @@ public class FabrialEffects {
         }
     };
 
+    public static SprenManifestation SMOKE_MANIFESTATION = new SprenManifestation(){
+        @Override
+        public int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, boolean simulate) {
+            if(charge){
+                if(!simulate) {
+                    BlockPos position = new BlockPos(pos);
+                    BlockPos summonPos = position.relative(side);
+                    SmokeCloud smokeCloud = new SmokeCloud(SAEntityTypes.SMOKE_CLOUD.get(), level);
+                    smokeCloud.setPos(new Vec3(summonPos.getX() + 0.5f, summonPos.getY() + (power / 2f), summonPos.getZ() + 0.5));
+                    smokeCloud.setSize(power);
+                    smokeCloud.setLifeTime(power * 10 * 20);
+                    level.addFreshEntity(smokeCloud);
+                }
+                return power*500;
+            }else{
+                float radius = power/2f;
+                AABB bb = new AABB(pos.x()-radius, pos.y()-radius, pos.z()-radius, pos.x()+radius, pos.y()+radius, pos.z()+radius);
+                for(Entity entity : level.getEntities(null, bb)){
+                    if(entity instanceof SmokeCloud){
+                        ((SmokeCloud)entity).isStable = false;
+                        if(((SmokeCloud)entity).getLifeTime() > 0){
+                            if(!simulate) {
+                                ((SmokeCloud) entity).setLifeTime(0);
+                            }
+                            return 500*power;
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
+
+        @Override
+        public int targetEntity(Entity entity, Level level, int power, boolean charge, Vec3 direction, boolean simulate) {
+            if(!simulate){
+                SmokeCloud smokeCloud = new SmokeCloud(SAEntityTypes.SMOKE_CLOUD.get(), level);
+                smokeCloud.setPos(new Vec3(entity.getX(), entity.getY()+(power/2f), entity.getZ()));
+                smokeCloud.setSize(power);
+                smokeCloud.setLifeTime(power*10*20);
+                level.addFreshEntity(smokeCloud);
+            }
+            return power*500;
+        }
+
+        @Override
+        public boolean isUseOnSelf(boolean charge) {
+            return false;
+        }
+
+        @Override
+        public String getSprenName() {
+            return "smoke";
+        }
+    };
+
     public static HashMap<String, SprenManifestation> sprenManifestationsMap = new HashMap<>();
 
     static {
@@ -279,6 +360,7 @@ public class FabrialEffects {
         sprenManifestationsMap.put(EXPLOSION_MANIFESTATION.getSprenName(), EXPLOSION_MANIFESTATION);
         sprenManifestationsMap.put(GRAVITY_MANIFESTATION.getSprenName(), GRAVITY_MANIFESTATION);
         sprenManifestationsMap.put(ICE_MANIFESTATION.getSprenName(), ICE_MANIFESTATION);
+        sprenManifestationsMap.put(SMOKE_MANIFESTATION.getSprenName(), SMOKE_MANIFESTATION);
     }
 
     public static int targetBlock(Position pos, Level level, int power, boolean charge, Vec3 direction, Direction side, String spren, boolean simulate){

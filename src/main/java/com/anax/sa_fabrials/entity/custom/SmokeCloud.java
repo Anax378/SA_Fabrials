@@ -25,7 +25,7 @@ public class SmokeCloud extends Entity {
 
     static final EntityDataAccessor<Integer> LIFETIME_TICKS_LEFT = SynchedEntityData.defineId(SmokeCloud.class, EntityDataSerializers.INT);
     static final EntityDataAccessor<Float> SIZE = SynchedEntityData.defineId(SmokeCloud.class, EntityDataSerializers.FLOAT);
-    boolean isStable;
+    public boolean isStable;
     public SmokeCloud(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }

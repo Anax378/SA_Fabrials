@@ -108,14 +108,8 @@ public class SprenCatchingStationBlockEntity extends BlockEntity implements Menu
 
     @Nullable
     public static String getAssociatedSpren(Item item){
-        if(isHasItemTag(item, SATags.Items.EXPLOSION_SPREN_ATTRACTORS)){return "explosion";}
-        if(isHasItemTag(item, SATags.Items.FIRE_SPREN_ATTRACTORS)){return "fire";}
-        if(isHasItemTag(item, SATags.Items.LIGHTNING_SPREN_ATTRACTORS)){return "lightning";}
-        if(isHasItemTag(item, SATags.Items.WIND_SPREN_ATTRACTORS)){return "wind";}
-        if(isHasItemTag(item, SATags.Items.HEALTH_SPREN_ATTRACTORS)){return "health";}
-        if(isHasItemTag(item, SATags.Items.GRAVITY_SPREN_ATTRACTORS)){return "gravity";}
-        if(isHasItemTag(item, SATags.Items.ICE_SPREN_ATTRACTORS)){return "ice";}
-        return null;
+        String spren = SATags.Items.getSpren(item);
+        return spren.equals("none") ? null : spren;
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SprenCatchingStationBlockEntity pBlockEntity) {
