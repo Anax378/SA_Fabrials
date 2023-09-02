@@ -20,6 +20,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -122,7 +123,7 @@ public class FabrialEffects {
             }
             }else{
                 int range = power*2;
-                int fireRemoved = 0;
+                boolean fireRemoved = false;
                 for(int x = -range; x <= range; x++){
                     for(int y = -range; y <= range; y++){
                         for(int z = -range; z <= range; z++){
@@ -132,15 +133,16 @@ public class FabrialEffects {
                                 BlockState blockState = level.getBlockState(blockPos);
                                 if(blockState.is(Blocks.FIRE) || blockState.is(Blocks.SOUL_FIRE)){
                                     if(!simulate){
-                                        level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 1|2);
+                                        level.setBlock(blockPos, Blocks.AIR.defaultBlockState(), 11);
+                                        level.sendBlockUpdated(blockPos, blockState, Blocks.AIR.defaultBlockState(), 11);
                                     }
-                                    fireRemoved++;
+                                    fireRemoved = true;
                                 }
                             }
                         }
                     }
                 }
-                return 150*power*fireRemoved;
+                return fireRemoved ? 150*power : 0;
             }
         }
 
